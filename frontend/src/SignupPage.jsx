@@ -50,7 +50,7 @@ function SignupPage() {
 
     const getOutlineColor = (touched, validator) => {
         if (!touched) return "#ffffff";
-        return validator ? "outline-green-500" : "outline-red-600";
+        return validator ? "outline-green-600" : "outline-red-600";
 
     }
 
@@ -151,52 +151,52 @@ function SignupPage() {
 
     return (
         <div className="flex align-middle justify-center items-center h-screen bg-gray-900">
-            <div className=" p-2 py-4 bg-white relative rounded-xl flex flex-col items-center w-[clamp(350px,30vw,520px)] ">
+            <div className=" p-2 pb-3 bg-white relative rounded-xl flex flex-col items-center w-[clamp(350px,54vmin,460px)] ">
 
-                <h1 className="text-5xl font-inter text-[#444444] font-medium mb-22 ">Sign up</h1>
-                <span className={`absolute top-21 text-lg text-red-600 font-medium text-center leading-tight`}>{message}</span>
+                <h1 className="text-5xl font-inter text-[#444444] font-medium mb-[clamp(78px,10vh,88px)] ">Sign up</h1>
+                <span className={`absolute top-20 text-[clamp(16px,2vmin,18px)] text-red-600 font-medium text-center leading-tight px-6`}>{message}</span>
 
-                <form onSubmit={handleSubmit} noValidate className="w-full px-4 items-center flex flex-col">
+                <form onSubmit={handleSubmit} noValidate className="w-full px-[clamp(8px,1vw,16px)] items-center flex flex-col">
 
-                    <div className="w-full overflow-clip flex items-center relative justify-center">
+                    <div className="w-full overflow-clip flex items-center relative justify-center max-w-114">
                         <img src="../src/assets/user.svg" alt="" className="absolute h-6 left-4" />
 
-                        <input type="text" placeholder="Name" className={`bg-[#dfdfdf] py-[clamp(4px,(1vh),10px)] m-1 w-[99%] px-10 rounded-4xl  outline-3 outline-[#ffffff] text-[clamp(19px,2.1vmin,24px)] text-ellipsis  ${getOutlineColor(nameTouched, isValidName())} pr-15 mx-1 text-ellipsis transition duration-300`} onChange={(e) => handleNameChange(e)} onBlur={() => setNameTouched(true)} />
+                        <input type="text" placeholder="Name" className={`bg-[#dfdfdf] py-[clamp(4px,(0.8vh),8px)] m-1 w-[99%] px-10 rounded-4xl  outline-3 outline-[#ffffff] text-[clamp(19px,2.1vmin,24px)] text-ellipsis  ${getOutlineColor(nameTouched, isValidName())} pr-15 mx-1 text-ellipsis transition duration-300`} onChange={(e) => handleNameChange(e)} maxLength={20} minLength={3} onBlur={() => setNameTouched(true)} />
 
                         <span className={`absolute h-7 bottom-1.5 right-3.5 text-[clamp(15px,1.8vmin,19px)] font-medium ${nameLength === 0 ? "text-neutral-500" : (nameLength < 3 || nameLength > 20) ? "text-red-600" : "text-green-700"} `}>{nameLength}/20</span>
                     </div>
-                    <div className="w-full overflow-clip flex items-center justify-center relative">
+                    <div className="w-full overflow-clip flex items-center justify-center relative max-w-114">
                         <img src="../src/assets/mail.svg" alt="" className="absolute h-6 left-4" />
-                        <input placeholder="Email" className={`bg-[#dfdfdf] py-[clamp(4px,(1vh),10px)] m-1 w-[99%] px-10 rounded-4xl  text-[clamp(18px,2.1vmin,22px)] outline-[#ffffff] outline-3 text-ellipsis ${getOutlineColor(emailTouched, isValidEmail())} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handleEmailChange(e)} onBlur={() => setEmailTouched(true)} />
+                        <input placeholder="Email" className={`bg-[#dfdfdf] py-[clamp(4px,(0.8vh),8px)] m-1 w-[99%] px-10 rounded-4xl  text-[clamp(18px,2.1vmin,22px)] outline-[#ffffff] outline-3 text-ellipsis ${getOutlineColor(emailTouched, isValidEmail())} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handleEmailChange(e)} onBlur={() => setEmailTouched(true)} />
                     </div>
 
-                    <div className="w-full overflow-clip flex items-center relative justify-center">
+                    <div className="w-full overflow-clip flex items-center relative justify-center max-w-114">
                         <img src="../src/assets/pass.svg" alt="" className="absolute h-6 left-4" />
 
-                        <input type={passwordType} placeholder="Password" className={`bg-[#dfdfdf] py-[clamp(4px,(1vh),10px)] m-1 w-[99%] px-10 rounded-4xl  outline-3 outline-[#ffffff] text-[clamp(19px,2.1vmin,24px)] text-ellipsis ${getOutlineColor(passwordTouched, isValidPassword())} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handlePasswordChange(e)} onBlur={() => { setPasswordRetypeTouched(true); setPasswordTouched(true) }} />
+                        <input type={passwordType} placeholder="Password" className={`bg-[#dfdfdf] py-[clamp(4px,(0.8vh),8px)] m-1 w-[99%] px-10 rounded-4xl  outline-3 outline-[#ffffff] text-[clamp(19px,2.1vmin,24px)] text-ellipsis ${getOutlineColor(passwordTouched, isValidPassword())} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handlePasswordChange(e)} onBlur={() => { setPasswordRetypeTouched(true); setPasswordTouched(true) }} />
 
                         <img src={`../src/assets/${passwordIcon}.svg`} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordVisibility} />
                     </div>
-                    <div className="w-full overflow-clip flex items-center relative justify-center">
+                    <div className="w-full overflow-clip flex items-center relative justify-center max-w-114">
                         <img src="../src/assets/pass.svg" alt="" className="absolute h-6 left-4" />
 
-                        <input type={passwordRetypeType} placeholder="Retype Password" className={`bg-[#dfdfdf] py-[clamp(4px,(1vh),10px)] m-1 w-[99%] px-10 rounded-4xl  outline-3 outline-[#ffffff] text-[clamp(19px,2.1vmin,24px)] text-ellipsis ${getOutlineColor(passwordRetypeTouched, isValidPasswordRetype())} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handlePasswordRetypeChange(e)} onBlur={() => { setPasswordRetypeTouched(true); setPasswordTouched(true) }} />
+                        <input type={passwordRetypeType} placeholder="Retype Password" className={`bg-[#dfdfdf] py-[clamp(4px,(0.8vh),8px)] m-1 w-[99%] px-10 rounded-4xl  outline-3 outline-[#ffffff] text-[clamp(19px,2.1vmin,24px)] text-ellipsis ${getOutlineColor(passwordRetypeTouched, isValidPasswordRetype())} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handlePasswordRetypeChange(e)} onBlur={() => { setPasswordRetypeTouched(true); setPasswordTouched(true) }} />
 
                         <img src={`../src/assets/${passwordRetypeIcon}.svg`} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordRetypeVisibility} />
 
                     </div>
 
 
-                    <span className={`text-lg text-neutral-500 text-center leading-tight m-4`}>Password should be atleast 8 characters, including one uppercase letter, one lowercase letter, one number, and one special symbol.</span>
+                    <span className={`text-[clamp(15px,2vmin,18px)] text-neutral-500 text-center leading-tight m-[clamp(8px,1.2vmin,16px)]`}>Password should be atleast 8 characters, including one uppercase letter, one lowercase letter, one number, and one special symbol.</span>
 
-                    <button type="submit" className="m-3 mb-3 bg-linear-to-r from-yellow-400 to-red-500 hover:from-red-500 hover:to-yellow-400 transition duration-300 text-white 
-                    text-[clamp(20px,3vmin,30px)] pt-1 pb-2 font-semibold rounded-3xl cursor-pointer hover:scale-105 self-auto w-[50%] text-nowrap mt-4">Sign up</button>
+                    <button type="submit" className="m-[clamp(6px,0.8vmin,12px)] bg-linear-to-r from-yellow-400 to-red-500 hover:from-red-500 hover:to-yellow-400 transition duration-300 text-white 
+                    text-[clamp(20px,3vmin,30px)] pt-1 pb-2 font-semibold rounded-3xl cursor-pointer hover:scale-105 self-auto w-[50%] text-nowrap">Sign up</button>
                 </form>
 
                 <div className="flex w-[90%] whitespace-nowrap items-center">
-                    <hr className="border-t border-gray-300 my-5 w-full" />
+                    <hr className="border-t border-gray-300 my-[clamp(10px,1.6vmin,20px)] w-full" />
                     <span className="mx-2 text-[clamp(15px,2vmin,20px)]">or continue with</span>
-                    <hr className="border-t border-gray-300 my-5 w-full" />
+                    <hr className="border-t border-gray-300 my-[clamp(12px,1.6vmin,20px)] w-full" />
                 </div>
 
                 <div className="text-lg font-semibold flex flex-col items-center">
@@ -207,7 +207,7 @@ function SignupPage() {
                         <button className="transition duration-300 w-[clamp(40px,5.5vmin,56px)] h-[clamp(40px,5.5vmin,56px)] m-1 mx-2 bg-white cursor-pointer hover:-translate-y-1 hover:shadow-md shadow-neutral-400 items-center justify-center flex rounded-xl"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/1024px-2023_Facebook_icon.svg.png" alt="" className="w-[clamp(30px,4vmin,44px)]" /></button>
                     </div>
                 </div>
-                <div className="text-[clamp(17px,1.8vmin,20px)] flex mt-[10px]">
+                <div className="text-[clamp(16.5px,2vmin,20px)] flex mt-[clamp(6px,0.6vmin,12px)]">
                     <span>Already have an account?&nbsp;</span>
                     <Link to={"/login"} className="hover:underline hover:scale-105  text-purple-900 transition duration-300 font-semibold">Login</Link>
                 </div>
