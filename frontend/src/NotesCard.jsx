@@ -16,7 +16,7 @@ function NotesCard({ note }) {
     return (
 
         <div className="flex justify-start flex-wrap">
-                    <div key={note.id} className="flex flex-col min-w-100 bg-neutral-700 justify-self-center m-1 p-1 border border-neutral-400 rounded relative hover:shadow-[0_0px_10px_rgba(255,255,255,0.35)] transition duration-300 justify-between">
+                    <div className="flex flex-col min-w-56 max-w-160 w-full bg-neutral-800 justify-self-center p-1 border border-neutral-400 rounded relative hover:shadow-[0_0px_10px_rgba(255,255,255,0.35)] transition duration-300 justify-between">
 
                         <div className="absolute right-0 top-0">
                             <button className="cursor-pointer hover:scale-120 transition duration-200 m-1.5">
@@ -46,12 +46,3 @@ function NotesCard({ note }) {
 }
 
 export default NotesCard
-
-
-// expanded && <div className="border border-x-0 border-b-0 border-t-neutral-600 flex w-full pt-2 pb-1 items-center justify-between">
-//     <select name="" id="" className="text-white text-xl rounded bg-amber-700 font-medium py-0.5 cursor-pointer outline-none mx-2 px-1 hover:bg-amber-800 hover:scale-105 transition duration-300">
-//         <option value="public" className="cursor-pointer">Public</option>
-//         <option value="public" className="cursor-pointer">Private</option>
-//     </select>
-//     <span className={`text-lg ${231 >= 3000 ? "text-red-500" : "text-neutral-300"}`}>{0}/3000</span>
-//     <button className="text-xl bg-amber-700 px-2 py-0.5 rounded font-medium text-white cursor-pointer hover:bg-amber-800 transition duration-300 hover:scale-105 mx-2">Done</butt
