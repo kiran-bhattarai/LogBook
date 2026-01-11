@@ -11,7 +11,7 @@ function NavBar() {
 
     return (
         <div>
-            <div className="bg-neutral-800 h-14 items-center flex justify-between px-4 text-white gap-5">
+            <div className="bg-neutral-800 h-14 items-center flex justify-between px-4 text-white gap-5 sticky top-0">
                 <Link to={"/"}>
                     <div className="text-3xl font-bold text-white font-poppins rounded bg-[#1d1d1d] px-2 py-1">
                         <span className="text-yellow-500 pr-0.5">

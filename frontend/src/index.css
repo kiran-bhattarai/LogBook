@@ -9,3 +9,32 @@ body {
   --font-inter: Inter, "sans-serif";
   --font-poppins: Poppins, "sans-serif"
 }
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    cursor: default;
+  }
+
+  .scrollbar-thumb {
+    scrollbar-color: #525252 transparent;
+    cursor: default;
+  }
+
+
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+    cursor: default;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    cursor: default;
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #525252;
+    border-radius: 9999px;
+    cursor: default;
+  }
+}
