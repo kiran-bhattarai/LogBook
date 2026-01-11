@@ -4,12 +4,14 @@ import ForgotPassword from "./ForgotPassword"
 import SignupPage from "./SignupPage"
 import NoteInput from "./NoteInput"
 import NotesCard from "./NotesCard"
+import NotesView from "./NotesView"
 
 function App() {
 
   return (
     <Routes>
       <Route path="/input" element={<NoteInput />} />
+      <Route path="/view" element={<NotesView />} />
       <Route path="/card" element={<NotesCard />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
