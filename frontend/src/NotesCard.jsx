@@ -15,10 +15,9 @@ function NotesCard({ note }) {
 
     return (
 
-        <div className="flex justify-start flex-wrap">
+        <div className="flex justify-start flex-wrap relative group">
                     <div className="flex flex-col min-w-56 max-w-160 w-full bg-neutral-800 justify-self-center p-1 border border-neutral-400 rounded relative hover:shadow-[0_0px_10px_rgba(255,255,255,0.35)] transition duration-300 justify-between">
-
-                        <div className="absolute right-0 top-0">
+                        <div className="absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition duration-150">
                             <button className="cursor-pointer hover:scale-120 transition duration-200 m-1.5">
                                 <img src={"../src/assets/delete_dark.svg"} alt="" className="h-8 justify-self-center bg-transparent" />
                             </button>
