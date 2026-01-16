@@ -10,7 +10,7 @@ function NavBar() {
 
 
     return (
-        <div className="sticky top-0 shadow-[0px_0px_10px_black]">
+        <div className="sticky top-0 shadow-[0px_0px_10px_black] z-10">
             <div className="bg-neutral-800 h-14 items-center flex justify-between px-4 text-white gap-5">
                 <Link to={"/"}>
                     <div className="text-3xl font-bold text-white font-poppins rounded bg-[#1d1d1d] px-2 py-1">
@@ -49,7 +49,7 @@ function NavBar() {
                         (user === "user") ?
                             <div className="h-full">
                                 <ul className="flex gap-3 items-center h-full text-xl">
-                                    <li className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 rounded hover:scale-105 whitespace-nowrap"><Link to={"/search-users"} className="px-4 p-2">Search users</Link></li>
+                                    <li className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 rounded hover:scale-105 whitespace-nowrap"><Link to={"/search"} className="px-4 p-2">Search users</Link></li>
                                 </ul>
                             </div>
                             :
