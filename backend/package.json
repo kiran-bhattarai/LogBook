@@ -22,6 +22,7 @@
     "mongoose": "^9.1.4",
     "nodemailer": "^7.0.12",
     "tailwindcss": "^4.1.18",
+    "validator": "^13.15.26",
     "winston": "^3.19.0"
   },
   "devDependencies": {
