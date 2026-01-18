@@ -68,43 +68,43 @@ function NotesView({onNoteClick}) {
             visibility: "private",
         },
                 {
-            id: 1,
+            id: 11,
             title: "Daily Plan",
             body: "Wake up early, finish React components, push commits.",
             visibility: "public",
         },
         {
-            id: 2,
+            id: 12,
             title: "Private thoughts",
             body: "Need to fix auto-resize bug and stop overengineering.",
             visibility: "private",
         },
         {
-            id: 3,
+            id: 13,
             title: "Ideas",
             body: "• Life tracker\n• Habit streaks\n• Calendar sync\n• Offline mode",
             visibility: "private",
         },
         {
-            id: 4,
+            id: 14,
             title: "Meeting Notes",
             body: "Discuss API auth, role-based access, and pagination.",
             visibility: "public",
         },
         {
-            id: 5,
+            id: 15,
             title: "",
             body: "Note without a title (edge case test).",
             visibility: "private",
         },
         {
-            id: 6,
+            id: 16,
             title: "Short",
             body: "Ok",
             visibility: "public",
         },
         {
-            id: 7,
+            id: 17,
             title: "Long body stress test",
             body:
                 "This is a very long note body meant to test how the UI behaves when content overflows. ".repeat(
@@ -113,19 +113,19 @@ function NotesView({onNoteClick}) {
             visibility: "private",
         },
         {
-            id: 8,
+            id: 18,
             title: "Draft",
             body: "",
             visibility: "private",
         },
         {
-            id: 9,
+            id: 19,
             title: "Public announcement",
             body: "This note should be visible to everyone.",
             visibility: "public",
         },
         {
-            id: 10,
+            id: 20,
             title: "Code snippet",
             body: "useEffect(() => {\n  console.log('Hello world');\n}, []);",
             visibility: "private",
