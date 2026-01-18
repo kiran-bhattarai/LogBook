@@ -1,8 +1,10 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import validator from 'validator'
 
 function SignupPage() {
+
+    const navigate = useNavigate()
 
     const [passwordIcon, setPasswordIcon] = useState("");
     const [passwordType, setPasswordType] = useState("password")
@@ -21,9 +23,11 @@ function SignupPage() {
     const [passwordTouched, setPasswordTouched] = useState(false)
     const [passwordRetypeTouched, setPasswordRetypeTouched] = useState(false)
 
-    const [message, setMessage] = useState("")
+    const [messageInfo, setMessageInfo] = useState("")
 
     const [nameLength, setNameLength] = useState(0)
+
+    const [accessToken, setAccessToken] = useState(null)
 
     const isValidName = () => {
         return /^[a-zA-Z0-9_]{3,20}$/.test(nameValue)
@@ -137,15 +141,34 @@ function SignupPage() {
         setPasswordRetypeTouched(true)
 
         if (emailValue === "" || passwordValue === "" || nameValue === "" || passwordRetypeValue === "") {
-            return setMessage("Please provide all the details.")
+            return setMessageInfo("Please provide all the details.")
         }
 
-        if (!isValidName()) return setMessage("Name must be 3–20 characters and can only include letters, numbers, and underscore.")
-        if (!isValidEmail()) return setMessage("Invalid email.")
-        if (passwordValue !== passwordRetypeValue) return setMessage("Passwords do not match.")
-        if (!isValidPassword()) return setMessage("Password criteria invalid.")
+        if (!isValidName()) return setMessageInfo("Name must be 3–20 characters and can only include letters, numbers, and underscore.")
+        if (!isValidEmail()) return setMessageInfo("Invalid email.")
+        if (passwordValue !== passwordRetypeValue) return setMessageInfo("Passwords do not match.")
+        if (!isValidPassword()) return setMessageInfo("Password criteria invalid.")
 
-        setMessage("")
+        setMessageInfo("")
+
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: nameValue, email: emailValue, password: passwordValue, passwordRetype: passwordRetypeValue })
+        })
+
+        const { message, token } = await res.json()
+
+        if (res.ok) {
+            setAccessToken(token)
+            navigate("/body")
+        }
+        else {
+            setMessageInfo(message)
+        }
+
 
     }
 
@@ -154,7 +177,7 @@ function SignupPage() {
             <div className=" p-2 pb-3 bg-white relative rounded-xl flex flex-col items-center w-[clamp(350px,54vmin,460px)] ">
 
                 <h1 className="text-5xl font-inter text-[#444444] font-medium mb-[clamp(78px,10vh,88px)] ">Sign up</h1>
-                <span className={`absolute top-20 text-[clamp(16px,2vmin,18px)] text-red-600 font-medium text-center leading-tight px-6`}>{message}</span>
+                <span className={`absolute top-20 text-[clamp(16px,2vmin,18px)] text-red-600 font-medium text-center leading-tight px-6`}>{messageInfo}</span>
 
                 <form onSubmit={handleSubmit} noValidate className="w-full px-[clamp(8px,1vw,16px)] items-center flex flex-col">
 
