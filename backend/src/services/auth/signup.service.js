@@ -18,7 +18,7 @@ export const signup = async (name, email, password) => {
 
     const passwordHash = await generateHash(password)
 
-    const user = new Users({
+    const user = await Users.create({
         name, email, password: passwordHash
     })
 
