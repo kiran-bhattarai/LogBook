@@ -3,6 +3,7 @@ import { isValidName, isValidEmail, isValidPassword } from "../../utils/validato
 import Users from "../../models/user.model.js"
 import { generateHash } from "../../utils/bcrypt.js"
 import { issueAccessToken } from "../../utils/jwt.js"
+import { generateRefreshToken } from "./refresh-token.service.js"
 
 
 export const signup = async (name, email, password) => {
@@ -24,6 +25,7 @@ export const signup = async (name, email, password) => {
 
     console.log(user)
     const accessToken = issueAccessToken(user._id.toString(), user.role)
-
-    return accessToken
+    const refreshToken = await generateRefreshToken(user._id.toString())
+    
+    return { accessToken, refreshToken }
 }

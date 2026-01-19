@@ -12,9 +12,11 @@ export const signup = async (req, res, next) => {
             return res.status(400).json({ message: "Please confirm your password" })
         }
 
-        const accessToken = await signupService(name, email, password)
+        const { accessToken, refreshToken } = await signupService(name, email, password)
 
-        return res.status(200).json({message: "User registered successfully.", token: accessToken})
+        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: false, sameSite: "lax" })
+
+        return res.status(200).json({ message: "User registered successfully.", token: accessToken, refreshToken: refreshToken })
     }
     catch (err) {
         next(err)
