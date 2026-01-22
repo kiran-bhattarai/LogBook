@@ -1,8 +1,11 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import valdidator from "validator"
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+
+    const navigate = useNavigate()
 
     const [passwordIcon, setPasswordIcon] = useState("");
     const [passwordType, setPasswordType] = useState("password")
@@ -73,8 +76,26 @@ function LoginPage() {
             setMessage("Please enter a valid email.")
             return
         }
-        
+
         setMessage("")
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: emailValue, password: passwordValue })
+        })
+
+        const { message, token } = await response.json()
+
+        if (response.ok) {
+            navigate("/body")
+        }
+        else {
+            setMessage(message)
+        }
+
     }
 
 
