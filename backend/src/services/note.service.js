@@ -14,3 +14,7 @@ export const noteFetch = async (userId) => {
     const notes = await Note.find({"userId": userId})
     return notes
 }
+
+export const noteDelete = async (userId, noteId) => {
+    await Note.deleteOne({userId, _id: noteId})
+}

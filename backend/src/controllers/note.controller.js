@@ -1,4 +1,4 @@
-import { noteSave as noteSaveService, noteFetch as noteFetchService } from "../services/note.service.js";
+import { noteSave as noteSaveService, noteFetch as noteFetchService, noteDelete as noteDeleteService } from "../services/note.service.js";
 
 export const noteSave = async (req, res, next) => {
     try {
@@ -29,4 +29,17 @@ export const noteFetch = async (req, res, next) => {
         next(err)
     }
 
+}
+
+export const noteDelete = async (req, res, next) => {
+    try{
+        const userId = req.user.sub
+        const { id } = req.params
+        await noteDeleteService(userId, id)
+
+        res.status(200).json({message: "Note deleted successfully"})
+    }
+    catch(err){
+        next(err)
+    }
 }
