@@ -10,6 +10,8 @@ body {
   --font-poppins: Poppins, "sans-serif"
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;
