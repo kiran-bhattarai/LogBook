@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [accessToken, setAccessToken] = useState(null)
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const API_URL = import.meta.env.VITE_API_URL;
 
@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify({ email, password })
         })
 
@@ -29,10 +30,13 @@ export const AuthProvider = ({ children }) => {
 
         const data = await res.json()
 
-        setUser(data.user)
-        setAccessToken(data.accessToken)
+        console.log("\nData from login controller:", data)
+
+        // setUser(data.user)
+        setAccessToken(data.token)
 
         setLoading(false)
+        return data
     }
 
 
@@ -49,6 +53,8 @@ export const AuthProvider = ({ children }) => {
 
         setUser(null)
         setAccessToken(null)
+
+        setLoading(false)
     }
 
 
@@ -59,29 +65,28 @@ export const AuthProvider = ({ children }) => {
                 credentials: "include"
             })
 
-            if(!res.ok) throw new Error("Refresh failed")
-            
+            if (!res.ok) throw new Error("Refresh failed")
+
             const data = await res.json()
 
-            setAccessToken(data.accessToken)
+            setAccessToken(data.token)
             setUser(data.user)
-            return data.accessToken
+            return data.token
         }
-         catch (err) {
+        catch (err) {
             console.error(err)
             setUser(null)
             setAccessToken(null)
             return null
-
         }
     }
 
 
     const protectedFetch = async (url, options = {}) => {
         let token = accessToken
-        
-        if(!token) token = await refreshAccessToken()
-        
+
+        if (!token) token = await refreshAccessToken()
+
         const config = {
             ...options,
             headers: {
@@ -93,25 +98,28 @@ export const AuthProvider = ({ children }) => {
 
         let res = await fetch(url, config)
 
-        if(res.status === 401) {
+        if (res.status === 401) {
             const newToken = await refreshAccessToken()
-            if(newToken){
+            if (newToken) {
                 config.headers.Authorization = `Bearer ${newToken}`
                 res = await fetch(url, config)
             }
         }
-
         return res
     }
 
     useEffect(() => {
-        const init = async() => {
+        const init = async () => {
+            setLoading(true)
             await refreshAccessToken()
             setLoading(false)
         }
         init()
     }, [])
 
+    if (loading) {
+        return <div className="flex justify-center items-center h-screen text-4xl text-white"><span>Loading...</span></div>
+    }
 
     return (
         <AuthContext.Provider value={{ user, accessToken, loading, login, logout, protectedFetch }}>
