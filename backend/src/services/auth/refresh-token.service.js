@@ -1,7 +1,8 @@
-import { generateHash } from "../../utils/bcrypt.js"
+import { generateHash, compareHash } from "../../utils/bcrypt.js"
 import RefreshToken from "../../models/refesh-token.model.js"
 import AppError from "../../errors/app-error.js"
 import crypto from "crypto"
+import { issueAccessToken } from "../../utils/jwt.js"
 
 export const generateRefreshToken = async (userId, device = "Unknown", ip = "0.0.0.0") => {
     const tokenId = crypto.randomBytes(16).toString("hex")
@@ -33,23 +34,23 @@ export const validateRefreshToken = async (refreshToken) => {
         throw new AppError("Invalid refresh token", 403)
     }
 
-    const isValid = await compareString(refreshToken, refreshTokenDb.tokenHash)
+    const isValid = await compareHash(refreshToken, refreshTokenDb.tokenHash)
     if (!isValid) {
         throw new AppError("Invalid refresh token", 403)
     }
 
     if (refreshTokenDb.expiresAt < new Date()) {
-        await RefreshToken.deleteOne({ tokenId: refreshTokenId })
+        await RefreshToken.deleteOne({ tokenId })
         throw new AppError("Refresh token expired", 403)
     }
 
-    await RefreshToken.deleteOne({ tokenId: refreshTokenId })
+    await RefreshToken.deleteOne({ tokenId })
 
     const newTokenId = crypto.randomBytes(16).toString("hex")
     const newSecret = crypto.randomBytes(32).toString("hex")
     const newRefreshToken = `${newTokenId}.${newSecret}`
 
-    const newTokenHash = await hashString(newRefreshToken)
+    const newTokenHash = await generateHash(newRefreshToken)
 
     await RefreshToken.create({
         userId: refreshTokenDb.userId.toString(),
@@ -57,8 +58,18 @@ export const validateRefreshToken = async (refreshToken) => {
         tokenHash: newTokenHash,
         device: refreshTokenDb.device,
         ip: refreshTokenDb.ip,
-        expiresAt: new Date(Date.now() + REFRESH_TOKEN_EXPIRE_DAYS * 24 * 60 * 60 * 1000)
+        expiresAt: new Date(Date.now() + process.env.REFRESH_TOKEN_EXPIRY_DAYS * 24 * 60 * 60 * 1000)
     })
 
     return newRefreshToken
+}
+
+export const refreshEndpoint = async (refreshToken) => {
+    const newRefToken = await validateRefreshToken(refreshToken)
+
+    const tokenId = newRefToken.split(".")[0]
+    const refreshTokenDb = await RefreshToken.findOne({ tokenId })
+    const newAccessToken = issueAccessToken(refreshTokenDb.userId.toString(), refreshTokenDb.role)
+
+    return { newRefToken, newAccessToken }
 }
