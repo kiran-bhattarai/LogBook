@@ -29,15 +29,17 @@ function Body() {
                     <SortBy></SortBy>
                 </div>
 
-                <div className="flex-1 overflow-y-auto p-4 max-w-[95%] mx-auto">
-                        <NotesView onNoteClick={setSelectedNote}/>
+                <div className="flex justify-center flex-1">
+                    <div className="flex-1 overflow-y-auto p-4 max-w-[95%]">
+                        <NotesView onNoteClick={setSelectedNote} />
+                    </div>
                 </div>
 
 
                 <Footer />
                 {selectedNote && <div className="fixed h-full w-full bg-[#00000063] z-10">
                     <div>
-                    <NoteEditor note={selectedNote}></NoteEditor>
+                        <NoteEditor note={selectedNote}></NoteEditor>
                     </div>
                 </div>}
             </div >
