@@ -1,142 +1,40 @@
+import { useState } from "react";
 import NotesCard from "./NotesCard";
+import { useEffect } from "react";
+import { useAuth } from "./AuthProvider";
 
-function NotesView({onNoteClick}) {
+function NotesView({ onNoteClick }) {
 
-    //For testing
-    const notes = [
-        {
-            id: 1,
-            title: "Daily Plan",
-            body: "Wake up early, finish React components, push commits.",
-            visibility: "public",
-        },
-        {
-            id: 2,
-            title: "Private thoughts",
-            body: "Need to fix auto-resize bug and stop overengineering.",
-            visibility: "private",
-        },
-        {
-            id: 3,
-            title: "Ideas",
-            body: "• Life tracker\n• Habit streaks\n• Calendar sync\n• Offline mode",
-            visibility: "private",
-        },
-        {
-            id: 4,
-            title: "Meeting Notes",
-            body: "Discuss API auth, role-based access, and pagination.",
-            visibility: "public",
-        },
-        {
-            id: 5,
-            title: "",
-            body: "Note without a title (edge case test).",
-            visibility: "private",
-        },
-        {
-            id: 6,
-            title: "Short",
-            body: "Ok",
-            visibility: "public",
-        },
-        {
-            id: 7,
-            title: "Long body stress test",
-            body:
-                "This is a very long note body meant to test how the UI behaves when content overflows. ".repeat(
-                    6
-                ),
-            visibility: "private",
-        },
-        {
-            id: 8,
-            title: "Draft",
-            body: "",
-            visibility: "private",
-        },
-        {
-            id: 9,
-            title: "Public announcement",
-            body: "This note should be visible to everyone.",
-            visibility: "public",
-        },
-        {
-            id: 10,
-            title: "Code snippet",
-            body: "useEffect(() => {\n  console.log('Hello world');\n}, []);",
-            visibility: "private",
-        },
-                {
-            id: 11,
-            title: "Daily Plan",
-            body: "Wake up early, finish React components, push commits.",
-            visibility: "public",
-        },
-        {
-            id: 12,
-            title: "Private thoughts",
-            body: "Need to fix auto-resize bug and stop overengineering.",
-            visibility: "private",
-        },
-        {
-            id: 13,
-            title: "Ideas",
-            body: "• Life tracker\n• Habit streaks\n• Calendar sync\n• Offline mode",
-            visibility: "private",
-        },
-        {
-            id: 14,
-            title: "Meeting Notes",
-            body: "Discuss API auth, role-based access, and pagination.",
-            visibility: "public",
-        },
-        {
-            id: 15,
-            title: "",
-            body: "Note without a title (edge case test).",
-            visibility: "private",
-        },
-        {
-            id: 16,
-            title: "Short",
-            body: "Ok",
-            visibility: "public",
-        },
-        {
-            id: 17,
-            title: "Long body stress test",
-            body:
-                "This is a very long note body meant to test how the UI behaves when content overflows. ".repeat(
-                    6
-                ),
-            visibility: "private",
-        },
-        {
-            id: 18,
-            title: "Draft",
-            body: "",
-            visibility: "private",
-        },
-        {
-            id: 19,
-            title: "Public announcement",
-            body: "This note should be visible to everyone.",
-            visibility: "public",
-        },
-        {
-            id: 20,
-            title: "Code snippet",
-            body: "useEffect(() => {\n  console.log('Hello world');\n}, []);",
-            visibility: "private",
-        },
-    ];
+    const [notes, setNotes] = useState([])
+    const { protectedFetch, loading } = useAuth()
+
+    useEffect(() => {
+        if (loading) return;
+        const getNotes = async () => {
+            const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/note/fetch`);
+            const data = await res.json();
+            console.log("The fetch notes response data", data)
+            setNotes(data.notes);
+        }
+        getNotes();
+
+    }, [protectedFetch, loading, setNotes]);
+
+    const deleteNoteLogicMain = async (id) => {
+        setNotes(prev => prev.filter(note => note._id !== id))
+    }
+
+    if (!notes) {
+        return (
+            <div className="text-3xl mt-[14vh] text-neutral-400">No notes</div>
+        )
+    }
 
     return (
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:5 2xl:columns-6 gap-2 bg-neutral-900">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-2">
             {notes.map(note => (
-                <div key={note.id} className="break-inside-avoid">
-                    <NotesCard note={note} onRealClick={onNoteClick} />
+                <div key={note._id} className="break-inside-avoid">
+                    <NotesCard note={note} deleteNoteLogicMain={deleteNoteLogicMain} onRealClick={onNoteClick} />
                 </div>
             ))}
         </div>
