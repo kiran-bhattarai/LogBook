@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import valdidator from "validator"
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
 
 function LoginPage() {
 
@@ -17,6 +18,8 @@ function LoginPage() {
     const [highlightPassword, setHighlightPassword] = useState(false)
 
     const [message, setMessage] = useState("")
+
+    const { login } = useAuth()
 
     const handlePasswordVisibility = () => {
         if (passwordType === "password") {
@@ -79,17 +82,11 @@ function LoginPage() {
 
         setMessage("")
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email: emailValue, password: passwordValue })
-        })
+        const data = await login(emailValue, passwordValue)
 
-        const { message, token } = await response.json()
+        const { message } = data
 
-        if (response.ok) {
+        if (message.includes("success")) {
             navigate("/body")
         }
         else {
