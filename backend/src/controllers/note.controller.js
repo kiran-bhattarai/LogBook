@@ -1,4 +1,4 @@
-import { noteSave as noteSaveService, noteFetch as noteFetchService, noteDelete as noteDeleteService } from "../services/note.service.js";
+import { noteSave as noteSaveService, noteFetch as noteFetchService, noteDelete as noteDeleteService, noteEdit as noteEditService } from "../services/note.service.js";
 
 export const noteSave = async (req, res, next) => {
     try {
@@ -10,7 +10,7 @@ export const noteSave = async (req, res, next) => {
         }
         const id = await noteSaveService(title, body, isPublic, userId)
 
-        res.status(200).json({message: "Note created successfully", id: id})
+        res.status(200).json({ message: "Note created successfully", id: id })
     }
     catch (err) {
         next(err)
@@ -18,28 +18,49 @@ export const noteSave = async (req, res, next) => {
 }
 
 export const noteFetch = async (req, res, next) => {
-    try{
+    try {
         const userId = req.user.sub
-        const notes  = await noteFetchService(userId)
-        
-        res.status(200).json({notes: notes})
+        const notes = await noteFetchService(userId)
+
+        res.status(200).json({ notes: notes })
 
     }
-    catch(err){
+    catch (err) {
         next(err)
     }
 
 }
 
 export const noteDelete = async (req, res, next) => {
-    try{
+    try {
         const userId = req.user.sub
         const { id } = req.params
         await noteDeleteService(userId, id)
 
-        res.status(200).json({message: "Note deleted successfully"})
+        res.status(200).json({ message: "Note deleted successfully" })
     }
-    catch(err){
+    catch (err) {
+        next(err)
+    }
+}
+
+export const noteEdit = async (req, res, next) => {
+    try {
+        const { noteId, title, body, isPublic } = req.body
+        const userId = req.user.sub
+
+        if (((title?.length || 0) + (body?.length || 0)) > 3000) {
+            return req.status(400).json({message: "Note length shouldnt exceed more that 3000 characters"})
+        }
+
+        if (((title?.length || 0) + (body?.length || 0)) === 0) {
+            await noteDeleteService(userId, noteId)
+        }
+
+        await noteEditService(userId, noteId, title, body, isPublic)
+        res.status(200).json({ message: "Note edited successfully" })
+    }
+    catch (err) {
         next(err)
     }
 }
