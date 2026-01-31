@@ -2,12 +2,14 @@ import Note from "../models/note.model.js"
 
 export const noteSave = async (title, body, isPublic, userId) => {
     if ((title.length + body.length) > 3000) return
-    await Note.create({
+    const { _id } = await Note.create({
         title,
         body,
         isPublic,
         userId
     })
+
+    return _id
 }
 
 export const noteFetch = async (userId) => {

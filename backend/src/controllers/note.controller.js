@@ -8,9 +8,9 @@ export const noteSave = async (req, res, next) => {
         if (title.trim().length === 0 && body.trim().length === 0) {
             return
         }
-        await noteSaveService(title, body, isPublic, userId)
+        const id = await noteSaveService(title, body, isPublic, userId)
 
-        res.status(200).json({message: "Note created successfully"})
+        res.status(200).json({message: "Note created successfully", id: id})
     }
     catch (err) {
         next(err)
