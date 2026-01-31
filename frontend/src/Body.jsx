@@ -16,7 +16,21 @@ function Body() {
 
     const [editor, setEditor] = useState(false)
 
+    const [sortId, setSortId] = useState(localStorage.getItem("sortId") || 1)
+
     const [selectedNote, setSelectedNote] = useState(null)
+
+    const [newNoteCreated, setNewNoteCreated] = useState(0)
+
+    const handleNewNoteCreated = (note) => {
+        setNewNoteCreated(prev => prev + 1)
+        return note
+    }
+
+    const setSortIdMain = (value) => {
+        setSortId(value)
+        localStorage.setItem("sortId", value)
+    }
 
 
     return (
@@ -25,13 +39,13 @@ function Body() {
                 <NavBar />
 
                 <div className="p-5 flex justify-center flex-col items-center">
-                    <NoteInput />
-                    <SortBy></SortBy>
+                    <NoteInput onNoteCreated={handleNewNoteCreated} />
+                    <SortBy sortId={sortId} setSortId={setSortIdMain} />
                 </div>
 
                 <div className="flex justify-center flex-1">
                     <div className="flex-1 overflow-y-auto p-4 max-w-[95%]">
-                        <NotesView onNoteClick={setSelectedNote} />
+                        <NotesView onNoteClick={setSelectedNote} newNoteCreated={newNoteCreated} sortId={sortId} />
                     </div>
                 </div>
 
