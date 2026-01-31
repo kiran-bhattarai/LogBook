@@ -32,6 +32,11 @@ function Body() {
         localStorage.setItem("sortId", value)
     }
 
+    const setSelectedNoteMain = (value) => {
+        setNewNoteCreated(prev => prev+1)
+        setSelectedNote(value)
+    }
+
 
     return (
         <>
@@ -53,7 +58,7 @@ function Body() {
                 <Footer />
                 {selectedNote && <div className="fixed h-full w-full bg-[#00000063] z-10">
                     <div>
-                        <NoteEditor note={selectedNote}></NoteEditor>
+                        <NoteEditor note={selectedNote} setNoteOnScreen={setSelectedNoteMain}></NoteEditor>
                     </div>
                 </div>}
             </div >
