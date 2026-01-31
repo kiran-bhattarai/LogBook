@@ -3,7 +3,7 @@ import NotesCard from "./NotesCard";
 import { useEffect } from "react";
 import { useAuth } from "./AuthProvider";
 
-function NotesView({ onNoteClick }) {
+function NotesView({ onNoteClick, newNoteCreated }) {
 
     const [notes, setNotes] = useState([])
     const { protectedFetch, loading } = useAuth()
@@ -18,15 +18,16 @@ function NotesView({ onNoteClick }) {
         }
         getNotes();
 
-    }, [protectedFetch, loading, setNotes]);
+    }, [protectedFetch, loading, setNotes, newNoteCreated]);
 
     const deleteNoteLogicMain = async (id) => {
         setNotes(prev => prev.filter(note => note._id !== id))
+        await protectedFetch(`${import.meta.env.VITE_API_URL}/note/delete/${id}`, { method: "DELETE" })
     }
 
-    if (!notes) {
+    if (!notes || notes.length === 0) {
         return (
-            <div className="text-3xl mt-[14vh] text-neutral-400">No notes</div>
+            <div className="text-3xl mt-[14vh] text-neutral-400 text-center">No notes</div>
         )
     }
 
