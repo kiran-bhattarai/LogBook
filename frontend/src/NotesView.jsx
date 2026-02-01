@@ -3,7 +3,7 @@ import NotesCard from "./NotesCard";
 import { useEffect } from "react";
 import { useAuth } from "./AuthProvider";
 
-function NotesView({ onNoteClick, newNoteCreated, sortId }) {
+function NotesView({ onNoteClick, newNoteCreated, sortId, searchingFor }) {
 
     const [notes, setNotes] = useState(null)
     const { protectedFetch, loading } = useAuth()
@@ -59,13 +59,15 @@ function NotesView({ onNoteClick, newNoteCreated, sortId }) {
         }
     }
 
-    const sortedNotes = getSortedNotes()
+    let sortedNotes = getSortedNotes()
+
+    sortedNotes = sortedNotes.filter(note => (note.title.toLowerCase().includes(searchingFor.toLowerCase()) || note.body.toLowerCase().includes(searchingFor.toLowerCase())))
 
     if (notes === null) {
         return <div className="text-center mt-[14vh] text-neutral-200">Loading...</div>
     }
 
-    if (notes.length === 0) {
+    if (notes.length === 0 || sortedNotes.length === 0) {
         return (
             <div className="text-3xl mt-[14vh] text-neutral-400 text-center">No notes</div>
         )
