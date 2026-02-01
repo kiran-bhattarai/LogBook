@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode"
 
 
 const AuthContext = createContext()
@@ -30,9 +31,7 @@ export const AuthProvider = ({ children }) => {
 
         const data = await res.json()
 
-        console.log("\nData from login controller:", data)
-
-        // setUser(data.user)
+        setUser(jwtDecode(data.token).role)
         setAccessToken(data.token)
 
         setLoading(false)
@@ -44,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
         setLoading(true)
 
-        const res = await fetch(`${API_URL}/auth/logout`, {
+        const res = await protectedFetch(`${API_URL}/auth/logout`, {
             method: "POST",
             credentials: "include"
         })
@@ -70,7 +69,9 @@ export const AuthProvider = ({ children }) => {
             const data = await res.json()
 
             setAccessToken(data.token)
-            setUser(data.user)
+
+            setUser(jwtDecode(data.token).role)
+
             return data.token
         }
         catch (err) {
