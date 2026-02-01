@@ -12,7 +12,7 @@ export const login = async (req, res, next) => {
 
         res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: false, sameSite: "lax" })
 
-        return res.status(200).json({ message: "User logged in successfully.", token: accessToken, refreshToken: refreshToken })
+        return res.status(200).json({ message: "User logged in successfully.", token: accessToken })
     }
     catch (err) {
         next(err)
