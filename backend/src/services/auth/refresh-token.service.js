@@ -3,6 +3,7 @@ import RefreshToken from "../../models/refesh-token.model.js"
 import AppError from "../../errors/app-error.js"
 import crypto from "crypto"
 import { issueAccessToken } from "../../utils/jwt.js"
+import User from "../../models/user.model.js"
 
 export const generateRefreshToken = async (userId, device = "Unknown", ip = "0.0.0.0") => {
     const tokenId = crypto.randomBytes(16).toString("hex")
@@ -69,7 +70,9 @@ export const refreshEndpoint = async (refreshToken) => {
 
     const tokenId = newRefToken.split(".")[0]
     const refreshTokenDb = await RefreshToken.findOne({ tokenId })
-    const newAccessToken = issueAccessToken(refreshTokenDb.userId.toString(), refreshTokenDb.role)
+    const { role } = await User.findOne({_id: refreshTokenDb.userId})
+
+    const newAccessToken = issueAccessToken(refreshTokenDb.userId.toString(), role)
 
     return { newRefToken, newAccessToken }
 }
