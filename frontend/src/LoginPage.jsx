@@ -154,7 +154,7 @@ function LoginPage({ setSignupWindow, setItselfOff }) {
 
                 <div className="text-[clamp(16px,1.8vmin,19px)] flex mt-[clamp(6px,0.6vmin,12px)]">
                     <span>Don't have an account?&nbsp;</span>
-                    <button onClick={setSignupWindow} className="hover:underline hover:scale-105  text-purple-900 transition duration-300 font-semibold">Login</button>
+                    <button onClick={setSignupWindow} className="hover:underline hover:scale-105  text-purple-900 transition duration-300 font-semibold">Register</button>
 
                 </div>
 
