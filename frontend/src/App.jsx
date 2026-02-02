@@ -8,7 +8,7 @@ import NotesView from "./NotesView"
 import Footer from "./Footer"
 import Body from "./Body.jsx"
 import NoteEditor from "./NoteEditor.jsx"
-import ProfilePage from "./Profile.jsx"
+import ProfilePage from "./ProfilePage.jsx"
 import SearchUsers from "./SearchUsers.jsx"
 import UserItem from "./UserItem.jsx"
 
