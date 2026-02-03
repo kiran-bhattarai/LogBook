@@ -15,3 +15,17 @@ export const authenticate = (req, res, next) => {
         res.status(401).json({ message: "Invalid token" })
     }
 }
+
+export const authenticateButNotForced = (req, res, next) => {
+    try {
+
+        const token = req.headers?.authorization.split(" ")[1]
+
+        req.user = verifyAccessToken(token)
+
+        next()
+    }
+    catch (err) {
+        res.status(401).json({ message: "Invalid token" })
+    }
+}
