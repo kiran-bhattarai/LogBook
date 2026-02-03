@@ -5,7 +5,7 @@ export const profileFetch = async (userId) => {
 
     const foundUser = await User.findOne({_id: userId})
     const name = foundUser?.name
-    const notesPublic = await Note.find({userId, isPublic:true})
+    const publicNotes = await Note.find({userId, isPublic:true})
     
-    return { name, notesPublic }
+    return { name, publicNotes }
 }

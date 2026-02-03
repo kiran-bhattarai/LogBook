@@ -19,9 +19,11 @@ export const authenticate = (req, res, next) => {
 export const authenticateButNotForced = (req, res, next) => {
     try {
 
-        const token = req.headers?.authorization.split(" ")[1]
+        const token = req.headers?.authorization?.split(" ")[1]
 
-        req.user = verifyAccessToken(token)
+        if(token){
+            req.user = verifyAccessToken(token)
+        }
 
         next()
     }
