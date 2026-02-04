@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useAuth } from "./AuthProvider"
 
 function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
@@ -8,6 +8,8 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
     const [profilePic, setProfilePic] = useState("../src/assets/user_profile.png")
 
     const [dropVisible, setDropVisible] = useState(false)
+
+    const dropdownRef = useRef()
 
     const { logout, user } = useAuth()
 
@@ -19,11 +21,23 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
         setDropVisible(prev => !prev)
     }
 
+    const handleClickOutsideDrop = (e) => {
+        if(dropdownRef.current && !dropdownRef.current.contains(e.target)){
+            setDropVisible(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutsideDrop)
+
+        return () => document.removeEventListener("mousedown", handleClickOutsideDrop)
+    }, [])
+
 
     return (
         <div className="sticky top-0 shadow-[0px_0px_10px_black] z-10">
             <div className="bg-neutral-800 h-14 items-center flex justify-between px-4 text-white gap-5">
-                <Link to={"/"}>
+                <Link to={"/body"}>
                     <div className="text-3xl font-bold text-white font-poppins rounded bg-[#1d1d1d] px-2 py-1">
                         <span className="text-yellow-500 pr-0.5">
                             Log
@@ -78,7 +92,7 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
                             </button>
                         </div>
 
-                        {dropVisible && <div className="border-neutral-600 border w-30 py-1.5 bg-[#1d1d1d] rounded absolute -right-3 mt-2">
+                        {dropVisible && <div ref={dropdownRef} className="border-neutral-600 border w-30 py-1.5 bg-[#1d1d1d] rounded absolute -right-3 mt-2">
                             <button className="w-full h-8 text-xl cursor-pointer hover:text-neutral-400 transition duration-200"><Link to={"/profile"}>Profile</Link></button>
                             <button onClick={handleLogout} className="w-full h-8 text-xl text-red-600 cursor-pointer hover:text-red-800 transition duration-200">Logout</button>
                         </div>}
