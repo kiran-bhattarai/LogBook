@@ -61,7 +61,7 @@ function NotesView({ onNoteClick, newNoteCreated, sortId, searchingFor }) {
 
     let sortedNotes = getSortedNotes()
 
-    sortedNotes = sortedNotes.filter(note => (note.title.toLowerCase().includes(searchingFor.toLowerCase()) || note.body.toLowerCase().includes(searchingFor.toLowerCase())))
+    sortedNotes = sortedNotes?.filter(note => (note.title.toLowerCase().includes(searchingFor?.toLowerCase()) || note.body.toLowerCase().includes(searchingFor?.toLowerCase())))
 
     if (notes === null) {
         return <div className="text-center mt-[14vh] text-neutral-200">Loading...</div>
