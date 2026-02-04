@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { profileFetch as profileFetchService } from "../services/profile.service.js"
+import { profileFetch as profileFetchService, profilesSearch as profilesSearchService } from "../services/profile.service.js"
 
 
 export const profileFetch = async (req, res, next) => {
@@ -28,6 +28,24 @@ export const profileFetch = async (req, res, next) => {
         }
 
         res.status(200).json({ name, publicNotes })
+
+    }
+    catch (err) {
+        next(err)
+    }
+}
+
+export const profilesSearch = async (req, res, next) => {
+    try {
+        const searchTerm = req.query?.term
+
+        if (!searchTerm || searchTerm.trim() === "") {
+            return res.status(400).json({ message: "Nothing to search" })
+        }
+
+        const foundUsers = await profilesSearchService(searchTerm)
+
+        res.status(200).json({ foundUsers })
 
     }
     catch (err) {
