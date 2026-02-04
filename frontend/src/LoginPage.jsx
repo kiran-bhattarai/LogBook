@@ -102,6 +102,8 @@ function LoginPage({ setSignupWindow, setItselfOff }) {
 
         if (!message.includes("success")) {
             setMessage(message)
+        }else{
+            setItselfOff()
         }
     }
 

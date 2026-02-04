@@ -177,6 +177,7 @@ function SignupPage({ setLoginWindow, setItselfOff }) {
 
         if (res.ok) {
             login(emailValue, passwordValue)
+            setItselfOff()
         }
         else {
             setMessageInfo(message)
