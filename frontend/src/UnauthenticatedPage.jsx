@@ -4,12 +4,15 @@ import Footer from "./Footer"
 import LoginPage from "./LoginPage"
 import SignupPage from "./SignupPage"
 import { TypeAnimation } from "react-type-animation"
+import SearchUsers from "./SearchUsers"
 
 
 function UnauthenticatedPage() {
 
     const [loginWindow, setLoginWindow] = useState(false)
     const [signupWindow, setSignupWindow] = useState(false)
+
+    const [searchAccounts, setSearchAccounts] = useState(false)
 
     const setLoginWindowMain = () => {
         setLoginWindow(prev => !prev)
@@ -24,7 +27,7 @@ function UnauthenticatedPage() {
 
     return (
         <div className="min-h-screen flex flex-col bg-neutral-900">
-            <NavBar setLogin={setLoginWindowMain} setSignup={setSignupWindowMain}></NavBar>
+            <NavBar setSearchUsers={setSearchAccounts} setLogin={setLoginWindowMain} setSignup={setSignupWindowMain}></NavBar>
 
             <div className="flex-1 flex-col flex justify-center">
                 <div className="text-white text-5xl self-center max-w-[80%] text-center flex flex-col gap-[clamp(60px,14vh,140px)] p-6 whitespace-nowrap">
@@ -59,11 +62,16 @@ function UnauthenticatedPage() {
                         <div className="">
                             {loginWindow
                                 && <div>
-                                    <LoginPage setSignupWindow={setSignupWindowMain} setItselfOff={() => setLoginWindow(false)}/>
+                                    <LoginPage setSignupWindow={setSignupWindowMain} setItselfOff={() => setLoginWindow(false)} />
                                 </div>}
                             {signupWindow && <SignupPage setLoginWindow={setLoginWindowMain} setItselfOff={() => setSignupWindow(false)}></SignupPage>}
                         </div>
                     </div>}
+                {searchAccounts && <div className="absolute h-full w-full bg-[#00000063] z-10">
+                    <div>
+                        <SearchUsers setSearchUsers={setSearchAccounts} />
+                    </div>
+                </div>}
             </div>
 
             <Footer></Footer>
