@@ -31,8 +31,13 @@ export const AuthProvider = ({ children }) => {
 
         const data = await res.json()
 
-        setUser(jwtDecode(data.token).role)
-        setAccessToken(data.token)
+        if(data.token){
+            setUser(jwtDecode(data.token).role)
+            setAccessToken(data.token)
+        }else{
+            setUser(null)
+            setAccessToken(null)
+        }
 
         setLoading(false)
         return data
