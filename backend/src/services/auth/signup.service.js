@@ -17,10 +17,16 @@ export const signup = async (name, email, password) => {
     const prevUser = await Users.findOne({ email: email })
     if (prevUser) throw new AppError("Email already in use.", 400)
 
+    let role = "user"
+    const anyPrevUser = await Users.findOne()
+    if(!anyPrevUser){
+        role = "admin"
+    }
+
     const passwordHash = await generateHash(password)
 
     const user = await Users.create({
-        name, email, password: passwordHash
+        name, email, password: passwordHash, role
     })
 
     console.log(user)
