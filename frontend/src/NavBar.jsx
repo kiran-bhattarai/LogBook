@@ -22,7 +22,7 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
     }
 
     const handleClickOutsideDrop = (e) => {
-        if(dropdownRef.current && !dropdownRef.current.contains(e.target)){
+        if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
             setDropVisible(false)
         }
     }
@@ -65,9 +65,9 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
                     {user && (user === "admin") ?
                         <div className="h-full">
                             <ul className="flex gap-3 items-center h-full text-xl">
+                                <li onClick={() => setSearchUsers(true)} className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 rounded hover:scale-105 whitespace-nowrap px-4 p-2 cursor-pointer">Search users</li>
                                 <li className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 rounded hover:scale-105"><Link to={"/dashboard"} className="px-4 p-2">Dashboard</Link></li>
-                                <li className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 whitespace-nowrap rounded hover:scale-105"><Link to={"/signup"} className="px-4 p-2">Users</Link></li>
-                                <li className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 whitespace-nowrap rounded hover:scale-105"><Link to={"/settings"} className="px-4 p-2">Settings</Link></li>
+                                <li className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 whitespace-nowrap rounded hover:scale-105"><Link to={"/access-control"} className="px-4 p-2">Access Control</Link></li>
                             </ul>
                         </div>
                         :
@@ -80,6 +80,7 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
                             :
                             <div className="h-full">
                                 <ul className="flex gap-3 items-center h-full text-xl">
+                                    <li onClick={() => setSearchUsers(true)} className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 rounded hover:scale-105 whitespace-nowrap px-4 p-2 cursor-pointer">Search users</li>
                                     <li className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 rounded hover:scale-105"><button className="cursor-pointer px-4 p-2" onClick={setLogin}>Login</button></li>
                                     <li className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 whitespace-nowrap rounded hover:scale-105"><button className="cursor-pointer px-4 p-2" onClick={setSignup}>Sign up</button></li>
                                 </ul>
