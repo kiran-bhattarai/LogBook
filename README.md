@@ -2,7 +2,7 @@
 
 LogBook is a multi-user note-taking full-stack application built with the MERN stack.
 
-### The project is currently on hold. Some features are missing and  will be added in the future.
+### The project is currently under development. Some features are missing and are being added.
 
 ## Features
 
@@ -14,6 +14,7 @@ LogBook is a multi-user note-taking full-stack application built with the MERN s
 - Profiles and user search feature
 - Refresh token rotation
 - Note search and sort feature
+- Google oauth
 
 ## How to run
 
