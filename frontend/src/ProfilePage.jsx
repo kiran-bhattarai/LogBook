@@ -22,6 +22,7 @@ function ProfilePage() {
 
     const [selectedNote, setSelectedNote] = useState(null)
 
+    const [avatar, setAvatar] = useState("../src/assets/user_profile.png")
     const [username, setUsername] = useState("loading...")
     const [userId, setUserId] = useState("loading...")
     const [notes, setNotes] = useState(null)
@@ -77,8 +78,8 @@ function ProfilePage() {
             const data = await res.json()
 
             setUsername(data.name)
+            setAvatar(data?.avatar)
             setNotes(data.publicNotes)
-            console.log(data)
 
             if (!id) {
                 setUserId(jwtDecode(accessToken).sub)
@@ -169,7 +170,7 @@ function ProfilePage() {
             <NavBar setSearchUsers={setSearchAccounts} setLogin={setLoginWindowMain} setSignup={setSignupWindowMain} setSearchingFor={setSearchingFor} ></NavBar>
             {username ?
                 <>
-                    <Profile name={username} userId={userId}></Profile>
+                    <Profile name={username} userId={userId} avatar={avatar}></Profile>
                     <div className="text-white bg-neutral-900 text-lg px-8 items-center b w-full flex justify-between border-b border-neutral-600">
                         <span>
                             Notes: {notes?.length}

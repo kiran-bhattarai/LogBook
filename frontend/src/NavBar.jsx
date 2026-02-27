@@ -1,20 +1,25 @@
 import { Link } from "react-router-dom"
 import { useState, useRef, useEffect } from "react"
 import { useAuth } from "./AuthProvider"
+import { useNavigate } from "react-router-dom"
 
 function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
 
-    const [mode, setMode] = useState("dark")
     const [profilePic, setProfilePic] = useState("../src/assets/user_profile.png")
+    const [mode, setMode] = useState("dark")
 
     const [dropVisible, setDropVisible] = useState(false)
 
     const dropdownRef = useRef()
 
-    const { logout, user } = useAuth()
+    const navigate = useNavigate()
+
+    const { logout, user, protectedFetch } = useAuth()
+    console.log(user)
 
     const handleLogout = () => {
         logout()
+        navigate("/body")
     }
 
     const toggleDrop = () => {
@@ -32,6 +37,27 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
 
         return () => document.removeEventListener("mousedown", handleClickOutsideDrop)
     }, [])
+
+    useEffect(() => {
+        const getAvatar = async () => {
+
+            if (user) {
+                const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/profile/fetch`)
+                if (!res.ok) {
+                    setProfilePic("../src/assets/user_profile.png")
+                    return
+                }
+                
+                const data = await res.json()
+                if(data.avatar){
+                    setProfilePic(data?.avatar)
+                }
+            }
+        }
+
+        getAvatar()
+
+    }, [user, protectedFetch])
 
 
     return (
@@ -74,7 +100,7 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
                         (user === "user") ?
                             <div className="h-full">
                                 <ul className="flex gap-3 items-center h-full text-xl">
-                                    <li onClick={() => setSearchUsers(true)} className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 rounded hover:scale-105 whitespace-nowrap px-4 p-2">Search users</li>
+                                    <li onClick={() => setSearchUsers(true)} className="h-[70%] flex items-center hover:bg-neutral-900 transition duration-300 rounded hover:scale-105 whitespace-nowrap px-4 p-2 cursor-pointer">Search users</li>
                                 </ul>
                             </div>
                             :
