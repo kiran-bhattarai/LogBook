@@ -148,7 +148,7 @@ function LoginPage({ setSignupWindow, setItselfOff }) {
                 <div className="text-lg font-semibold flex flex-col items-center">
 
                     <div className="flex">
-                        <button className="transition duration-300 w-[clamp(40px,5.5vmin,56px)] h-[clamp(40px,5.5vmin,56px)] m-1 mx-2 bg-white cursor-pointer hover:-translate-y-1 hover:shadow-md shadow-neutral-400 items-center justify-center flex rounded-xl"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/40px-Google_%22G%22_logo.svg.png?20230822192911" alt="" className="w-[clamp(30px,3.7vmin,38px)]" /></button>
+                        <button onClick={async() => window.open("http://localhost:3000/auth/google", "_self")} className="transition duration-300 w-[clamp(40px,5.5vmin,56px)] h-[clamp(40px,5.5vmin,56px)] m-1 mx-2 bg-white cursor-pointer hover:-translate-y-1 hover:shadow-md shadow-neutral-400 items-center justify-center flex rounded-xl"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/40px-Google_%22G%22_logo.svg.png?20230822192911" alt="" className="w-[clamp(30px,3.7vmin,38px)]" /></button>
 
                         <button className="transition duration-300 w-[clamp(40px,5.5vmin,56px)] h-[clamp(40px,5.5vmin,56px)] m-1 mx-2 bg-white cursor-pointer hover:-translate-y-1 hover:shadow-md shadow-neutral-400 items-center justify-center flex rounded-xl"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/1024px-2023_Facebook_icon.svg.png" alt="" className="w-[clamp(30px,3.7vmin,38px)]" /></button>
                     </div>
