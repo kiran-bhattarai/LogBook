@@ -11,7 +11,12 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+    },
+    avatar: {
+        type: String,
+    },
+    googleId: {
+        type: String,
     },
     isVerified: {
         type: Boolean,
@@ -20,11 +25,7 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         default: "user"
-    },
-    createdAt: {
-        type:  Date,
-        default: Date.now
     }
-})
+}, {timestamps: true})
 
 export default mongoose.model("Users", UserSchema)

@@ -18,6 +18,12 @@ export const login = async (email, password) => {
 
     const accessToken = issueAccessToken(prevUser._id.toString(), prevUser.role)
     const refreshToken = await generateRefreshToken(prevUser._id.toString())
-    
+
+    return { accessToken, refreshToken }
+}
+
+export const googleLogin = async (user) => {
+    const accessToken = issueAccessToken(user._id, user.role)
+    const refreshToken = await generateRefreshToken(user._id)
     return { accessToken, refreshToken }
 }

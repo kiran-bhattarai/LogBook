@@ -21,13 +21,13 @@ export const profileFetch = async (req, res, next) => {
             id = requestId
         }
 
-        const { name, publicNotes } = await profileFetchService(id)
+        const { name, publicNotes, avatar } = await profileFetchService(id)
 
         if (!name) {
             return res.status(400).json({ message: "User doesnt exists" })
         }
 
-        res.status(200).json({ name, publicNotes })
+        res.status(200).json({ name, publicNotes, avatar })
 
     }
     catch (err) {

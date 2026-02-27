@@ -6,9 +6,11 @@ export const profileFetch = async (userId) => {
 
     const foundUser = await User.findOne({ _id: userId })
     const name = foundUser?.name
+    const avatar = foundUser?.avatar
+    console.log(avatar)
     const publicNotes = await Note.find({ userId, isPublic: true })
 
-    return { name, publicNotes }
+    return { name, publicNotes, avatar }
 }
 
 export const profilesSearch = async (searchTerm) => {
@@ -21,7 +23,7 @@ export const profilesSearch = async (searchTerm) => {
         query.push({ _id: searchTerm });
     }
 
-    const foundUsers = await User.find({ $or: query }).select("name _id").limit(10);
+    const foundUsers = await User.find({ $or: query }).select("name _id avatar").limit(10);
 
     return foundUsers
 }
