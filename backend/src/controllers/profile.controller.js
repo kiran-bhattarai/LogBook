@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { profileFetch as profileFetchService, profilesSearch as profilesSearchService } from "../services/profile.service.js"
+import { profileFetch as profileFetchService, profilesSearch as profilesSearchService, changeAvatar as changeAvatarService } from "../services/profile.service.js"
 
 
 export const profileFetch = async (req, res, next) => {
@@ -7,10 +7,10 @@ export const profileFetch = async (req, res, next) => {
         let id = req.query?.id
         const requestId = req.user?.sub
 
-        if(id){
-            if(!mongoose.Types.ObjectId.isValid(id)){
+        if (id) {
+            if (!mongoose.Types.ObjectId.isValid(id)) {
                 return res.status(400).json({ message: "Invalid user id" });
-            }            
+            }
         }
 
         if (!requestId && !id) {
@@ -47,6 +47,21 @@ export const profilesSearch = async (req, res, next) => {
 
         res.status(200).json({ foundUsers })
 
+    }
+    catch (err) {
+        next(err)
+    }
+}
+
+export const changeAvatar = async (req, res, next) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: "No file uploaded" });
+        }
+
+        await changeAvatarService(req.user.sub, req.file)
+
+        res.status(200).json({ message: "Upload success" })
     }
     catch (err) {
         next(err)
