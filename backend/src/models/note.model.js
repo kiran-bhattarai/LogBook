@@ -16,11 +16,6 @@ const NoteSchema = new mongoose.Schema({
         ref: "Users",
         required: true
     }
-    ,
-    createdAt: {
-        type:  Date,
-        default: Date.now
-    }
-})
+}, { timestamps: true })
 
 export default mongoose.model("Note", NoteSchema)

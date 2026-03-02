@@ -7,6 +7,7 @@ import profileRouter from "./routes/profile.route.js"
 import { globalErrorHandler } from './middlewares/global-error-handler.js';
 import cookieParser from 'cookie-parser';
 import passport from "passport"
+import adminRouter from "./routes/admin.route.js"
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(passport.initialize())
 app.use("/auth", authRouter)
 app.use("/note", noteRouter)
 app.use("/profile", profileRouter)
+app.use("/admin", adminRouter)
 
 app.use(globalErrorHandler)
 
