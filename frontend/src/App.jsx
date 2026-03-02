@@ -11,6 +11,7 @@ import NoteEditor from "./NoteEditor.jsx"
 import ProfilePage from "./ProfilePage.jsx"
 import SearchUsers from "./SearchUsers.jsx"
 import UserItem from "./UserItem.jsx"
+import Dashboard from "./Dashboard.jsx"
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
       <Route path="/card" element={<NotesCard />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="*" element={<ProfilePage />} />
     </Routes>
