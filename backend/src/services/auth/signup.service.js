@@ -35,6 +35,9 @@ export const signup = async (name, email, password) => {
         name, email, password: passwordHash, role
     })
 
+    user.providers.local = true
+    user.save()
+
     const accessToken = issueAccessToken(user._id.toString(), user.role)
     const refreshToken = await generateRefreshToken(user._id.toString())
 
