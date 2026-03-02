@@ -15,11 +15,17 @@ export const signup = async (name, email, password) => {
     if (!isValidPassword(password)) throw new AppError("Password should be atleast 8 characters, including one uppercase letter, one lowercase letter, one number, and one special symbol.", 400)
 
     const prevUser = await Users.findOne({ email: email })
-    if (prevUser) throw new AppError("Email already in use.", 400)
+
+    if (prevUser) {
+        if (existingUser.providers?.local) {
+            throw new AppError("Email already in use.", 400)
+        }
+        throw new AppError("Account exists with Google/Facebook. Please login using OAuth.", 400)
+    }
 
     let role = "user"
     const anyPrevUser = await Users.findOne()
-    if(!anyPrevUser){
+    if (!anyPrevUser) {
         role = "admin"
     }
 
@@ -29,9 +35,8 @@ export const signup = async (name, email, password) => {
         name, email, password: passwordHash, role
     })
 
-    console.log(user)
     const accessToken = issueAccessToken(user._id.toString(), user.role)
     const refreshToken = await generateRefreshToken(user._id.toString())
-    
+
     return { accessToken, refreshToken }
 }

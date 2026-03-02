@@ -13,6 +13,10 @@ export const login = async (email, password) => {
     const prevUser = await Users.findOne({ email: email })
     if (!prevUser) throw new AppError("Invalid email or password.", 400)
 
+    if (!prevUser.providers?.local) {
+        throw new AppError("Please login using Google or Facebook", 400)
+    }
+
     const isValid = await compareHash(password, prevUser.password)
     if (!isValid) throw new AppError("Invalid email or password.", 400)
 

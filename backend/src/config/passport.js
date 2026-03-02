@@ -15,16 +15,27 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let user = await User.findOne({ googleId: profile.id });
+        const email = profile.emails[0].value;
 
-        if (!user) {
-          user = await User.create({
-            googleId: profile.id,
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            avatar: profile.photos[0].value,
-          });
+        let user = await User.findOne({ email });
+
+        if (user) {
+          if (!user.providers.google?.id) {
+            user.providers.google = { id: profile.id };
+            await user.save();
+          }
+          return done(null, user);
         }
+
+        user = await User.create({
+          name: profile.displayName,
+          email,
+          avatar: profile.photos[0].value,
+          providers: {
+            google: { id: profile.id }
+          },
+          isVerified: true
+        });
 
         return done(null, user);
       } catch (err) {
@@ -45,16 +56,27 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
 
-        let user = await User.findOne({ facebookId: profile.id });
+        const email = profile.emails[0].value;
 
-        if (!user) {
-          user = await User.create({
-            facebookId: profile.id,
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            avatar: profile.photos[0].value,
-          });
+        let user = await User.findOne({ email });
+
+        if (user) {
+          if (!user.providers.facebook?.id) {
+            user.providers.facebook = { id: profile.id };
+            await user.save();
+          }
+          return done(null, user);
         }
+
+        user = await User.create({
+          name: profile.displayName,
+          email,
+          avatar: profile.photos[0].value,
+          providers: {
+            facebook: { id: profile.id }
+          },
+          isVerified: true
+        });
 
         return done(null, user);
       } catch (err) {
