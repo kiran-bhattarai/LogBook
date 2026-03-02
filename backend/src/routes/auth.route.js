@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { signup } from "../controllers/auth/signup.controller.js";
-import { login, googleLogin } from "../controllers/auth/login.controller.js";
+import { login, oauthLogin } from "../controllers/auth/login.controller.js";
 import { refresh } from "../controllers/auth/refresh.controller.js";
 import { logout } from "../controllers/auth/logout.controller.js";
 import { authenticate } from "../middlewares/authenticate.js";
@@ -23,7 +23,20 @@ router.get(
   passport.authenticate("google", {
     session: false
   }),
-  googleLogin
+  oauthLogin
+);
+
+router.get(
+  "/facebook",
+  passport.authenticate("facebook", { scope: ["email"] })
+)
+
+router.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", {
+    session: false
+  }),
+  oauthLogin
 );
 
 export default router

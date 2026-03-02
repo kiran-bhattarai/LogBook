@@ -1,4 +1,4 @@
-import { login as loginService, googleLogin as googleLoginService } from "../../services/auth/login.service.js"
+import { login as loginService, oauthLogin as oauthLoginService } from "../../services/auth/login.service.js"
 
 export const login = async (req, res, next) => {
     try {
@@ -19,10 +19,10 @@ export const login = async (req, res, next) => {
     }
 }
 
-export const googleLogin = async (req, res, next) => {
+export const oauthLogin = async (req, res, next) => {
     try {
         const user = req.user
-        const { accessToken, refreshToken } = await googleLoginService(user)
+        const { accessToken, refreshToken } = await oauthLoginService(user)
 
         res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: false, sameSite: "lax" })
 

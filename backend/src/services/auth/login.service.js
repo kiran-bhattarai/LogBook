@@ -22,7 +22,7 @@ export const login = async (email, password) => {
     return { accessToken, refreshToken }
 }
 
-export const googleLogin = async (user) => {
+export const oauthLogin = async (user) => {
     const accessToken = issueAccessToken(user._id, user.role)
     const refreshToken = await generateRefreshToken(user._id)
     return { accessToken, refreshToken }

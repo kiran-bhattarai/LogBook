@@ -18,6 +18,9 @@ const UserSchema = new mongoose.Schema({
     googleId: {
         type: String,
     },
+    facebookId: {
+        type: String
+    },
     isVerified: {
         type: Boolean,
         default: false
