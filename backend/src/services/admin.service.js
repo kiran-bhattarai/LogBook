@@ -1,5 +1,6 @@
 import Users from "../models/user.model.js"
 import Note from "../models/note.model.js"
+import AppError from "../errors/app-error.js"
 
 export const dashboard = async () => {
 
@@ -115,7 +116,59 @@ export const users = async (name = "", sortId, page, limit) => {
             sortBy = -1
     }
 
-    const users = await Users.find({ name: { $regex: name, $options: "i"} }).skip((page - 1) * limit).limit(limit).sort({ [feild]: sortBy }).collation({ locale: "en", strength: 2 }).select("_id name role avatar notesCount createdAt")
-    
+    const users = await Users.find({ name: { $regex: name, $options: "i" } }).skip((page - 1) * limit).limit(limit).sort({ [feild]: sortBy }).collation({ locale: "en", strength: 2 }).select("_id name role avatar notesCount createdAt")
+
     return users
+}
+
+
+export const changeName = async (userId, newName) => {
+    const user = await Users.findById(userId)
+    if (!user) {
+        throw new AppError("User not found", 400)
+    }
+    user.name = `${newName}`
+    user.save()
+}
+
+export const removeAvatar = async (userId) => {
+    const user = await Users.findById(userId)
+    if (!user) {
+        throw new AppError("User not found", 400)
+    }
+    user.avatar = ""
+    user.save()
+}
+
+export const changeRole = async (userId, adminId) => {
+
+    if (adminId === userId) {
+        throw new AppError("You cannot change your own role", 400)
+    }
+    const user = await Users.findById(userId)
+    if (!user) {
+        throw new AppError("User not found", 400)
+    }
+
+    if (user.role === "admin") {
+        user.role = "user"
+    } else {
+        user.role = "admin"
+    }
+
+    user.save()
+}
+
+export const deleteUser = async (userId, adminId) => {
+
+    if (adminId === userId) {
+        throw new AppError("You cannot delete yourself", 400)
+    }
+    const user = await Users.findById(userId)
+    if (!user) {
+        throw new AppError("User not found", 400)
+    }
+
+    await Users.deleteOne(user)
+    await Note.deleteMany({ userId })
 }
