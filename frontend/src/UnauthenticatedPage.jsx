@@ -12,8 +12,6 @@ function UnauthenticatedPage() {
     const [loginWindow, setLoginWindow] = useState(false)
     const [signupWindow, setSignupWindow] = useState(false)
 
-    const [searchAccounts, setSearchAccounts] = useState(false)
-
     const setLoginWindowMain = () => {
         setLoginWindow(prev => !prev)
         setSignupWindow(false)
@@ -27,7 +25,7 @@ function UnauthenticatedPage() {
 
     return (
         <div className="min-h-screen flex flex-col bg-neutral-900">
-            <NavBar setSearchUsers={setSearchAccounts} setLogin={setLoginWindowMain} setSignup={setSignupWindowMain}></NavBar>
+            <NavBar setLogin={setLoginWindowMain} setSignup={setSignupWindowMain}></NavBar>
 
             <div className="flex-1 flex-col flex justify-center">
                 <div className="text-white text-5xl self-center max-w-[80%] text-center flex flex-col gap-[clamp(60px,14vh,140px)] p-6 whitespace-nowrap">

@@ -3,13 +3,16 @@ import { useState, useRef, useEffect } from "react"
 import { useAuth } from "./AuthProvider"
 import { useNavigate } from "react-router-dom"
 import ChangePicture from "./ChangePicture"
+import SearchUsers from "./SearchUsers"
 
-function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
+function NavBar({ setSearchingFor, setLogin, setSignup }) {
 
     const [profilePic, setProfilePic] = useState("../src/assets/user_profile.png")
     const [mode, setMode] = useState("dark")
 
     const [dropVisible, setDropVisible] = useState(false)
+    const [searchAccounts, setSearchUsers] = useState(false)
+
 
     const dropdownRef = useRef()
 
@@ -143,8 +146,11 @@ function NavBar({ setSearchUsers, setSearchingFor, setLogin, setSignup }) {
             </div>
             {
                 changePic &&
-                    <ChangePicture setHidden={() => setChangePic(false)}></ChangePicture>
+                <ChangePicture setHidden={() => setChangePic(false)}></ChangePicture>
             }
+            {searchAccounts && <div className="fixed h-full min-h-screen scroll w-full bg-[#00000063] z-10">
+                    <SearchUsers setSearchUsers={setSearchUsers} />
+            </div>}
         </>
     )
 
