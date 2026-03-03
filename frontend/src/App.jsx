@@ -12,6 +12,7 @@ import ProfilePage from "./ProfilePage.jsx"
 import SearchUsers from "./SearchUsers.jsx"
 import UserItem from "./UserItem.jsx"
 import Dashboard from "./Dashboard.jsx"
+import AccessControl from "./AccessControl.jsx"
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/access-control" element={<AccessControl />} />
       <Route path="*" element={<ProfilePage />} />
     </Routes>
   )
