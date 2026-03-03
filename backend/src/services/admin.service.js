@@ -1,8 +1,6 @@
 import Users from "../models/user.model.js"
 import Note from "../models/note.model.js"
 
-
-
 export const dashboard = async () => {
 
     const totalUsers = await Users.countDocuments();
@@ -84,4 +82,40 @@ export const dashboard = async () => {
     return ({
         totalUsers, userRoleFormatted, authProviderFormatted, usersPerDayFormatted, totalNotes, averageNotes, averagePrivateNotes, averagePublicNotes, noteVisibilityFormatted, notesPerDayFormatted
     })
+}
+
+
+export const users = async (name = "", sortId, page, limit) => {
+
+    let feild = "createdAt"
+    let sortBy = -1
+
+    switch (sortId) {
+        case (2):
+            sortBy = 1
+            break
+        case (3):
+            feild = "name"
+            sortBy = 1
+            break
+        case (4):
+            feild = "name"
+            sortBy = -1
+            break
+        case (5):
+            feild = "notesCount"
+            sortBy = -1
+            break
+        case (6):
+            feild = "notesCount"
+            sortBy = 1
+            break
+        default:
+            feild = "createdAt"
+            sortBy = -1
+    }
+
+    const users = await Users.find({ name: { $regex: name, $options: "i"} }).skip((page - 1) * limit).limit(limit).sort({ [feild]: sortBy }).collation({ locale: "en", strength: 2 }).select("_id name role avatar notesCount createdAt")
+    
+    return users
 }

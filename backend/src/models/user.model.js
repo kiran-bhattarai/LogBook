@@ -38,6 +38,10 @@ const UserSchema = new mongoose.Schema({
         enum: ["user", "admin"],
         default: "user",
     },
+    notesCount: {
+        type: Number,
+        default: 0
+    }
 }, { timestamps: true })
 
 export default mongoose.model("Users", UserSchema)

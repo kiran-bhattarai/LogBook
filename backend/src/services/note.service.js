@@ -1,5 +1,6 @@
 import Note from "../models/note.model.js"
 import AppError from "../errors/app-error.js"
+import User from "../models/user.model.js"
 
 export const noteSave = async (title, body, isPublic, userId) => {
     if ((title.length + body.length) > 3000) return
@@ -9,6 +10,7 @@ export const noteSave = async (title, body, isPublic, userId) => {
         isPublic,
         userId
     })
+    await User.findByIdAndUpdate(userId, { $inc: { notesCount: 1 } })
 
     return _id
 }
@@ -20,6 +22,7 @@ export const noteFetch = async (userId) => {
 
 export const noteDelete = async (userId, noteId) => {
     await Note.deleteOne({ userId, _id: noteId })
+    await User.findByIdAndUpdate(userId, { $inc: { notesCount: -1 } })
 }
 
 export const noteEdit = async (userId, noteId, title, body, isPublic) => {
