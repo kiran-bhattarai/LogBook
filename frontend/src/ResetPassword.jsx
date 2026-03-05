@@ -10,7 +10,7 @@ function ResetPassword() {
     const [code, setCode] = useState("")
 
 
-    const [nextStage, setNextStage] = useState(!false)
+    const [nextStage, setNextStage] = useState(false)
     const [resetStage, setResetStage] = useState(false)
 
     const [message, setMessage] = useState("")
@@ -110,6 +110,8 @@ function ResetPassword() {
             return
         }
 
+        setMessage("Email sent successfully")
+
         setNextStage(true)
     }
 
@@ -134,6 +136,7 @@ function ResetPassword() {
             return
         }
 
+        setMessage("")
         setResetStage(true)
     }
 
@@ -168,6 +171,7 @@ function ResetPassword() {
             return
         }
 
+        setMessage("")
         alert("Password changed successfully. Please login again.")
 
         navigate("/body")
@@ -185,7 +189,7 @@ function ResetPassword() {
                     </h1>
                     {
                         message &&
-                        <p className="absolute top-16 text-red-500">{message}</p>
+                        <p className={`absolute top-16 ${message.includes("uccess") ? "text-green-500" : "text-red-500"}`}>{message}</p>
                     }
 
                     {
