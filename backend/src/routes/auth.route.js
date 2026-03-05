@@ -5,6 +5,7 @@ import { refresh } from "../controllers/auth/refresh.controller.js";
 import { logout } from "../controllers/auth/logout.controller.js";
 import { authenticate } from "../middlewares/authenticate.js";
 import passport from "../config/passport.js";
+import { changePasswordMain, checkEmail, generateEmailToken, getEmail, verifyEmail, verifyPasswordReset } from "../controllers/auth/email.controller.js";
 
 const router = Router()
 
@@ -12,6 +13,16 @@ router.post("/signup", signup)
 router.post("/login", login)
 router.post("/refresh", refresh)
 router.post("/logout", authenticate, logout)
+
+router.get("/get-email", authenticate, getEmail)
+router.post("/verify-email", authenticate, verifyEmail)
+router.post("/send-code", authenticate, generateEmailToken)
+
+router.post("/send-reset-code", generateEmailToken)
+router.post("/check-email", checkEmail)
+router.post("/check-reset-code", verifyPasswordReset)
+router.post("/change-password-main", changePasswordMain)
+
 
 router.get(
   "/google",

@@ -67,9 +67,9 @@ export const refreshEndpoint = async (refreshToken) => {
 
     const tokenId = newRefToken.split(".")[0]
     const refreshTokenDb = await RefreshToken.findOne({ tokenId })
-    const { role } = await User.findOne({_id: refreshTokenDb.userId})
+    const { role, isVerified } = await User.findOne({_id: refreshTokenDb.userId})
 
-    const newAccessToken = issueAccessToken(refreshTokenDb.userId.toString(), role)
+    const newAccessToken = issueAccessToken(refreshTokenDb.userId.toString(), role, isVerified)
 
     return { newRefToken, newAccessToken }
 }

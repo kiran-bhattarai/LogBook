@@ -4,6 +4,7 @@ import Users from "../../models/user.model.js"
 import { generateHash } from "../../utils/bcrypt.js"
 import { issueAccessToken } from "../../utils/jwt.js"
 import { generateRefreshToken } from "./refresh-token.service.js"
+import { generateEmailToken } from "./email.service.js"
 
 
 export const signup = async (name, email, password) => {
@@ -17,7 +18,7 @@ export const signup = async (name, email, password) => {
     const prevUser = await Users.findOne({ email: email })
 
     if (prevUser) {
-        if (existingUser.providers?.local) {
+        if (prevUser.providers?.local) {
             throw new AppError("Email already in use.", 400)
         }
         throw new AppError("Account exists with Google/Facebook. Please login using OAuth.", 400)
@@ -36,9 +37,12 @@ export const signup = async (name, email, password) => {
     })
 
     user.providers.local = true
+
+    await generateEmailToken(user._id)
+
     user.save()
 
-    const accessToken = issueAccessToken(user._id.toString(), user.role)
+    const accessToken = issueAccessToken(user._id.toString(), user.role, user.isVerified)
     const refreshToken = await generateRefreshToken(user._id.toString())
 
     return { accessToken, refreshToken }

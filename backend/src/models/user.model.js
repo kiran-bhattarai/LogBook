@@ -41,6 +41,16 @@ const UserSchema = new mongoose.Schema({
     notesCount: {
         type: Number,
         default: 0
+    },
+    verificationCode: {
+        type: String
+    },
+    verificationExpires: {
+        type: Date
+    },
+    verificationTries: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 

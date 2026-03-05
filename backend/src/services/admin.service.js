@@ -164,11 +164,12 @@ export const deleteUser = async (userId, adminId) => {
     if (adminId === userId) {
         throw new AppError("You cannot delete yourself", 400)
     }
+
     const user = await Users.findById(userId)
     if (!user) {
         throw new AppError("User not found", 400)
     }
 
-    await Users.deleteOne(user)
-    await Note.deleteMany({ userId })
+    await Note.deleteMany({ userId: user._id })
+    await Users.findByIdAndDelete(user._id)
 }

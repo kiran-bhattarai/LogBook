@@ -20,14 +20,14 @@ export const login = async (email, password) => {
     const isValid = await compareHash(password, prevUser.password)
     if (!isValid) throw new AppError("Invalid email or password.", 400)
 
-    const accessToken = issueAccessToken(prevUser._id.toString(), prevUser.role)
+    const accessToken = issueAccessToken(prevUser._id.toString(), prevUser.role, prevUser.isVerified)
     const refreshToken = await generateRefreshToken(prevUser._id.toString())
 
     return { accessToken, refreshToken }
 }
 
 export const oauthLogin = async (user) => {
-    const accessToken = issueAccessToken(user._id, user.role)
+    const accessToken = issueAccessToken(user._id, user.role, user.isVerified)
     const refreshToken = await generateRefreshToken(user._id)
     return { accessToken, refreshToken }
 }
