@@ -13,6 +13,8 @@ import SearchUsers from "./SearchUsers.jsx"
 import UserItem from "./UserItem.jsx"
 import Dashboard from "./Dashboard.jsx"
 import AccessControl from "./AccessControl.jsx"
+import ResetPassword from "./ResetPassword.jsx"
+import VerifyEmail from "./VerifyEmail.jsx"
 
 function App() {
 
@@ -30,8 +32,9 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/access-control" element={<AccessControl />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="*" element={<ProfilePage />} />
     </Routes>
   )

@@ -137,7 +137,7 @@ function LoginPage({ setSignupWindow, setItselfOff }) {
                     text-[clamp(20px,2.8vmin,24px)] pt-0.5 pb-1.5 font-semibold rounded-4xl cursor-pointer hover:scale-105 self-auto w-[40%] text-nowrap">Login</button>
                 </form>
 
-                <Link to={"/forgot-password"} className="text-[clamp(16px,2vmin,24px)] hover:underline hover:scale-105 text-[#666666] transition duration-300 font-semibold m-1">Forgot password?</Link>
+                <Link to={"/reset-password"} className="text-[clamp(16px,2vmin,24px)] hover:underline hover:scale-105 text-[#666666] transition duration-300 font-semibold m-1">Forgot password?</Link>
 
                 <div className="flex w-[90%] whitespace-nowrap items-center mt-[clamp(8px,1.2vmin,16px)]">
                     <hr className="border-t border-gray-300 my-[clamp(10px,1.6vmin,20px)] w-full" />

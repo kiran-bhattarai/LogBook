@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect } from "react"
 import validator from 'validator'
 import { useAuth } from "./AuthProvider"
+import { useNavigate } from "react-router-dom";
 
 function SignupPage({ setLoginWindow, setItselfOff }) {
+
+    const navigate = useNavigate()
 
     const [passwordIcon, setPasswordIcon] = useState("");
     const [passwordType, setPasswordType] = useState("password")
@@ -178,11 +181,11 @@ function SignupPage({ setLoginWindow, setItselfOff }) {
         if (res.ok) {
             login(emailValue, passwordValue)
             setItselfOff()
+            navigate("/verify-email")
         }
         else {
             setMessageInfo(message)
         }
-
 
     }
 

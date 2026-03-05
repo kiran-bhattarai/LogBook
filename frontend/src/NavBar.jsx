@@ -4,6 +4,7 @@ import { useAuth } from "./AuthProvider"
 import { useNavigate } from "react-router-dom"
 import ChangePicture from "./ChangePicture"
 import SearchUsers from "./SearchUsers"
+import { jwtDecode } from "jwt-decode"
 
 function NavBar({ setSearchingFor, setLogin, setSignup }) {
 
@@ -18,8 +19,13 @@ function NavBar({ setSearchingFor, setLogin, setSignup }) {
 
     const navigate = useNavigate()
 
-    const { logout, user, protectedFetch } = useAuth()
-    console.log(user)
+    const { logout, user, protectedFetch, accessToken } = useAuth()
+
+    useEffect(() => {
+        if (accessToken && !jwtDecode(accessToken).verified) {
+            navigate("/verify-email")
+        }
+    }, [accessToken, navigate])
 
     const handleLogout = () => {
         logout()
@@ -149,7 +155,7 @@ function NavBar({ setSearchingFor, setLogin, setSignup }) {
                 <ChangePicture setHidden={() => setChangePic(false)}></ChangePicture>
             }
             {searchAccounts && <div className="fixed h-full min-h-screen scroll w-full bg-[#00000063] z-10">
-                    <SearchUsers setSearchUsers={setSearchUsers} />
+                <SearchUsers setSearchUsers={setSearchUsers} />
             </div>}
         </>
     )
