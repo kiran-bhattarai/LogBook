@@ -4,7 +4,6 @@ import Footer from "./Footer"
 import LoginPage from "./LoginPage"
 import SignupPage from "./SignupPage"
 import { TypeAnimation } from "react-type-animation"
-import SearchUsers from "./SearchUsers"
 
 
 function UnauthenticatedPage() {
@@ -65,11 +64,6 @@ function UnauthenticatedPage() {
                             {signupWindow && <SignupPage setLoginWindow={setLoginWindowMain} setItselfOff={() => setSignupWindow(false)}></SignupPage>}
                         </div>
                     </div>}
-                {searchAccounts && <div className="absolute h-full w-full bg-[#00000063] z-10">
-                    <div>
-                        <SearchUsers setSearchUsers={setSearchAccounts} />
-                    </div>
-                </div>}
             </div>
 
             <Footer></Footer>
