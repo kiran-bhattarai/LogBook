@@ -8,10 +8,14 @@ import { globalErrorHandler } from './middlewares/global-error-handler.js';
 import cookieParser from 'cookie-parser';
 import passport from "passport"
 import adminRouter from "./routes/admin.route.js"
+import loggerMiddleware from './middlewares/logger-middleware.js';
 
 dotenv.config();
 
 const app = express();
+
+app.use(loggerMiddleware)
+
 app.use(express.json());
 app.use(cors({origin: process.env.FRONTEND_URL, credentials: true}))
 app.use(cookieParser());

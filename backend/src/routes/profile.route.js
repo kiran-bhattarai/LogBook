@@ -9,15 +9,15 @@ const router = Router()
 
 router.get("/fetch", authenticateButNotForced, globalLimiter, profileFetch)
 router.get("/search", globalLimiter, profilesSearch)
-router.post("/avatar", authenticate, globalLimiter, isVerified, (req, res) => upload.single("image")(req, res, async (err) => {
+router.post("/avatar", authenticate, globalLimiter, isVerified, (req, res, next) => upload.single("image")(req, res, async (err) => {
     if (err) {
         if (err.code === "LIMIT_FILE_SIZE") {
             return res.status(400).json({ message: "File size too large. Max 5MB allowed." });
         }
 
-        return res.status(400).json({ message: err.message });
+        next(err)
     }
-    changeAvatar(req, res)
+    changeAvatar(req, res, next)
 }));
 
 export default router

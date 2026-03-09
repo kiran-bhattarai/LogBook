@@ -58,6 +58,9 @@ export const changeAvatar = async (req, res, next) => {
         if (!req.file) {
             return res.status(400).json({ message: "No file uploaded" });
         }
+        if (!req.file.mimetype.includes("image")) {
+            return res.status(400).json({ message: "Invalid file format" });
+        }
 
         await changeAvatarService(req.user.sub, req.file)
 
