@@ -19,7 +19,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.2.1",
+    "express-rate-limit": "^8.3.0",
     "express-session": "^1.19.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.2",
@@ -27,6 +27,8 @@
     "nodemailer": "^7.0.13",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "rate-limit-redis": "^4.3.1",
+    "redis": "^5.11.0",
     "tailwindcss": "^4.1.18",
     "validator": "^13.15.26",
     "winston": "^3.19.0"

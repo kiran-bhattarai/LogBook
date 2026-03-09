@@ -6,22 +6,23 @@ import { logout } from "../controllers/auth/logout.controller.js";
 import { authenticate } from "../middlewares/authenticate.js";
 import passport from "../config/passport.js";
 import { changePasswordMain, checkEmail, generateEmailToken, getEmail, verifyEmail, verifyPasswordReset } from "../controllers/auth/email.controller.js";
+import { authLimiter } from "../middlewares/rateLimit.js";
 
 const router = Router()
 
-router.post("/signup", signup)
-router.post("/login", login)
+router.post("/signup", authLimiter, signup)
+router.post("/login", authLimiter, login)
 router.post("/refresh", refresh)
 router.post("/logout", authenticate, logout)
 
-router.get("/get-email", authenticate, getEmail)
-router.post("/verify-email", authenticate, verifyEmail)
-router.post("/send-code", authenticate, generateEmailToken)
+router.get("/get-email", authenticate, authLimiter, getEmail)
+router.post("/verify-email", authenticate, authLimiter, verifyEmail)
+router.post("/send-code", authenticate, authLimiter, generateEmailToken)
 
-router.post("/send-reset-code", generateEmailToken)
-router.post("/check-email", checkEmail)
-router.post("/check-reset-code", verifyPasswordReset)
-router.post("/change-password-main", changePasswordMain)
+router.post("/send-reset-code", authLimiter, generateEmailToken)
+router.post("/check-email", authLimiter, checkEmail)
+router.post("/check-reset-code", authLimiter, verifyPasswordReset)
+router.post("/change-password-main", authLimiter, changePasswordMain)
 
 
 router.get(

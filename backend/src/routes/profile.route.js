@@ -3,12 +3,13 @@ import { profileFetch, profilesSearch, changeAvatar } from "../controllers/profi
 import { authenticate, authenticateButNotForced } from "../middlewares/authenticate.js";
 import { upload } from "../config/multer.config.js";
 import { isVerified } from "../middlewares/is-verified.js";
+import { globalLimiter } from "../middlewares/rateLimit.js";
 
 const router = Router()
 
-router.get("/fetch", authenticateButNotForced, profileFetch)
-router.get("/search", profilesSearch)
-router.post("/avatar", authenticate, isVerified, (req, res) => upload.single("image")(req, res, async (err) => {
+router.get("/fetch", authenticateButNotForced, globalLimiter, profileFetch)
+router.get("/search", globalLimiter, profilesSearch)
+router.post("/avatar", authenticate, globalLimiter, isVerified, (req, res) => upload.single("image")(req, res, async (err) => {
     if (err) {
         if (err.code === "LIMIT_FILE_SIZE") {
             return res.status(400).json({ message: "File size too large. Max 5MB allowed." });
