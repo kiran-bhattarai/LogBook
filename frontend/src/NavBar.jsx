@@ -73,7 +73,6 @@ function NavBar({ setSearchingFor, setLogin, setSignup }) {
 
     const handlePic = () => {
         setChangePic(true)
-
     }
 
 
@@ -82,11 +81,8 @@ function NavBar({ setSearchingFor, setLogin, setSignup }) {
             <div className="sticky top-0 shadow-[0px_0px_10px_black] z-10">
                 <div className="bg-neutral-800 h-14 items-center flex justify-between px-4 text-white gap-5">
                     <Link to={"/body"}>
-                        <div className="text-3xl font-bold text-white font-poppins rounded bg-[#1d1d1d] px-2 py-1">
-                            <span className="text-yellow-500 pr-0.5">
-                                Log
-                            </span>
-                            <span className="">book</span>
+                        <div className="hover:scale-105 duration-200 text-3xl font-bold text-white font-poppins rounded bg-linear-60 from-indigo-600 to-green-600 px-1.5 py-0.5">
+                            <span className="">LB</span>
                         </div>
                     </Link>
 

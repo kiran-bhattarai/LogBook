@@ -1,10 +1,9 @@
 import { useState } from "react"
-import NavBar from "./NavBar"
 import Footer from "./Footer"
 import LoginPage from "./LoginPage"
 import SignupPage from "./SignupPage"
 import { TypeAnimation } from "react-type-animation"
-
+import NavBar from "./components/layout/navbar/NavBar"
 
 function UnauthenticatedPage() {
 
