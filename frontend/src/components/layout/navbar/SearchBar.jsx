@@ -1,4 +1,4 @@
-import { useAuth } from "../../../AuthProvider"
+import { useAuth } from "../../../context/AuthContext"
 
 function SearchBar({ setSearchValue }) {
 

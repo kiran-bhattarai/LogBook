@@ -4,9 +4,9 @@ function useClickOutside(ref, callback) {
 
   useEffect(() => {
 
-    function handleClick(e) {
+    async function handleClick(e) {
       if (ref.current && !ref.current.contains(e.target)) {
-        callback()
+        await callback()
       }
     }
 

@@ -1,7 +1,7 @@
-import { LineChart } from "recharts"
-import { useAuth } from "../../../AuthProvider"
+import { useAuth } from "../../../context/AuthContext"
 import { useState } from "react"
-import SearchUsers from "../../../SearchUsers"
+import SearchUsers from "../../../features/profile/components/SearchUsers"
+import { Link } from "react-router-dom"
 
 function NavLinks({ setLogin, setSignup }) {
 
