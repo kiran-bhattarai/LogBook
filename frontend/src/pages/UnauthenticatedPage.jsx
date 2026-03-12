@@ -53,7 +53,7 @@ function UnauthenticatedPage() {
             </PageContainer>
             {
                 (loginWindow || signupWindow) &&
-                <div className="absolute self-center top-0 flex items-center bg-[#00000040] h-screen w-screen justify-center z-1">
+                <div className="absolute self-center top-0 flex items-center bg-[#00000040] h-screen w-screen justify-center z-20">
                     <div className="">
                         {loginWindow
                             && <div>

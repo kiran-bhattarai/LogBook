@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
 
       return data.token;
     } catch (err) {
+      console.log(err)
       setUser(null);
       setAccessToken(null);
       return null;

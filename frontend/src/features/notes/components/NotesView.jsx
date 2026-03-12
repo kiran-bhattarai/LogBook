@@ -44,14 +44,14 @@ function NotesView({ onNoteClick, newNoteCreated, sortId, searchingFor }) {
     return (
         <AnimatePresence>
 
-            {/* <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-2"> */}
-            <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 xl:5 2xl:columns-6 gap-2 bg-neutral-900">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-2">
+            {/* <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 xl:5 2xl:columns-6 gap-2 bg-neutral-900"> */}
                 {sortedNotes.map(note => (
                     <motion.div initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -50, opacity: 0 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        key={note._id} className="break-inside-avoid">
+                        key={note._id} className="">
                         <NotesCard note={note} deleteNoteLogicMain={deleteNoteLogicMain} onRealClick={onNoteClick} />
                     </motion.div>
                 ))}

@@ -38,7 +38,7 @@ function UserMenu() {
 
     const handleLogout = () => {
         logout()
-        navigate("/body")
+        navigate("/")
     }
 
     if (!user) return null

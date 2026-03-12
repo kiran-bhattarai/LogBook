@@ -25,7 +25,7 @@ function NotesCard({ note, onRealClick, deleteNoteLogicMain }) {
 
 
     return (
-        <motion.div animate={visible ? { y: 0, opacity: 1 } : { y: -300, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 25, duration: 0.8 }} className="flex justify-center flex-wrap relative group mb-2" >
+        <motion.div animate={visible ? { y: 0, opacity: 1 } : { y: -300, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 25, duration: 0.8 }} className="flex justify-center flex-wrap relative group" >
             <div onClick={() => onRealClick(note)} className="flex flex-col min-w-56 max-w-140 w-full bg-neutral-800 justify-self-center p-1 border border-neutral-400 rounded relative hover:shadow-[0_0px_10px_rgba(255,255,255,0.35)] transition duration-300 justify-between">
 
                 {deleteNoteLogicMain && <div className="absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition duration-150">

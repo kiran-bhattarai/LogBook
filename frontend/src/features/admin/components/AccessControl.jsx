@@ -29,7 +29,7 @@ function AccessControl() {
     }
     asyncWrapper()
 
-  }, [protectedFetch, sortId, debounceSearchData])
+  }, [protectedFetch, sortId, debounceSearchData, loading])
 
   return (
         <div className="justify-self-center w-full h-full items-center flex flex-col justify-center mt-5">

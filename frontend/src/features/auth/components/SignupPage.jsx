@@ -159,11 +159,12 @@ function SignupPage({ setLoginWindow, setItselfOff }) {
         setMessageInfo("")
 
         const { res, data } = await signupRequest({ name: nameValue, email: emailValue, password: passwordValue, passwordRetype: passwordRetypeValue })
-
+        
+        console.log("The res dats is", res.ok)
         if (res.ok) {
             login(emailValue, passwordValue)
-            setItselfOff()
             navigate("/verify-email")
+            setItselfOff()
         }
         else {
             setMessageInfo(data.message)

@@ -27,7 +27,7 @@ function PageContainer({ children }) {
                 {children}
 
                 {(loginWindow || signupWindow) &&
-                    <div className="absolute self-center flex items-center bg-[#00000040] h-screen w-screen justify-center z-1">
+                    <div className="absolute self-center flex items-center bg-[#00000040] h-screen w-screen justify-center z-20">
                         <div className="">
                             {loginWindow
                                 && <div>

@@ -55,7 +55,7 @@ function Dashboard() {
 
     if (loading) {
         return (
-            <div className="h-screen flex items-center justify-center">
+            <div className="flex-1 flex items-center justify-center">
                 <Spinner></Spinner>
             </div>
         )
