@@ -163,8 +163,8 @@ function SignupPage({ setLoginWindow, setItselfOff }) {
         console.log("The res dats is", res.ok)
         if (res.ok) {
             login(emailValue, passwordValue)
-            navigate("/verify-email")
             setItselfOff()
+            navigate("/verify-email")
         }
         else {
             setMessageInfo(data.message)

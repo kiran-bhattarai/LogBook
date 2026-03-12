@@ -8,6 +8,7 @@ import ProfileNoteViewer from "../features/profile/components/ProfileNoteViewer"
 import SortBy from "../components/ui/SortBy"
 import { getSortedNotes } from "../utils/sortNotes"
 import PageContainer from "../components/layout/PageContainer"
+import { useNavSearch } from "../context/NavSearchContext"
 
 function ProfilePage() {
 
@@ -22,7 +23,8 @@ function ProfilePage() {
     const [notes, setNotes] = useState(null)
 
     const [sortId, setSortId] = useState(localStorage.getItem("sortId") || 1)
-    const [searchingFor, setSearchingFor] = useState("")
+
+    const { searchValue } = useNavSearch()
 
     const setSortIdMain = (value) => {
         localStorage.setItem("sortId", value)
@@ -71,7 +73,7 @@ function ProfilePage() {
 
     let sortedNotes = getSortedNotes(sortId, notes)
 
-    sortedNotes = sortedNotes?.filter(note => (note.title.toLowerCase().includes(searchingFor?.toLowerCase()) || note.body.toLowerCase().includes(searchingFor?.toLowerCase())))
+    sortedNotes = sortedNotes?.filter(note => (note.title.toLowerCase().includes(searchValue?.toLowerCase()) || note.body.toLowerCase().includes(searchValue?.toLowerCase())))
 
 
     return (
@@ -111,7 +113,7 @@ function ProfilePage() {
                     :
                     <div className="flex-1 bg-neutral-900 text-5xl text-white text-center justify-center flex items-center"><span>The user doesn't exists</span></div>
                 }
-                {selectedNote && <div className="fixed h-full w-full bg-[#00000063] z-10">
+                {selectedNote && <div className="fixed top-0 h-full w-full bg-[#00000063] z-10">
                     <div>
                         <ProfileNoteViewer note={selectedNote} setNoteOnScreen={setSelectedNote} />
                     </div>
