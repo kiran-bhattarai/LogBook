@@ -10,8 +10,6 @@ import UnauthenticatedPage from "./UnauthenticatedPage"
 
 function HomePage() {
 
-    const [editor, setEditor] = useState(false)
-
     const { user } = useAuth()
 
     const [sortId, setSortId] = useState(localStorage.getItem("sortId") || 1)
@@ -21,8 +19,6 @@ function HomePage() {
     const [newNoteCreated, setNewNoteCreated] = useState(0)
 
     const [searchAccounts, setSearchAccounts] = useState(false)
-
-    const [searchingFor, setSearchingFor] = useState("")
 
     const handleNewNoteCreated = (note) => {
         setNewNoteCreated(prev => prev + 1)
@@ -58,7 +54,7 @@ function HomePage() {
 
                 <div className="flex justify-center flex-1">
                     <div className="flex-1 overflow-y-auto p-4 max-w-[95%]">
-                        <NotesView onNoteClick={setSelectedNote} newNoteCreated={newNoteCreated} sortId={sortId} searchingFor={searchingFor} />
+                        <NotesView onNoteClick={setSelectedNote} newNoteCreated={newNoteCreated} sortId={sortId} />
                     </div>
                 </div>
 
