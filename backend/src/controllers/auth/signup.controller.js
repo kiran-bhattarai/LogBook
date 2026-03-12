@@ -16,7 +16,7 @@ export const signup = async (req, res, next) => {
 
         res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: false, sameSite: "lax" })
 
-        return res.status(200).json({ message: "User registered successfully.", token: accessToken, refreshToken: refreshToken })
+        return res.status(200).json({ message: "User registered successfully.", token: accessToken })
     }
     catch (err) {
         next(err)
