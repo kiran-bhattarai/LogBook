@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { getSortedNotes } from "../../../utils/sortNotes";
 import { deleteNoteRequest, fetchNoteRequest } from "../services/notesApi";
 import { useNavSearch } from "../../../context/NavSearchContext";
+import Spinner from "../../../components/ui/Spinner";
 
 function NotesView({ onNoteClick, newNoteCreated, sortId }) {
 
@@ -35,7 +36,11 @@ function NotesView({ onNoteClick, newNoteCreated, sortId }) {
     sortedNotes = sortedNotes?.filter(note => (note.title.toLowerCase().includes(searchValue?.toLowerCase()) || note.body.toLowerCase().includes(searchValue?.toLowerCase())))
 
     if (notes === null) {
-        return <div className="text-center mt-[14vh] text-neutral-200">Loading...</div>
+        return (
+            <div className="justify-self-center translate-y-10">
+                <Spinner />
+            </div>
+        )
     }
 
     if (notes.length === 0 || sortedNotes.length === 0) {
@@ -47,7 +52,7 @@ function NotesView({ onNoteClick, newNoteCreated, sortId }) {
     return (
         <AnimatePresence>
 
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                 {/* <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 xl:5 2xl:columns-6 gap-2 bg-neutral-900"> */}
                 {sortedNotes.map(note => (
                     <motion.div initial={{ y: -50, opacity: 0 }}

@@ -22,12 +22,11 @@ function ProfilePage() {
     const [userId, setUserId] = useState("loading...")
     const [notes, setNotes] = useState(null)
 
-    const [sortId, setSortId] = useState(localStorage.getItem("sortId") || 1)
+    const [sortId, setSortId] = useState(1)
 
     const { searchValue } = useNavSearch()
 
     const setSortIdMain = (value) => {
-        localStorage.setItem("sortId", value)
         setSortId(value)
     }
 
@@ -82,23 +81,29 @@ function ProfilePage() {
                 {username ?
                     <>
                         <Profile name={username} userId={userId} avatar={avatar}></Profile>
-                        <div className="text-white bg-neutral-900 text-lg px-8 items-center b w-full flex justify-between border-b border-neutral-600">
-                            <span>
-                                Notes: {notes?.length}
-                            </span>
-                            <div className="left-1/4 translate-x-1/4">
-                                <SortBy sortId={sortId} setSortId={setSortIdMain}></SortBy>
+
+                        <div className="bg-black/30 border-b border-neutral-600 flex justify-center font-inter">
+                            <div className="text-white py-2 pt-1 max-w-7xl text-lg px-8 items-center w-full flex justify-between md:flex-row flex-col">
+
+                                <span>
+                                    Notes: {notes?.length}
+                                </span>
+
+                                <div className="md:left-1/4 md:translate-x-1/4 translate-0 right-0">
+                                    <SortBy sortId={sortId} setSortId={setSortIdMain}></SortBy>
+                                </div>
+                                <span className="text-sm text-neutral-300">
+                                    ⓘ Only public notes are visible
+                                </span>
                             </div>
-                            <span className="text-sm">
-                                ⓘ Only public notes are visible
-                            </span>
 
 
                         </div>
-                        <div className="flex-1 bg-neutral-900 w-full">
+
+                        <div className="flex-1 w-full">
                             {notes === null ? <div className="text-center mt-[14vh] text-neutral-200">Loading...</div> : (notes.length === 0 || sortedNotes.length === 0) ? <div className="text-3xl mt-[14vh] text-neutral-400 text-center">No notes</div> : <div className="w-[95%] justify-self-center p-5">
 
-                                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                                     {sortedNotes && sortedNotes.map(note => (
                                         <div key={note._id} className="break-inside-avoid">
                                             <NotesCard onRealClick={setSelectedNote} note={note} />

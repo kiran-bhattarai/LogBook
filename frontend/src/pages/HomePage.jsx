@@ -12,7 +12,7 @@ function HomePage() {
 
     const { user } = useAuth()
 
-    const [sortId, setSortId] = useState(localStorage.getItem("sortId") || 1)
+    const [sortId, setSortId] = useState(1)
 
     const [selectedNote, setSelectedNote] = useState(null)
 
@@ -27,7 +27,6 @@ function HomePage() {
 
     const setSortIdMain = (value) => {
         setSortId(value)
-        localStorage.setItem("sortId", value)
     }
 
     const setSelectedNoteMain = (value) => {
@@ -60,7 +59,7 @@ function HomePage() {
 
             </PageContainer>
 
-            {selectedNote && <div className="fixed h-full w-full bg-[#00000063] z-10">
+            {selectedNote && <div className="fixed top-0 h-full w-full bg-[#00000063] z-10">
                 <div>
                     <NoteEditor note={selectedNote} setNoteOnScreen={setSelectedNoteMain}></NoteEditor>
                 </div>

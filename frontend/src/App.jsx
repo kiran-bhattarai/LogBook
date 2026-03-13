@@ -13,7 +13,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/profile" element={<ProtectedRoute> <CheckVerified> <ProfilePage /> </CheckVerified> </ProtectedRoute>} />
+      <Route path="/profile" element={<CheckVerified> <ProfilePage /> </CheckVerified>} />
 
       <Route path="/" element={<CheckVerified><HomePage />  </CheckVerified>} />
 
@@ -21,7 +21,7 @@ function App() {
 
       <Route path="/access-control" element={<ProtectedRoute role={"admin"}> <CheckVerified> <AccessControlPage /> </CheckVerified> </ProtectedRoute>} />
 
-      <Route path="/reset-password" element={<ProtectedRoute> <CheckVerified><ResetPassword/> </CheckVerified> </ProtectedRoute>} />
+      <Route path="/reset-password" element={<ResetPassword/>} />
 
       <Route path="/verify-email" element={<ProtectedRoute > <VerifyEmail /> </ProtectedRoute>} />
 

@@ -23,28 +23,33 @@ function UnauthenticatedPage() {
     return (
         <>
             <PageContainer>
+                <div className="font-inter text-white text-5xl self-center max-w-[80%] text-center flex flex-col items-center gap-10 p-6 whitespace-nowrap">
+                    <div className="font-poppins font-medium">
+                        <TypeAnimation
+                            sequence={[
+                                'Capture ideas.',
+                                1000,
+                                'Organize thoughts.',
+                                1000,
+                                'Access anywhere.',
+                                1000,
+                            ]}
+                            wrapper="span"
+                            speed={30}
+                            style={{ fontSize: 'clamp(34px,5vw,60px)', display: 'inline-block' }}
+                            repeat={Infinity}
+                        />
+                    </div>
+                    <p className="text-[clamp(18px,1.4vw,20px)] max-w-225 2xl:max-w-240 whitespace-normal font-light text-neutral-300">A powerful yet simple note-taking app built with the MERN stack. Easily create, organize, and manage your notes in a clean and distraction-free workspace. Whether you're saving quick ideas or detailed thoughts, everything stays accessible and organized in one place.</p>
 
-                <div className="text-white text-5xl self-center max-w-[80%] text-center flex flex-col gap-[clamp(60px,14vh,140px)] p-6 whitespace-nowrap">
-                    <TypeAnimation
-                        sequence={[
-                            'Capture ideas.',
-                            1000,
-                            'Organize thoughts.',
-                            1000,
-                            'Access anywhere.',
-                            1000,
-                        ]}
-                        wrapper="span"
-                        speed={50}
-                        style={{ fontSize: 'clamp(40px,7vmin,60px)', display: 'inline-block' }}
-                        repeat={Infinity}
-                    />
-                    <p className="text-[clamp(20px,3.6vmin,34px)] whitespace-normal">LogBook is a secure, multi-user note-taking app built with the MERN stack.</p>
-
-                    <div className="flex flex-col items-center gap-2">
+                    <div className="flex flex-col items-center gap-2 font-poppins font-medium">
                         <div className="text-2xl flex gap-4">
-                            <button className="border-amber-700 bg-amber-700 border-2 px-3 pb-1.5 rounded hover:bg-amber-700 hover:border-amber-700 duration-200 transition hover:scale-105 cursor-pointer" onClick={setLoginWindowMain}>Login</button>
-                            <button className="border-amber-800  border-2 px-3 pb-1.5 rounded duration-200 transition hover:scale-105 cursor-pointer" onClick={setSignupWindowMain}>Sign up</button>
+                            <button className="bg-linear-60 from-indigo-600 to-green-800 hover:to-indigo-800 hover:from-green-900 px-3 pb-1 rounded duration-200 transition hover:scale-110 cursor-pointer" onClick={setLoginWindowMain}>Login</button>
+
+                            <span className="p-0.5 bg-linear-60 from-indigo-600 to-green-700 hover:to-indigo-800 hover:from-green-900 rounded hover:scale-110 duration-200">
+                            <button className="bg-neutral-900 px-3 pb-1 rounded duration-200 transition cursor-pointer" onClick={setSignupWindowMain}>Sign up</button>
+
+                            </span>
                         </div>
                         <p className="text-2xl"></p>
                     </div>

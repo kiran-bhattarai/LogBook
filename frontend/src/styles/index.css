@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 body {
-  @apply bg-neutral-900;
+  @apply bg-[#080808];
 }
 
 @theme{

@@ -5,9 +5,9 @@ export const getSortedNotes = (sortId, notes) => {
 
     switch (sortId) {
         case 1:
-            return arr.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        case 2:
             return arr.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+        case 2:
+            return arr.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         case 3:
             return arr.sort((a, b) =>
                 (a.title || a.body).localeCompare(b.title || b.body)
