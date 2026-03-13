@@ -52,7 +52,7 @@ function UserMenu() {
                     </button>
                 </div>
 
-                {dropVisible && <div className="border-neutral-600 border w-30 py-1.5 bg-[#1d1d1d] rounded absolute -right-3 mt-2">
+                {dropVisible && <div className="border-neutral-600 border w-30 py-1.5 bg-[#1d1d1d] rounded absolute right-0 mt-2">
                     <button className="w-full h-8 text-xl cursor-pointer hover:text-neutral-400 transition duration-200"><Link to={"/profile"}>Profile</Link></button>
                     <button className="w-full h-8 text-lg cursor-pointer hover:text-neutral-400 transition duration-200" onClick={() => setChangePic(true)}>Change Pic</button>
                     <button onClick={handleLogout} className="w-full h-8 text-xl text-red-600 cursor-pointer hover:text-red-800 transition duration-200">Logout</button>
