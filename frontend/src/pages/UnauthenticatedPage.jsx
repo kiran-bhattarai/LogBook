@@ -23,7 +23,7 @@ function UnauthenticatedPage() {
     return (
         <>
             <PageContainer>
-                <div className="font-inter text-white text-5xl self-center max-w-[80%] text-center flex flex-col items-center gap-10 p-6 whitespace-nowrap">
+                <div className="font-inter text-black dark:text-white text-5xl self-center max-w-[80%] text-center flex flex-col items-center gap-10 p-6 whitespace-nowrap">
                     <div className="font-poppins font-medium">
                         <TypeAnimation
                             sequence={[
@@ -40,20 +40,16 @@ function UnauthenticatedPage() {
                             repeat={Infinity}
                         />
                     </div>
-                    <p className="text-[clamp(18px,1.4vw,20px)] max-w-225 2xl:max-w-240 whitespace-normal font-light text-neutral-300">A powerful yet simple note-taking app built with the MERN stack. Easily create, organize, and manage your notes in a clean and distraction-free workspace. Whether you're saving quick ideas or detailed thoughts, everything stays accessible and organized in one place.</p>
+                    <p className="text-[clamp(18px,1.4vw,20px)] max-w-225 2xl:max-w-240 whitespace-normal font-light text-neutral-600 dark:text-neutral-300">A powerful yet simple note-taking app built with the MERN stack. Easily create, organize, and manage your notes in a clean and distraction-free workspace. Whether you're saving quick ideas or detailed thoughts, everything stays accessible and organized in one place.</p>
 
-                    <div className="flex flex-col items-center gap-2 font-poppins font-medium">
+                    <div className="flex flex-col items-center gap-2 font-poppins font-medium text-white">
                         <div className="text-2xl flex gap-4">
-                            <button className="bg-linear-60 from-indigo-600 to-green-800 hover:to-indigo-800 hover:from-green-900 px-3 pb-1 rounded duration-200 transition hover:scale-110 cursor-pointer" onClick={setLoginWindowMain}>Login</button>
+                            <button className="bg-linear-60 from-indigo-600 to-green-800 dark:from-indigo-500 dark:to-green-600 hover:from-green-900 hover:to-indigo-800 px-3 pb-1 rounded duration-200 transition hover:scale-110 cursor-pointer" onClick={setLoginWindowMain}>Login</button>
 
-                            <span className="p-0.5 bg-linear-60 from-indigo-600 to-green-700 hover:to-indigo-800 hover:from-green-900 rounded hover:scale-110 duration-200">
-                            <button className="bg-neutral-900 px-3 pb-1 rounded duration-200 transition cursor-pointer" onClick={setSignupWindowMain}>Sign up</button>
-
-                            </span>
+                            <button className=" text-black border-2 hover:border-indigo-800 border-indigo-600 hover:scale-110 dark:bg-neutral-900 dark:text-white px-3 pb-1 rounded duration-200 transition cursor-pointer" onClick={setSignupWindowMain}>Sign up</button>
                         </div>
                         <p className="text-2xl"></p>
                     </div>
-
                 </div>
             </PageContainer>
             {

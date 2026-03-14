@@ -4,7 +4,16 @@ const ThemeContext = createContext(null)
 
 function ThemeProvider({ children }) {
 
-    const [darkMode, setDarkMode] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches)
+    const getTheme = () => {
+        const theme = localStorage.getItem("theme")
+        if (!theme) {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches
+        }
+        if (theme === "light") return false
+        return true
+    }
+
+    const [darkMode, setDarkMode] = useState(getTheme())
 
     const toggleTheme = () => {
         setDarkMode(prev => !prev)
@@ -13,8 +22,10 @@ function ThemeProvider({ children }) {
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add("dark");
-        }else{
+            localStorage.setItem("theme", "dark")
+        } else {
             document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light")
         }
     }, [darkMode])
 

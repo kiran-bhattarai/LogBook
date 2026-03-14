@@ -82,8 +82,8 @@ function ProfilePage() {
                     <>
                         <Profile name={username} userId={userId} avatar={avatar}></Profile>
 
-                        <div className="bg-black/30 border-b border-neutral-600 flex justify-center font-inter">
-                            <div className="text-white py-2 pt-1 max-w-7xl text-lg px-8 items-center w-full flex justify-between md:flex-row flex-col">
+                        <div className="bg-white/30 border-b dark:bg-black/30 border-neutral-600 flex justify-center font-inter">
+                            <div className="text-black dark:text-white py-2 pt-1 max-w-7xl text-lg px-8 items-center w-full flex justify-between md:flex-row flex-col">
 
                                 <span>
                                     Notes: {notes?.length}
@@ -92,16 +92,15 @@ function ProfilePage() {
                                 <div className="md:left-1/4 md:translate-x-1/4 translate-0 right-0">
                                     <SortBy sortId={sortId} setSortId={setSortIdMain}></SortBy>
                                 </div>
-                                <span className="text-sm text-neutral-300">
+
+                                <span className="text-sm text-black dark:text-neutral-300">
                                     ⓘ Only public notes are visible
                                 </span>
                             </div>
-
-
                         </div>
 
                         <div className="flex-1 w-full">
-                            {notes === null ? <div className="text-center mt-[14vh] text-neutral-200">Loading...</div> : (notes.length === 0 || sortedNotes.length === 0) ? <div className="text-3xl mt-[14vh] text-neutral-400 text-center">No notes</div> : <div className="w-[95%] justify-self-center p-5">
+                            {notes === null ? <div className="text-center mt-[14vh] text-neutral-200">Loading...</div> : (notes.length === 0 || sortedNotes.length === 0) ? <div className="text-3xl mt-[14vh] dark:text-neutral-400 text-black text-center">No notes</div> : <div className="w-[95%] justify-self-center p-5">
 
                                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                                     {sortedNotes && sortedNotes.map(note => (
@@ -116,7 +115,7 @@ function ProfilePage() {
                         </div>
                     </>
                     :
-                    <div className="flex-1 bg-neutral-900 text-5xl text-white text-center justify-center flex items-center"><span>The user doesn't exists</span></div>
+                    <div className="flex-1 text-black text-5xl dark:text-white text-center justify-center flex items-center"><span>The user doesn't exists</span></div>
                 }
                 {selectedNote && <div className="fixed top-0 h-full w-full bg-[#00000063] z-10">
                     <div>

@@ -8,7 +8,7 @@ function NavBar({ setLogin, setSignup }) {
 
     return (
         <>
-            <div className="sticky top-0 z-10 bg-black shadow-[0px_0px_1px_1px] shadow-[#b1b1b131] h-14 items-center flex justify-center text-white">
+            <div className="sticky top-0 z-10 bg-gray-100 dark:bg-black text-black dark:text-white shadow-[0px_0px_4px_1px] shadow-[#575757] dark:shadow-neutral-400 h-14 items-center flex justify-center">
                 <div className="max-w-7xl justify-self-center w-400 items-center flex justify-between py-1 2xl:py-2 sm:px-3 px-1.5 gap-1">
                     <Logo />
                     <SearchBar />

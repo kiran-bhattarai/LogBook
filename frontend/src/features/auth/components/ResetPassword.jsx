@@ -13,7 +13,7 @@ function ResetPassword() {
 
 
     const [nextStage, setNextStage] = useState(!false)
-    const [resetStage, setResetStage] = useState(false)
+    const [resetStage, setResetStage] = useState(!false)
 
     const [message, setMessage] = useState("")
 
@@ -161,11 +161,25 @@ function ResetPassword() {
 
     return (
         <>
-            <div className="flex items-center justify-center h-full min-h-screen bg-black p-2 sm:p-0">
+            <div className="flex items-center justify-center h-full min-h-screen p-2 sm:p-0 relative overflow-hidden bg-black/20 dark:bg-transparent">
+
+                <div className="absolute inset-0 -z-10 max-w-full m-auto">
+                    <div className="absolute top-[10%] left-[5%] w-72 h-72 bg-blue-500/45 dark:bg-blue-500/15 rounded-full blur-[120px]"></div>
+
+                    <div className="absolute top-[60%] left-[10%] w-80 h-80 bg-purple-500/40 dark:bg-purple-500/10 rounded-full blur-[120px]"></div>
+
+                    <div className="absolute top-[20%] right-[10%] w-80 h-80 bg-cyan-500/40 dark:bg-cyan-500/10 rounded-full blur-[120px]"></div>
+
+                    <div className="absolute bottom-[5%] right-[5%] w-72 h-72 bg-emerald-500/40 dark:bg-emerald-500/10 rounded-full blur-[120px]"></div>
+
+                    <div className="absolute top-[45%] left-[45%] w-96 h-96 bg-indigo-500/38 dark:bg-indigo-500/8 rounded-full blur-[140px]"></div>
+
+                    <div className="absolute bottom-[30%] right-[30%] w-72 h-72 bg-green-400/40 dark:bg-green-400/10 rounded-full blur-[120px]"></div>
+                </div>
 
 
 
-                <div className="text-white dark:bg-[#202023] dark:text-white font-inter w-110 items-center flex-col flex rounded-2xl p-4 pb-7 relative self-center">
+                <div className="text-black bg-white dark:bg-[#202023] dark:text-white font-inter w-110 items-center flex-col flex rounded-2xl p-4 pb-7 relative self-center">
 
                     <h1 className="text-3xl font-medium mb-14 font-poppins">
                         Reset Password
@@ -182,23 +196,23 @@ function ResetPassword() {
                                     <img src="../src/assets/mail.svg" alt="" className="absolute h-6 left-4" />
                                     <input value={emailValue} placeholder="Email" className={`bg-[#dfdfdf] dark:bg-[#101010] dark:outline-[#101010] py-[clamp(2px,(0.4vh),4px)] m-1 w-[99%] px-10 rounded-4xl  text-[clamp(19px,2.1vmin,23px)] outline-[#dfdfdf] outline-2 mx-1 text-ellipsis transition duration-300`} onChange={(e) => { setEmailValue(e.target.value) }} />
                                 </div>
-                                <p className="text-[15px] text-neutral-300 m-2 ">
+                                <p className="text-[15px] dark:text-neutral-300 text-neutral-700 m-2 ">
                                     A 6 digit code will be sent to your email.
                                 </p>
-                                <button onClick={sendEmailFunc} className="px-3 py-1 pb-1.5 text-lg font-medium rounded-4xl bg-linear-to-r from-indigo-600 to-green-700 hover:from-green-800 hover:to-indigo-700  cursor-pointer hover:scale-105 transition  duration-300">Send Code</button>
+                                <button onClick={sendEmailFunc} className="text-white px-3 py-1 pb-1.5 text-lg font-medium rounded-4xl bg-linear-to-r from-indigo-500 to-green-600 hover:from-green-800 hover:to-indigo-700  cursor-pointer hover:scale-105 transition  duration-300">Send Code</button>
                             </div>
                             :
                             !resetStage ?
                                 <div className="flex-col flex items-center w-full">
                                     <input value={code} onChange={(e) => setCode(e.target.value)} placeholder="- - - - - -" maxLength={6} type="text" className="dark:bg-[#101010] dark:outline-[#101010] dark:text-white text-black max-w-[55%] bg-neutral-200 text-3xl rounded-4xl px-4 text-center text-ellipsis" />
-                                    <p className="text-[15px] text-neutral-300 dark:text-neutral-400 m-2">
+                                    <p className="text-[15px] dark:text-neutral-300 text-neutral-700 m-2">
                                         Enter the 6 digit code sent to your email.
                                     </p>
-                                    <button onClick={verifyCodeFunc} className="mb-8 px-3 py-1 pb-1.5 text-lg font-medium rounded-4xl bg-linear-to-r from-indigo-600 to-green-700 hover:from-green-800 hover:to-indigo-700  cursor-pointer hover:scale-105  transition duration-300">Verify Code</button>
+                                    <button onClick={verifyCodeFunc} className="text-white mb-8 px-3 py-1 pb-1.5 text-lg font-medium rounded-4xl bg-linear-to-r from-indigo-500 to-green-600 hover:from-green-800 hover:to-indigo-700  cursor-pointer hover:scale-105  transition duration-300">Verify Code</button>
 
                                     <div className="flex flex-col gap-1">
-                                        <div className="p-0.5 hover:scale-105 transition duration-300 bg-linear-to-r from-indigo-600 to-green-700 hover:from-green-800 hover:to-indigo-700 rounded-4xl">
-                                            <button onClick={sendEmailFunc} className="px-3 py-0.5 pb-1 text-md font-medium rounded-4xl  cursor-pointer transition  duration-300 bg-[#202023]">Resend Code</button>
+                                        <div className="p-0.5 hover:scale-105 transition duration-300 bg-linear-to-r from-indigo-500 to-green-600 hover:from-green-800 hover:to-indigo-700 rounded-4xl">
+                                            <button onClick={sendEmailFunc} className=" px-3 py-0.5 pb-1 text-md font-medium rounded-4xl  cursor-pointer transition  duration-300 dark:bg-[#202023] bg-white">Resend Code</button>
                                         </div>
                                         <button onClick={() => setNextStage(false)} className="px-3 py-0.5 pb-1 md font-medium rounded-4xl bbg-linear-to-r from-indigo-600 to-green-700 hover:from-green-800 hover:to-indigo-700 cursor-pointer hover:scale-105 transition  duration-300">Edit email</button>
                                     </div>
@@ -223,10 +237,10 @@ function ResetPassword() {
 
                                         </div>
                                     </div>
-                                    <p className="text-[14px] leading-4  text-neutral-400 m-4 text-center">
+                                    <p className="text-[14px] leading-4  dark:text-neutral-300 text-neutral-700 m-4 text-center">
                                         Password should be atleast 8 characters, including one uppercase letter, one lowercase letter, one number, and one special symbol.
                                     </p>
-                                    <button onClick={handleSubmit} className="px-3 py-1 pb-1.5 text-lg font-medium rounded-4xl bg-linear-60 transition from-indigo-600 to-green-700 hover:from-green-800 hover:to-indigo-700 cursor-pointer hover:scale-105 duration-300">Confirm</button>
+                                    <button onClick={handleSubmit} className="text-white px-3 py-1 pb-1.5 text-lg font-medium rounded-4xl bg-linear-60 transition from-indigo-600 to-green-700 hover:from-green-800 hover:to-indigo-700 cursor-pointer hover:scale-105 duration-300">Confirm</button>
                                 </div>
                     }
 

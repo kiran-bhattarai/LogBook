@@ -2,10 +2,15 @@
 @import "tailwindcss";
 
 body {
-  @apply bg-[#080808];
+  @apply dark:bg-[#080808] bg-neutral-300;
 }
 
-@theme{
+input,
+textarea {
+  @apply placeholder:text-[#797979]
+}
+
+@theme {
   --font-inter: Inter, "sans-serif";
   --font-poppins: Poppins, "sans-serif"
 }
@@ -33,7 +38,7 @@ body {
     background: transparent;
     cursor: default;
   }
-  
+
   .scrollbar::-webkit-scrollbar-thumb {
     background-color: #525252;
     border-radius: 9999px;

@@ -45,7 +45,7 @@ function NavLinks({ setLogin, setSignup }) {
 
     return (
         <>
-            <div className="h-full font-poppins sm:translate-x-9.5" ref={ref}>
+            <div className="h-full font-poppins sm:translate-x-9.5 bg-gray-100 dark:bg-black text-black dark:text-white" ref={ref}>
 
                 <button className="sm:hidden flex cursor-pointer -translate-x-1 overflow-hidden" onClick={handleClick}>
                     <svg className="duration-200 scale-180" id="btn" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,16 +55,16 @@ function NavLinks({ setLogin, setSignup }) {
                     </svg>
                 </button>
 
-                <ul id="menu" className="text-center hidden w-max sm:w-min sm:flex flex-col sm:flex-row sm:relative absolute sm:top-0 top-14 right-9 rounded border-white bg-black gap-1.5 items-center text-[16px]">
+                <ul id="menu" className="text-center sm:shadow-none shadow-[0px_0px_3px_1px] shadow-[#646464] dark:shadow-neutral-900 hidden w-max sm:w-min sm:flex flex-col sm:flex-row sm:relative absolute sm:top-0 top-14 right-9 rounded bg-gray-300 sm:bg-gray-100 dark:bg-black sm:dark:bg-black border-white gap-1.5 items-center text-[16px]">
 
-                    <li onClick={() => setSearchUsers(true)} className="h-[70%] flex items-center hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105 md:whitespace-nowrap md:leading-normal leading-4.5 px-2 p-1.5 cursor-pointer">Search users</li>
+                    <li onClick={() => setSearchUsers(true)} className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105 md:whitespace-nowrap md:leading-normal leading-4.5 px-2 p-1.5 cursor-pointer">Search users</li>
 
                     {user === "admin" &&
                         <>
-                            <li className="h-[70%] flex items-center hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105">
+                            <li className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105">
                                 <Link to={"/dashboard"} className="px-2 p-1.5">Dashboard</Link>
                             </li>
-                            <li className="h-[70%] flex items-center hover:bg-neutral-800 font-medium transition duration-300 whitespace-normal lg:whitespace-nowrap lg:leading-normal leading-4.5 rounded hover:scale-105 ">
+                            <li className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 whitespace-normal lg:whitespace-nowrap lg:leading-normal leading-4.5 rounded hover:scale-105 ">
                                 <Link to={"/access-control"} className="px-2 p-1.5">Access Control</Link>
                             </li>
                         </>
@@ -72,8 +72,8 @@ function NavLinks({ setLogin, setSignup }) {
                     {
                         !user &&
                         <>
-                            <li className="h-[70%] flex items-center hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105"><button className="cursor-pointer px-2 p-1" onClick={setLogin}>Login</button></li>
-                            <li className="h-[70%] flex items-center hover:bg-neutral-800 font-medium transition duration-300 whitespace-nowrap rounded hover:scale-105"><button className="cursor-pointer px-2 p-1" onClick={setSignup}>Sign up</button></li>
+                            <li className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105"><button className="cursor-pointer px-2 p-1" onClick={setLogin}>Login</button></li>
+                            <li className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 whitespace-nowrap rounded hover:scale-105"><button className="cursor-pointer px-2 p-1" onClick={setSignup}>Sign up</button></li>
                         </>
                     }
 

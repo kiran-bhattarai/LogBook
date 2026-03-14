@@ -52,10 +52,10 @@ function UserMenu() {
                     </button>
                 </div>
 
-                {dropVisible && <div className="border-neutral-600 border w-30 py-1.5 bg-[#101018] rounded-lg absolute right-0 mt-2">
-                    <button className="w-full h-8 text-xl cursor-pointer hover:text-neutral-400 transition duration-200"><Link to={"/profile"}>Profile</Link></button>
-                    <button className="w-full h-8 text-lg cursor-pointer hover:text-neutral-400 transition duration-200" onClick={() => setChangePic(true)}>Change Pic</button>
-                    <button onClick={handleLogout} className="w-full h-8 text-xl text-red-600 cursor-pointer hover:text-red-800 transition duration-200">Logout</button>
+                {dropVisible && <div className="border-neutral-600 font-poppins border w-30 font-medium py-1.5 bg-neutral-200 dark:bg-[#101018] rounded absolute right-0 mt-2 shadow-[0px_0px_3px_1px] shadow-[#646464] dark:shadow-neutral-900 ">
+                    <button className="w-full h-8 text-xl cursor-pointer hover:text-neutral-800 dark:hover:text-neutral-400 transition duration-200"><Link to={"/profile"}>Profile</Link></button>
+                    <button className="w-full h-8 text-lg cursor-pointer hover:text-neutral-800 dark:hover:text-neutral-400 transition duration-200" onClick={() => setChangePic(true)}>Change Pic</button>
+                    <button onClick={handleLogout} className="w-full h-8 text-xl cursor-pointer text-red-600 hover:text-red-800 transition duration-200">Logout</button>
                 </div>}
             </div>
 
