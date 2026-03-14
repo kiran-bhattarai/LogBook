@@ -45,7 +45,7 @@ function NotesView({ onNoteClick, newNoteCreated, sortId }) {
 
     if (notes.length === 0 || sortedNotes.length === 0) {
         return (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-3xl mt-[14vh] text-neutral-400 text-center">No notes</motion.div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-3xl mt-[14vh] dark:text-neutral-400 text-black text-center">No notes</motion.div>
         )
     }
 

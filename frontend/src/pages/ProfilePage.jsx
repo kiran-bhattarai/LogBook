@@ -9,6 +9,7 @@ import SortBy from "../components/ui/SortBy"
 import { getSortedNotes } from "../utils/sortNotes"
 import PageContainer from "../components/layout/PageContainer"
 import { useNavSearch } from "../context/NavSearchContext"
+import Spinner from "../components/ui/Spinner"
 
 function ProfilePage() {
 
@@ -100,7 +101,9 @@ function ProfilePage() {
                         </div>
 
                         <div className="flex-1 w-full">
-                            {notes === null ? <div className="text-center mt-[14vh] text-neutral-200">Loading...</div> : (notes.length === 0 || sortedNotes.length === 0) ? <div className="text-3xl mt-[14vh] dark:text-neutral-400 text-black text-center">No notes</div> : <div className="w-[95%] justify-self-center p-5">
+                            {notes === null ? <div className="justify-self-center translate-y-15">
+                                <Spinner />
+                            </div> : (notes.length === 0 || sortedNotes.length === 0) ? <div className="text-3xl mt-[14vh] dark:text-neutral-400 text-black text-center">No notes</div> : <div className="w-[95%] justify-self-center p-5">
 
                                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
                                     {sortedNotes && sortedNotes.map(note => (
