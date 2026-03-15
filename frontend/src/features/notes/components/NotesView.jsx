@@ -7,6 +7,7 @@ import { getSortedNotes } from "../../../utils/sortNotes";
 import { deleteNoteRequest, fetchNoteRequest } from "../services/notesApi";
 import { useNavSearch } from "../../../context/NavSearchContext";
 import Spinner from "../../../components/ui/Spinner";
+import NoteCardSkeleton from "@/components/skeletons/NoteCardSkeleton";
 
 function NotesView({ onNoteClick, newNoteCreated, sortId }) {
 
@@ -37,8 +38,15 @@ function NotesView({ onNoteClick, newNoteCreated, sortId }) {
 
     if (notes === null) {
         return (
-            <div className="justify-self-center translate-y-10">
-                <Spinner />
+            <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 xl:columns-4 2xl:columns-5 relative ">
+
+                {
+                    Array.from({ length: 6 }).map((_, i) => (
+                        <div className="break-inside-avoid py-2">
+                            <NoteCardSkeleton key={i} />
+                        </div>
+                    ))
+                }
             </div>
         )
     }
@@ -52,15 +60,16 @@ function NotesView({ onNoteClick, newNoteCreated, sortId }) {
     return (
         <AnimatePresence>
 
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-                {/* <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 xl:5 2xl:columns-6 gap-2 bg-neutral-900"> */}
+            <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 xl:columns-4 2xl:columns-5 relative ">
                 {sortedNotes.map(note => (
                     <motion.div initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -50, opacity: 0 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
                         key={note._id} className="">
-                        <NotesCard note={note} deleteNoteLogicMain={deleteNoteLogicMain} onRealClick={onNoteClick} />
+                        <div className="break-inside-avoid py-2">
+                            <NotesCard note={note} deleteNoteLogicMain={deleteNoteLogicMain} onRealClick={onNoteClick} />
+                        </div>
                     </motion.div>
                 ))}
             </div>

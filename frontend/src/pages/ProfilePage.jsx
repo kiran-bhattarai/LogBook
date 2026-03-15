@@ -11,6 +11,7 @@ import PageContainer from "../components/layout/PageContainer"
 import { useNavSearch } from "../context/NavSearchContext"
 import Spinner from "../components/ui/Spinner"
 import DefaultAvatar from "@/assets/default_avatar.png"
+import NoteCardSkeleton from "@/components/skeletons/NoteCardSkeleton"
 
 function ProfilePage() {
 
@@ -102,19 +103,32 @@ function ProfilePage() {
                         </div>
 
                         <div className="flex-1 w-full">
-                            {notes === null ? <div className="justify-self-center translate-y-15">
-                                <Spinner />
-                            </div> : (notes.length === 0 || sortedNotes.length === 0) ? <div className="text-3xl mt-[14vh] dark:text-neutral-400 text-black text-center">No notes</div> : <div className="w-[95%] justify-self-center p-5">
+                            {notes === null ?
+                                (
+                                    <div className="w-[95%] justify-self-center p-5">
+                                        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 xl:columns-4 2xl:columns-5 relative ">
 
-                                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-                                    {sortedNotes && sortedNotes.map(note => (
-                                        <div key={note._id} className="break-inside-avoid">
-                                            <NotesCard onRealClick={setSelectedNote} note={note} />
+                                            {
+                                                Array.from({ length: 6 }).map((_, i) => (
+                                                    <div className="break-inside-avoid py-2">
+                                                        <NoteCardSkeleton key={i} type="profile" />
+                                                    </div>
+                                                ))
+                                            }
                                         </div>
-                                    ))}
-                                </div>
+                                    </div>
+                                )
+                                : (notes.length === 0 || sortedNotes.length === 0) ? <div className="text-3xl mt-[14vh] dark:text-neutral-400 text-black text-center">No notes</div> : <div className="w-[95%] justify-self-center p-5">
+                                    <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-3 xl:columns-4 2xl:columns-5 relative ">
 
-                            </div>
+                                        {sortedNotes && sortedNotes.map(note => (
+                                            <div key={note._id} className="break-inside-avoid py-2">
+                                                <NotesCard onRealClick={setSelectedNote} note={note} />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                </div>
                             }
                         </div>
                     </>

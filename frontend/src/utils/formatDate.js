@@ -1,23 +1,18 @@
 export function timeAgo(date) {
-  const now = new Date();
-  const diffInSeconds = Math.floor((now - date) / 1000);
+  const diffInSeconds = Math.floor((new Date() - date) / 1000);
+
+  if (diffInSeconds < 60) return "just now";
   
-  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+  const intervals = [
+    { label: 'd', seconds: 86400 },
+    { label: 'h', seconds: 3600 },
+    { label: 'm', seconds: 60 }
+  ];
 
-  if (diffInSeconds < 60) {
-    return "just now"; 
+  for (const interval of intervals) {
+    const count = Math.floor(diffInSeconds / interval.seconds);
+    if (count >= 1) {
+      return `${count}${interval.label} ago`;
+    }
   }
-
-  const diffInMinutes = Math.floor(diffInSeconds / 60);
-  if (diffInMinutes < 60) {
-    return rtf.format(-diffInMinutes, 'minute');
-  }
-
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  if (diffInHours < 24) {
-    return rtf.format(-diffInHours, 'hour');
-  }
-
-  const diffInDays = Math.floor(diffInHours / 24);
-  return rtf.format(-diffInDays, 'day');
 }
