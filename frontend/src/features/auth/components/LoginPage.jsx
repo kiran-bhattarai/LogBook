@@ -3,6 +3,10 @@ import { Link } from "react-router-dom"
 import valdidator from "validator"
 import { useAuth } from "../../../context/AuthContext"
 import useClickOutside from "../../../hooks/useClickOutside";
+import MailIcon from "@/assets/icons/mail.svg"
+import PasswordIcon from "@/assets/icons/pass.svg"
+import VisibleIcon from "@/assets/icons/visible.svg"
+import NotVisibleIcon from "@/assets/icons/not_visible.svg"
 
 function LoginPage({ setSignupWindow, setItselfOff }) {
 
@@ -106,16 +110,16 @@ function LoginPage({ setSignupWindow, setItselfOff }) {
                 <form onSubmit={handleSubmit} noValidate className="w-full px-2 items-center flex flex-col">
 
                     <div className="w-full overflow-clip flex items-center justify-center relative max-w-114">
-                        <img src="../src/assets/mail.svg" alt="" className="absolute h-6 left-4" />
+                        <img src={MailIcon} alt="" className="absolute h-6 left-4" />
                         <input placeholder="Email" className={`bg-[#dfdfdf] dark:bg-[#101010] dark:outline-[#101010] py-1 m-1 w-[99%] px-10 rounded-4xl  text-[19px] outline-[#dddddd] outline text-ellipsis ${highlightEmail ? "outline-red-600" : ""} mx-1 text-ellipsis transition duration-300`} onChange={(e) => { setEmailValue(e.target.value) }} />
                     </div>
 
                     <div className="w-full overflow-clip flex items-center relative justify-center max-w-114">
-                        <img src="../src/assets/pass.svg" alt="" className="absolute h-6 left-4" />
+                        <img src={PasswordIcon} alt="" className="absolute h-6 left-4" />
 
                         <input type={passwordType} placeholder="Password" className={`bg-[#dfdfdf] dark:bg-[#101010] dark:outline-[#101010] py-1 m-1 w-[99%] px-10 rounded-4xl outline-[#dddddd] outline text-[19px] text-ellipsis ${highlightPassword ? " outline-red-600" : ""} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handlePasswordIcon(e)} />
 
-                        <img src={`../src/assets/${passwordIcon}.svg`} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordVisibility} />
+                        <img src={passwordIcon && (passwordIcon === "visible" ? VisibleIcon : NotVisibleIcon)} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordVisibility} />
                     </div>
 
                     <button type="submit" className="m-1.5 bg-linear-to-r from-indigo-500 to-green-600 hover:from-green-800 hover:to-indigo-700 transition duration-300 text-white 

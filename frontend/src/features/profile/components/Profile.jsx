@@ -1,4 +1,6 @@
-function Profile({ name = "Name", userId = "UserId", avatar = "../src/assets/user_profile.png" }) {
+import DefaultAvatar from "@/assets/default_avatar.png"
+
+function Profile({ name = "Name", userId = "UserId", avatar = DefaultAvatar }) {
 
     return (
         <div className="h-full bg-white/30 dark:bg-black/30">

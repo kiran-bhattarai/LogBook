@@ -4,13 +4,14 @@ import { useState, useRef, useEffect } from "react"
 import useClickOutside from "../../../hooks/useClickOutside"
 import { Link } from "react-router-dom"
 import ChangePicture from "../../../features/profile/components/ChangePicture"
+import DefaultAvatar from "@/assets/default_avatar.png"
 
 function UserMenu() {
 
     const { user, logout, protectedFetch } = useAuth()
     const navigate = useNavigate()
 
-    const [profilePic, setProfilePic] = useState("../src/assets/user_profile.png")
+    const [profilePic, setProfilePic] = useState(DefaultAvatar)
     const [changePic, setChangePic] = useState(false)
     const [dropVisible, setDropVisible] = useState(false)
 
@@ -23,7 +24,7 @@ function UserMenu() {
             if (user) {
                 const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/profile/fetch`)
                 if (!res.ok) {
-                    setProfilePic("../src/assets/user_profile.png")
+                    setProfilePic(DefaultAvatar)
                     return
                 }
 

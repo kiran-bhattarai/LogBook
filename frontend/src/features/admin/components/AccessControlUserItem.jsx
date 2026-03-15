@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useAuth } from "../../../context/AuthContext"
 import { Link } from "react-router-dom"
 import { changeNameRequest, changeRoleRequest, deleteUserRequest, removeAvatarRequest } from "../services/adminApi"
+import DefaultAvatar from "@/assets/default_avatar.png"
 
 
 function AccessControlUserItem({ user }) {
@@ -95,7 +96,7 @@ function AccessControlUserItem({ user }) {
                         <div className="sm:flex-row flex justify-between items-start sm:items-center flex-col w-full">
                             <div className="flex">
                                 <div className="flex items-center font-poppins pt-1">
-                                    <img src={avatar ? avatar : "../src/assets/user_profile.png"} referrerPolicy="no-referrer" alt="" className="bg-neutral-300 h-10 rounded-full mr-2" />
+                                    <img src={avatar ? avatar : DefaultAvatar} referrerPolicy="no-referrer" alt="" className="bg-neutral-300 h-10 rounded-full mr-2" />
                                     <div className="">
                                         <h1 className="text-black dark:text-white text-2xl">{name}</h1>
                                         <h3 className="text-neutral-900 dark:text-neutral-400 text-sm">{user._id}</h3>

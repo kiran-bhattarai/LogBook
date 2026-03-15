@@ -51,20 +51,20 @@ function NavLinks({ setLogin, setSignup }) {
                     <svg className="duration-200 scale-180" id="btn" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" strokeWidth="0" />
                         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-                        <g id="SVGRepo_iconCarrier"> <path fillRule="evenodd" clipRule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" fill="#dddddd" /> </g>
+                        <g id="SVGRepo_iconCarrier"> <path fillRule="evenodd" clipRule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" fill="#797979" /> </g>
                     </svg>
                 </button>
 
                 <ul id="menu" className="text-center sm:shadow-none shadow-[0px_0px_3px_1px] shadow-[#646464] dark:shadow-neutral-900 hidden w-max sm:w-min sm:flex flex-col sm:flex-row sm:relative absolute sm:top-0 top-14 right-9 rounded bg-gray-300 sm:bg-gray-100 dark:bg-black sm:dark:bg-black border-white gap-1.5 items-center text-[16px]">
 
-                    <li onClick={() => setSearchUsers(true)} className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105 md:whitespace-nowrap md:leading-normal leading-4.5 px-2 p-1.5 cursor-pointer">Search users</li>
+                    <li onClick={() => setSearchUsers(true)} className="h-[70%] flex items-center hover:bg-neutral-400 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105 md:whitespace-nowrap md:leading-normal leading-4.5 px-2 p-1.5 cursor-pointer">Search users</li>
 
                     {user === "admin" &&
                         <>
-                            <li className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105">
+                            <li className="h-[70%] flex items-center hover:bg-neutral-400 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105">
                                 <Link to={"/dashboard"} className="px-2 p-1.5">Dashboard</Link>
                             </li>
-                            <li className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 whitespace-normal lg:whitespace-nowrap lg:leading-normal leading-4.5 rounded hover:scale-105 ">
+                            <li className="h-[70%] flex items-center hover:bg-neutral-400 dark:hover:bg-neutral-800 font-medium transition duration-300 whitespace-normal lg:whitespace-nowrap lg:leading-normal leading-4.5 rounded hover:scale-105 ">
                                 <Link to={"/access-control"} className="px-2 p-1.5">Access Control</Link>
                             </li>
                         </>
@@ -72,8 +72,8 @@ function NavLinks({ setLogin, setSignup }) {
                     {
                         !user &&
                         <>
-                            <li className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105"><button className="cursor-pointer px-2 p-1" onClick={setLogin}>Login</button></li>
-                            <li className="h-[70%] flex items-center hover:bg-neutral-300 dark:hover:bg-neutral-800 font-medium transition duration-300 whitespace-nowrap rounded hover:scale-105"><button className="cursor-pointer px-2 p-1" onClick={setSignup}>Sign up</button></li>
+                            <li className="h-[70%] flex items-center hover:bg-neutral-400 dark:hover:bg-neutral-800 font-medium transition duration-300 rounded hover:scale-105"><button className="cursor-pointer px-2 p-1" onClick={setLogin}>Login</button></li>
+                            <li className="h-[70%] flex items-center hover:bg-neutral-400 dark:hover:bg-neutral-800 font-medium transition duration-300 whitespace-nowrap rounded hover:scale-105"><button className="cursor-pointer px-2 p-1" onClick={setSignup}>Sign up</button></li>
                         </>
                     }
 

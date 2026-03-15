@@ -3,6 +3,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { timeAgo } from "../../../utils/formatDate";
 import { useTheme } from "../../../context/ThemeContext";
+import PublicIcon from "@/assets/icons/public.svg"
+import PrivateIcon from "@/assets/icons/private.svg"
+import DeleteIcon from "@/assets/icons/delete.svg"
 
 function NotesCard({ note, onRealClick, deleteNoteLogicMain }) {
 
@@ -32,7 +35,7 @@ function NotesCard({ note, onRealClick, deleteNoteLogicMain }) {
 
                 {deleteNoteLogicMain && <div className="absolute right-0 top-0 transition duration-150">
                     <button className="cursor-pointer hover:scale-120 transition duration-200 m-2 mr-3 mt-2.5" onClick={(e) => deleteLogic(e)}>
-                        <img src={"../src/assets/delete_dark.svg"} alt="" className="h-7 justify-self-center bg-transparent" />
+                        <img src={DeleteIcon} alt="" className="h-7 justify-self-center bg-transparent" />
                     </button>
                 </div>}
 
@@ -43,7 +46,7 @@ function NotesCard({ note, onRealClick, deleteNoteLogicMain }) {
                 <div className={`border border-x-0 border-b-0 border-t-neutral-600 flex w-full py-0.5 items-center justify-between`}>
 
                     {deleteNoteLogicMain && <div className="text-black dark:text-white flex items-center text-sm">
-                        <img src={note.isPublic ? "../src/assets/public_dark.svg" : "../src/assets/private_dark.svg"} alt="" width={"20px"} className="ml-1.5 mr-1 justify-self-center bg-transparent hover:scale-110 duration-200 transition" />
+                        <img src={note.isPublic ? PublicIcon : PrivateIcon} alt="" width={"20px"} className="ml-1.5 mr-1 justify-self-center bg-transparent hover:scale-110 duration-200 transition" />
                         {note.isPublic ? "Public" : "Private"}
                     </div>}
 

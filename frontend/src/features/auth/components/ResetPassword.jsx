@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom"
 import { isStrongPassword } from "validator"
 import { changePasswordMainRequest, checkEmailRequest, checkResetCodeRequest } from "../services/authApi"
 import BackgroundEffects from "../../../components/ui/BackgroundEffects"
+import MailIcon from "@/assets/icons/mail.svg"
+import PasswordIcon from "@/assets/icons/pass.svg"
+import VisibleIcon from "@/assets/icons/visible.svg"
+import NotVisibleIcon from "@/assets/icons/not_visible.svg"
+
 
 function ResetPassword() {
 
@@ -12,8 +17,8 @@ function ResetPassword() {
     const [code, setCode] = useState("")
 
 
-    const [nextStage, setNextStage] = useState(!false)
-    const [resetStage, setResetStage] = useState(!false)
+    const [nextStage, setNextStage] = useState(false)
+    const [resetStage, setResetStage] = useState(false)
 
     const [message, setMessage] = useState("")
 
@@ -179,7 +184,7 @@ function ResetPassword() {
                         !nextStage ?
                             <div className="flex-col flex items-center w-full">
                                 <div className="w-full overflow-clip flex items-center justify-center relative max-w-90 text-black dark:text-white">
-                                    <img src="../src/assets/mail.svg" alt="" className="absolute h-6 left-4" />
+                                    <img src={MailIcon} alt="" className="absolute h-6 left-4" />
                                     <input value={emailValue} placeholder="Email" className={`bg-[#dfdfdf] dark:bg-[#101010] dark:outline-[#101010] py-[clamp(2px,(0.4vh),4px)] m-1 w-[99%] px-10 rounded-4xl  text-[clamp(19px,2.1vmin,23px)] outline-[#dfdfdf] outline-2 mx-1 text-ellipsis transition duration-300`} onChange={(e) => { setEmailValue(e.target.value) }} />
                                 </div>
                                 <p className="text-[15px] dark:text-neutral-300 text-neutral-700 m-2 ">
@@ -208,18 +213,18 @@ function ResetPassword() {
 
                                     <div className="text-black dark:text-white">
                                         <div className="w-full overflow-clip flex items-center relative justify-center max-w-114">
-                                            <img src="../src/assets/pass.svg" alt="" className="absolute h-6 left-4" />
+                                            <img src={PasswordIcon} alt="" className="absolute h-6 left-4" />
 
                                             <input type={passwordType} placeholder="Password" className={`dark:bg-[#101010] dark:outline-[#101010] bg-[#dfdfdf] py-[clamp(2px,(0.4vh),4px)] m-1 w-[99%] px-10 rounded-4xl  outline-2 outline-[#dddddd] text-[clamp(19px,2.1vmin,24px)] text-ellipsis mx-1 transition duration-300`} onChange={(e) => handlePasswordChange(e)} />
 
-                                            <img src={`../src/assets/${passwordIcon}.svg`} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordVisibility} />
+                                            <img src={passwordIcon && (passwordIcon === "visible" ? VisibleIcon : NotVisibleIcon)} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordVisibility} />
                                         </div>
                                         <div className="w-full overflow-clip flex items-center relative justify-center max-w-114">
-                                            <img src="../src/assets/pass.svg" alt="" className="absolute h-6 left-4" />
+                                            <img src={PasswordIcon} alt="" className="absolute h-6 left-4" />
 
                                             <input type={passwordRetypeType} placeholder="Retype Password" className={`dark:bg-[#101010] dark:outline-[#101010] bg-[#dfdfdf] py-[clamp(2px,(0.4vh),4px)] m-1 w-[99%] px-10 rounded-4xl  outline-2 outline-[#dddddd] text-[clamp(19px,2.1vmin,24px)] text-ellipsis mx-1 transition duration-300`} onChange={(e) => handlePasswordRetypeChange(e)} />
 
-                                            <img src={`../src/assets/${passwordRetypeIcon}.svg`} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordRetypeVisibility} />
+                                            <img src={passwordRetypeIcon && (passwordRetypeIcon === "visible" ? VisibleIcon : NotVisibleIcon)} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordRetypeVisibility} />
 
                                         </div>
                                     </div>

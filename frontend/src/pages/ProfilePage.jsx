@@ -10,6 +10,7 @@ import { getSortedNotes } from "../utils/sortNotes"
 import PageContainer from "../components/layout/PageContainer"
 import { useNavSearch } from "../context/NavSearchContext"
 import Spinner from "../components/ui/Spinner"
+import DefaultAvatar from "@/assets/default_avatar.png"
 
 function ProfilePage() {
 
@@ -18,7 +19,7 @@ function ProfilePage() {
 
     const [selectedNote, setSelectedNote] = useState(null)
 
-    const [avatar, setAvatar] = useState("../src/assets/user_profile.png")
+    const [avatar, setAvatar] = useState(DefaultAvatar)
     const [username, setUsername] = useState("loading...")
     const [userId, setUserId] = useState("loading...")
     const [notes, setNotes] = useState(null)

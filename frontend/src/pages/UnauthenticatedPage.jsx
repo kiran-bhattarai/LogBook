@@ -44,7 +44,7 @@ function UnauthenticatedPage() {
 
                     <div className="flex flex-col items-center gap-2 font-poppins font-medium text-white">
                         <div className="text-2xl flex gap-4">
-                            <button className="bg-linear-60 from-indigo-600 to-green-800 dark:from-indigo-500 dark:to-green-600 hover:from-green-900 hover:to-indigo-800 px-3 pb-1 rounded duration-200 transition hover:scale-110 cursor-pointer" onClick={setLoginWindowMain}>Login</button>
+                            <button className="bg-linear-60 dark:from-indigo-600 dark:to-green-800 from-indigo-500 to-green-600 hover:from-green-900 hover:to-indigo-800 px-3 pb-1 rounded duration-200 transition hover:scale-110 cursor-pointer" onClick={setLoginWindowMain}>Login</button>
 
                             <button className=" text-black border-2 hover:border-indigo-800 border-indigo-600 hover:scale-110 dark:bg-neutral-900 dark:text-white px-3 pb-1 rounded duration-200 transition cursor-pointer" onClick={setSignupWindowMain}>Sign up</button>
                         </div>
