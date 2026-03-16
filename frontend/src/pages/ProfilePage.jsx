@@ -9,9 +9,9 @@ import SortBy from "../components/ui/SortBy"
 import { getSortedNotes } from "../utils/sortNotes"
 import PageContainer from "../components/layout/PageContainer"
 import { useNavSearch } from "../context/NavSearchContext"
-import Spinner from "../components/ui/Spinner"
 import DefaultAvatar from "@/assets/default_avatar.png"
 import NoteCardSkeleton from "@/components/skeletons/NoteCardSkeleton"
+import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton"
 
 function ProfilePage() {
 
@@ -37,7 +37,7 @@ function ProfilePage() {
 
     useEffect(() => {
 
-        const fetchNotes = async () => {
+        const fetchProfile = async () => {
 
             let res
 
@@ -69,7 +69,7 @@ function ProfilePage() {
                 setUserId(id)
             }
         }
-        fetchNotes()
+        fetchProfile()
 
     }, [protectedFetch, accessToken, id])
 
@@ -81,9 +81,13 @@ function ProfilePage() {
     return (
         <>
             <PageContainer>
-                {username ?
-                    <>
+                {userId ?
+                    <>  {
+                        userId === "loading..." ? 
+                        <ProfileSkeleton />
+                        :
                         <Profile name={username} userId={userId} avatar={avatar}></Profile>
+                        }
 
                         <div className="bg-white/30 border-b dark:bg-black/30 border-neutral-600 flex justify-center font-inter">
                             <div className="text-black dark:text-white py-2 pt-1 max-w-7xl text-lg px-8 items-center w-full flex justify-between md:flex-row flex-col">
