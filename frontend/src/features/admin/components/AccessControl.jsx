@@ -1,8 +1,8 @@
 import AccessControlUserItem from "./AccessControlUserItem"
 import { useEffect, useState } from "react"
 import { useAuth } from "../../../context/AuthContext"
-import Spinner from "../../../components/ui/Spinner"
 import { getUsersRequest } from "../services/adminApi"
+import AccessControlSkeleton from "@/components/skeletons/AccessControlSkeleton"
 
 function AccessControl() {
 
@@ -61,7 +61,11 @@ function AccessControl() {
         <div className="w-full max-h-[68vh] h-[68vh] overflow-y-auto scrollbar-thin scrollbar-thumb scrollbar flex flex-col items-center gap-0.5 border border-neutral-700">
           {
             !userList
-              ? <Spinner />
+              ? 
+              Array.from({length: 5}).map((_, i) => 
+                <AccessControlSkeleton key={i} />
+              )
+
               : userList.length === 0
                 ? <div className="text-black dark:text-white text-3xl text-center items-center flex h-[70%]">
                   <h1>No users found</h1>
