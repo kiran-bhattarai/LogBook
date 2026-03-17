@@ -1,5 +1,4 @@
 import { useState, useRef } from "react"
-import { useAuth } from "../../../context/AuthContext"
 import { editNoteRequest } from "../services/notesApi"
 import useClickOutside from "../../../hooks/useClickOutside"
 
@@ -11,10 +10,9 @@ function NoteEditor({ note, setNoteOnScreen }) {
 
     const containerRef = useRef()
 
-    const { protectedFetch } = useAuth()
 
     const saveChanges = async () => {
-        const { data } = await editNoteRequest({ protectedFetch, noteId: note._id, title, body, isPublic })
+        const data = await editNoteRequest({ noteId: note._id, title, body, isPublic })
         if (!data.message.includes("success")) {
             alert(data.message)
         } else {

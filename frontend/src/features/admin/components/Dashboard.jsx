@@ -1,10 +1,10 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell, Legend, ResponsiveContainer } from "recharts";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../../context/AuthContext"
 import { useTheme } from "../../../context/ThemeContext";
 import PiechartSkeleton from "@/components/skeletons/Dashboard skeletons/PiechartSkeleton";
 import LinechartSkeleton from "@/components/skeletons/Dashboard skeletons/LinechartSkeleton";
 import DataSkeleton from "@/components/skeletons/Dashboard skeletons/DataSkeleton";
+import { dashboardDataRequest } from "../services/adminApi";
 
 const COLORS = ["#6366F1", "#F59E0B", "#10B981", "#F43F5E", "#0EA5E9"];
 
@@ -38,7 +38,6 @@ function Dashboard() {
 
     const [dashboardData, setDashboardData] = useState({})
 
-    const { protectedFetch } = useAuth()
 
     const [loading, setLoading] = useState(false)
 
@@ -46,15 +45,13 @@ function Dashboard() {
         const wrapper = async () => {
 
             setLoading(true)
-            const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/admin/dashboard`)
-            const data = await res.json()
+            const data = await dashboardDataRequest()
             setLoading(false)
-
-            console.log(data)
             setDashboardData(data)
         }
+
         wrapper()
-    }, [protectedFetch])
+    }, [])
 
 
     const { darkMode } = useTheme()

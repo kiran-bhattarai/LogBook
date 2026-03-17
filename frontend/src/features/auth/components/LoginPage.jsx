@@ -10,7 +10,7 @@ import NotVisibleIcon from "@/assets/icons/not_visible.svg"
 
 function LoginPage({ setSignupWindow, setItselfOff }) {
 
-    const [passwordIcon, setPasswordIcon] = useState("");
+    const [passwordIcon, setPasswordIcon] = useState(null);
     const [passwordType, setPasswordType] = useState("password")
 
     const [emailValue, setEmailValue] = useState("")
@@ -111,13 +111,13 @@ function LoginPage({ setSignupWindow, setItselfOff }) {
 
                     <div className="w-full overflow-clip flex items-center justify-center relative max-w-114">
                         <img src={MailIcon} alt="" className="absolute h-6 left-4" />
-                        <input placeholder="Email" className={`bg-[#dfdfdf] dark:bg-[#101010] dark:outline-[#101010] py-1 m-1 w-[99%] px-10 rounded-4xl  text-[19px] outline-[#dddddd] outline text-ellipsis ${highlightEmail ? "outline-red-600" : ""} mx-1 text-ellipsis transition duration-300`} onChange={(e) => { setEmailValue(e.target.value) }} />
+                        <input autoComplete="username" placeholder="Email" className={`bg-[#dfdfdf] dark:bg-[#101010] dark:outline-[#101010] py-1 m-1 w-[99%] px-10 rounded-4xl  text-[19px] outline-[#dddddd] outline text-ellipsis ${highlightEmail ? "outline-red-600" : ""} mx-1 text-ellipsis transition duration-300`} onChange={(e) => { setEmailValue(e.target.value) }} />
                     </div>
 
                     <div className="w-full overflow-clip flex items-center relative justify-center max-w-114">
                         <img src={PasswordIcon} alt="" className="absolute h-6 left-4" />
 
-                        <input type={passwordType} placeholder="Password" className={`bg-[#dfdfdf] dark:bg-[#101010] dark:outline-[#101010] py-1 m-1 w-[99%] px-10 rounded-4xl outline-[#dddddd] outline text-[19px] text-ellipsis ${highlightPassword ? " outline-red-600" : ""} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handlePasswordIcon(e)} />
+                        <input autoComplete="current-password" type={passwordType} placeholder="Password" className={`bg-[#dfdfdf] dark:bg-[#101010] dark:outline-[#101010] py-1 m-1 w-[99%] px-10 rounded-4xl outline-[#dddddd] outline text-[19px] text-ellipsis ${highlightPassword ? " outline-red-600" : ""} mx-1 text-ellipsis transition duration-300`} onChange={(e) => handlePasswordIcon(e)} />
 
                         <img src={passwordIcon && (passwordIcon === "visible" ? VisibleIcon : NotVisibleIcon)} height="28px" alt="" className="absolute h-7 right-3.5 cursor-pointer" onClick={handlePasswordVisibility} />
                     </div>

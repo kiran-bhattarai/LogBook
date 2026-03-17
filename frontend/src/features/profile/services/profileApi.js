@@ -1,14 +1,15 @@
-export const changeAvatarRequest = async ({ protectedFetch, formData }) => {
-    const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/profile/avatar`, {
-        method: "POST",
-        body: formData
+import api from "@/lib/axios"
+
+export const changeAvatarRequest = async (formData) => {
+    const { data } = await api.post("/profile/avatar", formData , {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
     })
-    const data = await res.json()
-    return { res, data }
+    return data
 }
 
 export const searchProfileRequest = async (searchTerm) => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/profile/search?term=${searchTerm}`)
-    const data = await res.json()
-    return { res, data }
+    const { data } = await api.get(`/profile/search?term=${searchTerm}`)
+    return data
 }

@@ -12,7 +12,7 @@ function AccessControl() {
   const [searchData, setSearchData] = useState("")
   const [sortId, setSortId] = useState(1)
 
-  const { protectedFetch, loading } = useAuth()
+  const { loading } = useAuth()
 
   useEffect(() => {
     setTimeout(() => setDebounceSearchData(searchData), 500)
@@ -23,13 +23,13 @@ function AccessControl() {
     console.log("The use effect is runnign")
     const asyncWrapper = async () => {
       if (loading) return
-      const { data } = await getUsersRequest({ protectedFetch, sortId, debounceSearchData })
+      const data = await getUsersRequest({ sortId, debounceSearchData })
 
       setUserList(data)
     }
     asyncWrapper()
 
-  }, [protectedFetch, sortId, debounceSearchData, loading])
+  }, [sortId, debounceSearchData, loading])
 
   return (
     <div className="justify-self-center w-full h-full items-center flex flex-col justify-center font-inter px-2">

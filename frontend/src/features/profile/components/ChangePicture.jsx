@@ -1,5 +1,4 @@
 import { useRef, useState } from "react"
-import { useAuth } from "../../../context/AuthContext"
 import Spinner from "../../../components/ui/Spinner"
 import { changeAvatarRequest } from "../services/profileApi"
 
@@ -9,7 +8,6 @@ function ChangePicture({ setHidden }) {
     const containerRef = useRef()
     const [spinner, setSpinner] = useState(false)
 
-    const { protectedFetch } = useAuth()
 
     const handleUpload = async () => {
         const formData = new FormData()
@@ -20,19 +18,18 @@ function ChangePicture({ setHidden }) {
             return
         }
 
-        setSpinner(true)
-        const { res, data } = await changeAvatarRequest({ protectedFetch, formData })
-        setSpinner(false)
-
-
-        if (!res.ok) {
-            alert(data.message)
+        try {
+            setSpinner(true)
+            await changeAvatarRequest(formData)
+            setSpinner(false)
+            setHidden()
+            setImage(null)
+            window.location.reload()
+        } catch (err) {
+            setSpinner(false)
+            alert(err.response?.data?.message || "Something went wrong")
             return
         }
-
-        setHidden()
-        setImage(null)
-        window.location.reload()
     }
 
     const handleClick = (e) => {
@@ -42,7 +39,7 @@ function ChangePicture({ setHidden }) {
     }
 
     return (
-<div onClick={(e) => handleClick(e)} className="fixed inset-0 z-10 flex h-screen items-center justify-center bg-[#0000005b] font-inter">
+        <div onClick={(e) => handleClick(e)} className="fixed inset-0 z-10 flex h-screen items-center justify-center bg-[#0000005b] font-inter">
             <div ref={containerRef} className="bg-neutral-300 dark:bg-[#202023] text-black dark:text-white font-medium h-80 w-80 rounded-2xl flex flex-col justify-center items-center p-2 gap-6">
                 <div className="h-40 w-40 border border-black dark:border-neutral-300 flex items-center justify-center relative text-sm">
                     {spinner &&

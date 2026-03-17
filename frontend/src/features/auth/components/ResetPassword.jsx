@@ -103,10 +103,10 @@ function ResetPassword() {
             return
         }
 
-        const { res, data } = await checkEmailRequest(emailValue)
-
-        if (!res.ok) {
-            setMessage(data.message)
+        try {
+            await checkEmailRequest(emailValue)
+        } catch (err) {
+            setMessage(err.response?.data?.message || "Something went wrong")
             return
         }
 
@@ -122,15 +122,16 @@ function ResetPassword() {
             return
         }
 
-        const { res, data } = await checkResetCodeRequest({ email: emailValue, code })
-
-        if (!res.ok) {
-            setMessage(data.message)
+        try {
+            await checkResetCodeRequest({ email: emailValue, code })
+            setMessage("")
+            setResetStage(true)
+        }
+        catch (err) {
+            setMessage(err.response?.data?.message || "Something went wrong")
             return
         }
 
-        setMessage("")
-        setResetStage(true)
     }
 
 
@@ -150,17 +151,16 @@ function ResetPassword() {
             return
         }
 
-        const { res, data } = await changePasswordMainRequest({ email: emailValue, code, password: passwordValue })
-
-        if (!res.ok) {
-            setMessage(data.message)
+        try {
+            await changePasswordMainRequest({ email: emailValue, code, password: passwordValue })
+            setMessage("")
+            alert("Password changed successfully. Please login again.")
+            navigate("/")
+        }
+        catch (err) {
+            setMessage(err.response?.data?.message || "Something went wrong")
             return
         }
-
-        setMessage("")
-        alert("Password changed successfully. Please login again.")
-
-        navigate("/")
 
     }
 

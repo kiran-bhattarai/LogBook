@@ -20,7 +20,7 @@ function SearchUsers({ setSearchUsers }) {
             }
 
             const timeout = setTimeout(async () => {
-                const { data } = await searchProfileRequest(searchTerm)
+                const data = await searchProfileRequest(searchTerm)
                 setUsers(data.foundUsers)
             }, 400)
 

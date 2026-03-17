@@ -14,25 +14,26 @@ function VerifyEmail() {
 
     const [userEmail, setUserEmail] = useState("")
 
-    const { protectedFetch, logout, accessToken } = useAuth()
+    const { logout, accessToken } = useAuth()
 
     useEffect(() => {
         if (jwtDecode(accessToken).verified) {
             navigate("/")
         }
         const asyncWrapper = async () => {
-            const { res, data } = await getEmailRequest({ protectedFetch })
 
-            if (!res.ok) {
-                setMessage(data.messsage)
+            try {
+                const data = await getEmailRequest()
+                setUserEmail(data.email)
+            } catch (err) {
+                setMessage(err.response?.data?.message || "Something went wrong")
                 return
             }
 
-            setUserEmail(data.email)
         }
 
         asyncWrapper()
-    }, [protectedFetch])
+    }, [])
 
     const verifyEmailCode = async () => {
 
@@ -41,26 +42,25 @@ function VerifyEmail() {
             return
         }
 
-        const { res, data } = await verifyEmailRequest({ protectedFetch, code })
-
-        if (!res.ok) {
-            setMessage(data.message)
+        try {
+            await verifyEmailRequest(code)
+            window.location.assign("/");
+        } catch (err) {
+            setMessage(err.response?.data?.message || "Something went wrong")
             return
         }
-
-        window.location.assign("/");
     }
 
     const resendCode = async () => {
 
-        const { res, data } = await sendCodeRequest({ protectedFetch, code })
-
-        if (!res.ok) {
-            setMessage(data.messsage)
+        try {
+            await sendCodeRequest({ code })
+            setMessage("Code sent successfully")
+        } catch (err) {
+            setMessage(err.response?.data?.message || "Something went wrong")
             return
         }
 
-        setMessage("Code sent successfully")
     }
 
     const logoutFunc = async () => {

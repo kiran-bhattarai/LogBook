@@ -1,5 +1,4 @@
 import { useState, useRef } from "react"
-import { useAuth } from "../../../context/AuthContext"
 import { createNoteRequest } from "../services/notesApi"
 
 
@@ -15,7 +14,6 @@ function NoteInput({ onNoteCreated }) {
     const titleRef = useRef(null)
     const textareaRef = useRef(null)
 
-    const { protectedFetch } = useAuth()
 
 
     const inputBodyHandler = (e) => {
@@ -42,8 +40,8 @@ function NoteInput({ onNoteCreated }) {
 
     const createNote = async () => {
 
-        const { data } = await createNoteRequest({
-            protectedFetch, title: inputTitleData,
+        const data = await createNoteRequest({
+            title: inputTitleData,
             body: inputBodyData,
             isPublic: isPublic
         })

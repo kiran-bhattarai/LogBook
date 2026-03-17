@@ -1,41 +1,31 @@
-export const getUsersRequest = async ({ protectedFetch, sortId, debounceSearchData }) => {
-    const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/admin/users?sortId=${sortId}&name=${debounceSearchData}`)
-    const data = await res.json()
-    return { res, data }
+import api from "@/lib/axios"
+
+export const getUsersRequest = async ({ sortId, debounceSearchData }) => {
+    const { data } = await api.get(`/admin/users?sortId=${sortId}&name=${debounceSearchData}`)
+    return data
 }
 
-export const changeNameRequest = async ({ protectedFetch, userId, newName }) => {
-    const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/admin/change-name?userId=${userId}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ newName })
-    })
-    const data = await res.json()
-    return { res, data }
+export const changeNameRequest = async ({ userId, newName }) => {
+    const { data } = await api.post(`/admin/change-name?userId=${userId}`, { newName })
+    return data
 }
 
-export const removeAvatarRequest = async ({ protectedFetch, userId }) => {
-    const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/admin/remove-avatar?userId=${userId}`, {
-        method: "POST",
-    })
-    const data = await res.json()
-    return { res, data }
+export const removeAvatarRequest = async ({ userId }) => {
+    const { data } = await api.post(`/admin/remove-avatar?userId=${userId}`)
+    return data
 }
 
-export const changeRoleRequest = async ({ protectedFetch, userId }) => {
-    const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/admin/change-role?userId=${userId}`, {
-        method: "POST",
-    })
-    const data = await res.json()
-    return { res, data }
+export const changeRoleRequest = async ({ userId }) => {
+    const { data } = await api.post(`/admin/change-role?userId=${userId}`)
+    return data
 }
 
-export const deleteUserRequest = async ({ protectedFetch, userId }) => {
-    const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/admin/delete-user?userId=${userId}`, {
-        method: "POST",
-    })
-    const data = await res.json()
-    return { res, data }
+export const deleteUserRequest = async ({ userId }) => {
+    const { data } = await api.post(`/admin/delete-user?userId=${userId}`)
+    return data
+}
+
+ export const dashboardDataRequest = async () => {
+    const { data } = await api.get(`/admin/dashboard`)
+    return data
 }

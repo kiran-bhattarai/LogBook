@@ -12,6 +12,7 @@ import { useNavSearch } from "../context/NavSearchContext"
 import DefaultAvatar from "@/assets/default_avatar.png"
 import NoteCardSkeleton from "@/components/skeletons/NoteCardSkeleton"
 import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton"
+import api from "@/lib/axios"
 
 function ProfilePage() {
 
@@ -33,35 +34,28 @@ function ProfilePage() {
         setSortId(value)
     }
 
-    const { protectedFetch, accessToken } = useAuth()
+    const { accessToken } = useAuth()
 
     useEffect(() => {
 
         const fetchProfile = async () => {
 
-            let res
 
-            if (id && accessToken) {
-                res = await protectedFetch(`${import.meta.env.VITE_API_URL}/profile/fetch?id=${id}`)
-            }
-            else if (accessToken) {
-                res = await protectedFetch(`${import.meta.env.VITE_API_URL}/profile/fetch`)
-            }
-            else if (id) {
-                res = await fetch(`${import.meta.env.VITE_API_URL}/profile/fetch?id=${id}`)
-            } else {
-                res = await fetch(`${import.meta.env.VITE_API_URL}/profile/fetch`)
-            }
+            try {
+                let data
+                if (id) {
+                    ({ data } = await api.get(`/profile/fetch?id=${id}`))
+                } else {
+                    ({ data } = await api.get("/profile/fetch"))
+                }
 
-            if (!res.ok) {
-                setUsername(false)
+                setUsername(data.name)
+                setAvatar(data?.avatar)
+                setNotes(data.publicNotes)
+            } catch {
+                setUserId(false)
                 return
             }
-            const data = await res.json()
-
-            setUsername(data.name)
-            setAvatar(data?.avatar)
-            setNotes(data.publicNotes)
 
             if (!id) {
                 setUserId(jwtDecode(accessToken).sub)
@@ -71,7 +65,7 @@ function ProfilePage() {
         }
         fetchProfile()
 
-    }, [protectedFetch, accessToken, id])
+    }, [accessToken, id])
 
     let sortedNotes = getSortedNotes(sortId, notes)
 
@@ -83,11 +77,11 @@ function ProfilePage() {
             <PageContainer>
                 {userId ?
                     <>  {
-                        userId === "loading..." ? 
-                        <ProfileSkeleton />
-                        :
-                        <Profile name={username} userId={userId} avatar={avatar}></Profile>
-                        }
+                        userId === "loading..." ?
+                            <ProfileSkeleton />
+                            :
+                            <Profile name={username} userId={userId} avatar={avatar}></Profile>
+                    }
 
                         <div className="bg-white/30 border-b dark:bg-black/30 border-neutral-600 flex justify-center font-inter">
                             <div className="text-black dark:text-white py-2 pt-1 max-w-7xl text-lg px-8 items-center w-full flex justify-between md:flex-row flex-col">
@@ -114,8 +108,8 @@ function ProfilePage() {
 
                                             {
                                                 Array.from({ length: 6 }).map((_, i) => (
-                                                    <div className="break-inside-avoid py-2">
-                                                        <NoteCardSkeleton key={i} type="profile" />
+                                                    <div key={i} className="break-inside-avoid py-2">
+                                                        <NoteCardSkeleton type="profile" />
                                                     </div>
                                                 ))
                                             }
