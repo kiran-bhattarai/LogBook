@@ -50,7 +50,7 @@ export const noteEdit = async (req, res, next) => {
         const userId = req.user.sub
 
         if (((title?.length || 0) + (body?.length || 0)) > 3000) {
-            return req.status(400).json({message: "Note length shouldnt exceed more that 3000 characters"})
+            return res.status(400).json({message: "Note length shouldnt exceed more that 3000 characters"})
         }
 
         if (((title?.length || 0) + (body?.length || 0)) === 0) {
