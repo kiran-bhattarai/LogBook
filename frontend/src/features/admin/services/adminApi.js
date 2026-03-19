@@ -1,7 +1,14 @@
 import api from "@/lib/axios"
 
-export const getUsersRequest = async ({ sortId, debounceSearchData }) => {
-    const { data } = await api.get(`/admin/users?sortId=${sortId}&name=${debounceSearchData}`)
+export const getUsersRequest = async ({ pageParam = 1, sortId, debounceSearchData }) => {
+    const { data } = await api.get(`/admin/users`, {
+        params: {
+            page: pageParam,
+            limit: 10,
+            sortId,
+            name: debounceSearchData
+        }
+    })
     return data
 }
 

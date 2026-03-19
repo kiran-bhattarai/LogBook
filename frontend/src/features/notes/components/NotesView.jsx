@@ -20,7 +20,6 @@ function NotesView({ onNoteClick, newNoteCreated, sortId }) {
         if (loading) return;
         const getNotes = async () => {
             const data = await fetchNoteRequest()
-            console.log("The fetch notes response data", data)
             setNotes(data.notes);
         }
         getNotes();

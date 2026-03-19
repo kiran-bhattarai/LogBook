@@ -3,33 +3,36 @@ import { useEffect, useState } from "react"
 import { useAuth } from "../../../context/AuthContext"
 import { getUsersRequest } from "../services/adminApi"
 import AccessControlSkeleton from "@/components/skeletons/AccessControlSkeleton"
+import { useInfiniteQuery } from "@tanstack/react-query"
 
 function AccessControl() {
-
-  const [userList, setUserList] = useState(null)
 
   const [debounceSearchData, setDebounceSearchData] = useState("")
   const [searchData, setSearchData] = useState("")
   const [sortId, setSortId] = useState(1)
 
-  const { loading } = useAuth()
-
   useEffect(() => {
-    setTimeout(() => setDebounceSearchData(searchData), 500)
+    const timer = setTimeout(() => setDebounceSearchData(searchData), 500);
+    return () => clearTimeout(timer);
+  }, [searchData]);
 
-  }, [searchData])
 
-  useEffect(() => {
-    console.log("The use effect is runnign")
-    const asyncWrapper = async () => {
-      if (loading) return
-      const data = await getUsersRequest({ sortId, debounceSearchData })
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage} = useInfiniteQuery({
 
-      setUserList(data)
-    }
-    asyncWrapper()
+    queryKey: ["access_control", sortId, debounceSearchData],
 
-  }, [sortId, debounceSearchData, loading])
+    queryFn: ({ pageParam = 1 }) => getUsersRequest({ pageParam, sortId, name: debounceSearchData }),
+
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length < 10) return undefined;
+      return allPages.length + 1;
+    },
+
+    keepPreviousData: true,
+  });
+
+
+  const allUsers = data ? data.pages.flat() : [];
 
   return (
     <div className="justify-self-center w-full h-full items-center flex flex-col justify-center font-inter px-2">
@@ -59,23 +62,25 @@ function AccessControl() {
         </div>
 
         <div className="w-full max-h-[68vh] h-[68vh] overflow-y-auto scrollbar-thin scrollbar-thumb scrollbar flex flex-col items-center gap-0.5 border border-neutral-700">
-          {
-            !userList
-              ? 
-              Array.from({length: 5}).map((_, i) => 
-                <AccessControlSkeleton key={i} />
-              )
-
-              : userList.length === 0
-                ? <div className="text-black dark:text-white text-3xl text-center items-center flex h-[70%]">
+          {!data
+            ? Array.from({ length: 5 }).map((_, i) => <AccessControlSkeleton key={i} />)
+            : allUsers.length === 0
+              ? (
+                <div className="text-black dark:text-white text-3xl text-center items-center flex h-[70%]">
                   <h1>No users found</h1>
                 </div>
-                : userList.map(user =>
-                  <div className="w-full" key={user._id}>
-                    <AccessControlUserItem user={user} />
-                  </div>
-                )
-          }
+              )
+              : allUsers.map((user) => (
+                <div className="w-full" key={user._id}>
+                  <AccessControlUserItem user={user} />
+                </div>
+              ))}
+
+          {hasNextPage && (
+            <button className="cursor-pointer hover:scale-105 transition duration-200" onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+              {isFetchingNextPage ? "Loading..." : "Load More"}
+            </button>
+          )}
         </div>
       </div>
     </div>

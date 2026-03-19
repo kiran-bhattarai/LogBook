@@ -88,15 +88,17 @@ function LoginPage({ setSignupWindow, setItselfOff }) {
 
         setMessage("")
 
-        const data = await login(emailValue, passwordValue)
-
-        const { message } = data
-
-        if (!message.includes("success")) {
-            setMessage(message)
-        } else {
+        try {
+            const data = await login(emailValue, passwordValue)
+            if (!data.message.includes("success")) {
+                setMessage(data.message)
+            }
             setItselfOff()
         }
+        catch (err) {
+            setMessage(err.response?.data?.message || "Something went wrong")
+        }
+
     }
 
 

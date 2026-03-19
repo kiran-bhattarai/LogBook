@@ -39,11 +39,14 @@ export const profilesSearch = async (req, res, next) => {
     try {
         const searchTerm = req.query?.term
 
+        const page = req.query.page || 1
+        const limit = req.query.limit || 10
+
         if (!searchTerm || searchTerm.trim() === "") {
             return res.status(400).json({ message: "Nothing to search" })
         }
 
-        const foundUsers = await profilesSearchService(searchTerm)
+        const foundUsers = await profilesSearchService(searchTerm, page, limit)
 
         res.status(200).json({ foundUsers })
 
