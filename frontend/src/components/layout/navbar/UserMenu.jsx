@@ -5,13 +5,14 @@ import useClickOutside from "../../../hooks/useClickOutside"
 import { Link } from "react-router-dom"
 import ChangePicture from "../../../features/profile/components/ChangePicture"
 import DefaultAvatar from "@/assets/default_avatar.png"
+import { fetchMyProfileRequest } from "@/features/profile/services/profileApi"
+import { useQuery } from "@tanstack/react-query"
 
 function UserMenu() {
 
-    const { user, logout, protectedFetch } = useAuth()
+    const { user, logout } = useAuth()
     const navigate = useNavigate()
 
-    const [profilePic, setProfilePic] = useState(DefaultAvatar)
     const [changePic, setChangePic] = useState(false)
     const [dropVisible, setDropVisible] = useState(false)
 
@@ -19,23 +20,13 @@ function UserMenu() {
 
     useClickOutside(dropdownRef, () => setDropVisible(false))
 
-    useEffect(() => {
-        const getAvatar = async () => {
-            if (user) {
-                const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/profile/fetch`)
-                if (!res.ok) {
-                    setProfilePic(DefaultAvatar)
-                    return
-                }
+    const { data, isLoading, error } = useQuery({
+        queryKey: ['profile', 'me'],
+        queryFn: fetchMyProfileRequest,
+        enabled: !!user
+    })
 
-                const data = await res.json()
-                if (data.avatar) {
-                    setProfilePic(data?.avatar)
-                }
-            }
-        }
-        getAvatar()
-    }, [user, protectedFetch])
+    const profilePic = data?.avatar || DefaultAvatar
 
     const handleLogout = () => {
         logout()

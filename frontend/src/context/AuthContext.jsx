@@ -1,8 +1,9 @@
-import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 import { loginRequest, refreshRequest, logoutRequest } from "../features/auth/services/authApi";
-import { createProtectedFetch } from "../utils/fetchClient";
+
+import { setAccessToken as setAccessTokenAxios, setRefreshHandler } from "@/lib/axios"
 
 const AuthContext = createContext();
 
@@ -19,21 +20,18 @@ export const AuthProvider = ({ children }) => {
       setAccessToken(data.token);
       setUser(jwtDecode(data.token).role);
 
+      setAccessTokenAxios(data.token)
+
       return data.token;
     } catch (err) {
       console.log(err)
       setUser(null);
       setAccessToken(null);
+      setAccessTokenAxios(null)
       return null;
     }
   };
 
-const protectedFetch = useMemo(() => {
-  return createProtectedFetch(
-    () => accessToken,
-    refreshAccessToken
-  );
-}, [accessToken]);
 
   const login = async (email, password) => {
     const data = await loginRequest(email, password);
@@ -41,18 +39,25 @@ const protectedFetch = useMemo(() => {
     if (data.token) {
       setAccessToken(data.token);
       setUser(jwtDecode(data.token).role);
+
+      setAccessTokenAxios(data.token)
     }
 
     return data;
   };
 
   const logout = async () => {
-    await logoutRequest(protectedFetch);
+    await logoutRequest();
     setUser(null);
     setAccessToken(null);
+
+    setAccessTokenAxios(null)
   };
 
   useEffect(() => {
+
+    setRefreshHandler(refreshAccessToken)
+
     const init = async () => {
       await refreshAccessToken();
       setLoading(false);
@@ -62,7 +67,7 @@ const protectedFetch = useMemo(() => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, accessToken, loading, login, logout, protectedFetch }}>
+    <AuthContext.Provider value={{ user, accessToken, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

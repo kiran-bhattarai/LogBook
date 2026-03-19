@@ -2,34 +2,49 @@ import { searchProfileRequest } from "../services/profileApi"
 import UserItem from "./UserItem"
 import { useEffect, useRef, useState } from "react"
 import SearchIcon from "@/assets/icons/search.svg"
+import { useInfiniteQuery } from "@tanstack/react-query"
 
 
 function SearchUsers({ setSearchUsers }) {
 
-    const [searchTerm, setSearchTerm] = useState("")
-    const [users, setUsers] = useState(null)
-
     const containerRef = useRef()
 
+    const [searchTerm, setSearchTerm] = useState("");
+    const [debouncedSearch, setDebouncedSearch] = useState("");
+
     useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(searchTerm);
+        }, 400);
 
-        const fetchUsers = async () => {
-            if (!searchTerm) {
-                setUsers(null)
-                return
-            }
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
 
-            const timeout = setTimeout(async () => {
-                const { data } = await searchProfileRequest(searchTerm)
-                setUsers(data.foundUsers)
-            }, 400)
+    const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
 
-            return () => clearTimeout(timeout)
-        }
+        queryKey: ["searchUsers", debouncedSearch],
 
-        fetchUsers()
+        queryFn: async ({ pageParam = 1 }) => {
+            if (!debouncedSearch) return { foundUsers: [] };
 
-    }, [searchTerm])
+            const data = await searchProfileRequest({
+                searchTerm: debouncedSearch,
+                pageParam: pageParam,
+                limit: 10,
+            });
+            return data;
+        },
+
+        enabled: !!searchTerm && !!debouncedSearch,
+
+        getNextPageParam: (lastPage, allPages) => {
+            if (lastPage.foundUsers.length < 10) return undefined;
+            return allPages.length + 1;
+        },
+    });
+
+
+    const users = data?.pages?.flatMap(p => p.foundUsers) || [];
 
     const handleClick = (e) => {
         if (containerRef && !containerRef.current.contains(e.target)) {
@@ -54,7 +69,13 @@ function SearchUsers({ setSearchUsers }) {
                         <div className="text-black dark:text-neutral-400 text-3xl top-1/2 translate-y-1/2 h-[60%]">No user found</div>
                         :
                         users?.map((user) => <UserItem setItselfOffOnFalse={setSearchUsers} key={user._id} user={user} />)}
+                    {hasNextPage && (
+                        <button className="cursor-pointer hover:scale-105 transition duration-200" onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+                            {isFetchingNextPage ? "Loading..." : "Load More"}
+                        </button>
+                    )}
                 </div>
+
 
             </div>
         </div>

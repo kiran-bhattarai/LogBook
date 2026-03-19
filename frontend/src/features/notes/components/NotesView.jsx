@@ -12,24 +12,23 @@ import NoteCardSkeleton from "@/components/skeletons/NoteCardSkeleton";
 function NotesView({ onNoteClick, newNoteCreated, sortId }) {
 
     const [notes, setNotes] = useState(null)
-    const { protectedFetch, loading } = useAuth()
+    const { loading } = useAuth()
 
     const { searchValue } = useNavSearch()
 
     useEffect(() => {
         if (loading) return;
         const getNotes = async () => {
-            const { data } = await fetchNoteRequest({ protectedFetch })
-            console.log("The fetch notes response data", data)
+            const data = await fetchNoteRequest()
             setNotes(data.notes);
         }
         getNotes();
 
-    }, [protectedFetch, loading, setNotes, newNoteCreated]);
+    }, [loading, setNotes, newNoteCreated]);
 
     const deleteNoteLogicMain = async (id) => {
         setNotes(prev => prev.filter(note => note._id !== id))
-        await deleteNoteRequest({ protectedFetch, id })
+        await deleteNoteRequest(id)
     }
 
     let sortedNotes = getSortedNotes(sortId, notes)
@@ -42,8 +41,8 @@ function NotesView({ onNoteClick, newNoteCreated, sortId }) {
 
                 {
                     Array.from({ length: 6 }).map((_, i) => (
-                        <div className="break-inside-avoid py-2">
-                            <NoteCardSkeleton key={i} />
+                        <div  key={i} className="break-inside-avoid py-2">
+                            <NoteCardSkeleton />
                         </div>
                     ))
                 }

@@ -1,13 +1,10 @@
 import { useState } from "react"
-import { useAuth } from "../../../context/AuthContext"
 import { Link } from "react-router-dom"
 import { changeNameRequest, changeRoleRequest, deleteUserRequest, removeAvatarRequest } from "../services/adminApi"
 import DefaultAvatar from "@/assets/default_avatar.png"
 
 
 function AccessControlUserItem({ user }) {
-
-    const { protectedFetch } = useAuth()
 
     const [name, setName] = useState(user.name)
     const [avatar, setAvatar] = useState(user.avatar)
@@ -24,14 +21,13 @@ function AccessControlUserItem({ user }) {
             newName = prompt("Enter new name:")
         }
 
-        const { res, data } = await changeNameRequest({ protectedFetch, userId: user._id, newName })
-
-        if (!res.ok) {
-            alert(data.message)
+        try {
+            await changeNameRequest({ userId: user._id, newName })
+            setName(newName)
+        } catch (err) {
+            alert(err.response?.data?.message || "Something went wrong")
             return
         }
-
-        setName(newName)
     }
 
     const removeAvatar = async () => {
@@ -41,14 +37,15 @@ function AccessControlUserItem({ user }) {
             return
         }
 
-        const { res, data } = await removeAvatarRequest({ protectedFetch, userId: user._id })
+        try {
+            await removeAvatarRequest({ userId: user._id })
+            setAvatar("")
 
-        if (!res.ok) {
-            alert(data.message)
+        } catch (err) {
+            alert(err.response?.data?.message || "Something went wrong")
             return
         }
 
-        setAvatar("")
     }
 
     const changeRole = async () => {
@@ -58,14 +55,13 @@ function AccessControlUserItem({ user }) {
             return
         }
 
-        const { res, data } = await changeRoleRequest({ protectedFetch, userId: user._id })
-
-        if (!res.ok) {
-            alert(data.message)
+        try {
+            await changeRoleRequest({ userId: user._id })
+            setRole(role === "admin" ? "user" : "admin")
+        } catch (err) {
+            alert(err.response?.data?.message || "Something went wrong")
             return
         }
-
-        setRole(role === "admin" ? "user" : "admin")
     }
 
     const deleteUserFunc = async () => {
@@ -75,14 +71,14 @@ function AccessControlUserItem({ user }) {
             return
         }
 
-        const { res, data } = await deleteUserRequest({ protectedFetch, userId: user._id })
+        try {
+            await deleteUserRequest({ userId: user._id })
+            setVisible(false)
 
-        if (!res.ok) {
-            alert(data.message)
+        } catch (err) {
+            alert(err.response?.data?.message || "Something went wrong")
             return
         }
-
-        setVisible(false)
     }
 
     return (

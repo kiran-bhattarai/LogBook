@@ -13,7 +13,7 @@ export const profileFetch = async (userId) => {
     return { name, publicNotes, avatar }
 }
 
-export const profilesSearch = async (searchTerm) => {
+export const profilesSearch = async (searchTerm, page, limit=10) => {
 
     const query = [];
 
@@ -23,7 +23,7 @@ export const profilesSearch = async (searchTerm) => {
         query.push({ _id: searchTerm });
     }
 
-    const foundUsers = await User.find({ $or: query }).select("name _id avatar").limit(10);
+    const foundUsers = await User.find({ $or: query }).select("name _id avatar").skip((page - 1) * limit).limit(limit);
 
     return foundUsers
 }

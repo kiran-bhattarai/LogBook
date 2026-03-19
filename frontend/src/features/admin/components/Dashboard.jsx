@@ -1,10 +1,11 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell, Legend, ResponsiveContainer } from "recharts";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../../context/AuthContext"
 import { useTheme } from "../../../context/ThemeContext";
 import PiechartSkeleton from "@/components/skeletons/Dashboard skeletons/PiechartSkeleton";
 import LinechartSkeleton from "@/components/skeletons/Dashboard skeletons/LinechartSkeleton";
 import DataSkeleton from "@/components/skeletons/Dashboard skeletons/DataSkeleton";
+import { dashboardDataRequest } from "../services/adminApi";
+import { useQuery } from "@tanstack/react-query";
 
 const COLORS = ["#6366F1", "#F59E0B", "#10B981", "#F43F5E", "#0EA5E9"];
 
@@ -36,25 +37,12 @@ function prepareChartData(rawData, valueKey, daysBack = 30) {
 
 function Dashboard() {
 
-    const [dashboardData, setDashboardData] = useState({})
+    const { data, isLoading, error } = useQuery({
+        queryKey: ['dashboard'],
+        queryFn: dashboardDataRequest
+    })
 
-    const { protectedFetch } = useAuth()
-
-    const [loading, setLoading] = useState(false)
-
-    useEffect(() => {
-        const wrapper = async () => {
-
-            setLoading(true)
-            const res = await protectedFetch(`${import.meta.env.VITE_API_URL}/admin/dashboard`)
-            const data = await res.json()
-            setLoading(false)
-
-            console.log(data)
-            setDashboardData(data)
-        }
-        wrapper()
-    }, [protectedFetch])
+    const dashboardData = data
 
 
     const { darkMode } = useTheme()
@@ -79,7 +67,7 @@ function Dashboard() {
                 <div className="w-screen">
                     <div className="justify-self-center flex flex-wrap gap-8 my-8 text-neutral-900 dark:text-neutral-300">
                         {
-                            loading ?
+                            isLoading ?
                                 <DataSkeleton />
                                 :
                                 <h2>Total users: <span className="text-3xl font-medium text-black dark:text-white">{dashboardData.totalUsers}</span></h2>
@@ -90,7 +78,7 @@ function Dashboard() {
 
                         <div className="justify-between items-center h-full flex flex-col w-min gap-5">
                             {
-                                loading ?
+                                isLoading ?
 
                                     <PiechartSkeleton />
                                     :
@@ -111,7 +99,7 @@ function Dashboard() {
 
                         <div className="justify-center items-center flex flex-col w-min gap-5">
                             {
-                                loading ?
+                                isLoading ?
 
                                     <PiechartSkeleton />
                                     :
@@ -134,7 +122,7 @@ function Dashboard() {
                         <div className="justify-center items-center flex flex-col gap-5 w-full max-w-125 -translate-x-2 sm:translate-0 pr-5">
 
                             {
-                                loading ?
+                                isLoading ?
                                     <LinechartSkeleton />
                                     :
                                     <>
@@ -168,12 +156,12 @@ function Dashboard() {
                     <div className="justify-self-center flex flex-wrap gap-x-8 gap-y-4 my-8 justify-center text-neutral-900 dark:text-neutral-300">
 
                         {
-                            loading ?
+                            isLoading ?
                                 <>
                                     <DataSkeleton className={"w-46"} />
-                                    <DataSkeleton className={"w-64"}/>
-                                    <DataSkeleton className={"w-82"}/>
-                                    <DataSkeleton className={"w-82"}/>
+                                    <DataSkeleton className={"w-64"} />
+                                    <DataSkeleton className={"w-82"} />
+                                    <DataSkeleton className={"w-82"} />
                                 </>
                                 :
                                 <>
@@ -190,7 +178,7 @@ function Dashboard() {
 
                         <div className="justify-between items-center h-full flex flex-col w-min gap-5">
                             {
-                                loading ?
+                                isLoading ?
 
                                     <PiechartSkeleton />
                                     :
@@ -212,7 +200,7 @@ function Dashboard() {
 
                         <div className="justify-center items-center flex flex-col gap-5 -translate-x-2 sm:translate-0 w-full max-w-125 pr-5">
                             {
-                                loading ?
+                                isLoading ?
                                     <LinechartSkeleton />
                                     :
                                     <>
