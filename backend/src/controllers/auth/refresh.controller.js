@@ -9,7 +9,7 @@ export const refresh = async (req, res, next) => {
         }
         const { newRefToken, newAccessToken } = await refreshEndpoint(refreshToken)
 
-        res.cookie("refreshToken", newRefToken, { httpOnly: true, secure: false, sameSite: "lax" })
+        res.cookie("refreshToken", newRefToken, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: process.env.NODE_ENV === "production" ? "none" : "lax" })
         res.status(200).json({ message: "Refresh completed successfully", token: newAccessToken })
 
     } catch (err) {

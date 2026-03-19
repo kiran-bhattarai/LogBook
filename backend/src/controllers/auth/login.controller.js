@@ -10,7 +10,7 @@ export const login = async (req, res, next) => {
 
         const { accessToken, refreshToken } = await loginService(email, password)
 
-        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: false, sameSite: "lax" })
+        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: process.env.NODE_ENV === "production" ? "none" : "lax" })
 
         return res.status(200).json({ message: "User logged in successfully.", token: accessToken })
     }
@@ -24,7 +24,7 @@ export const oauthLogin = async (req, res, next) => {
         const user = req.user
         const { accessToken, refreshToken } = await oauthLoginService(user)
 
-        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: false, sameSite: "lax" })
+        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: process.env.NODE_ENV === "production" ? "none" : "lax" })
 
         res.redirect(`http://localhost:5173/body`)
     }

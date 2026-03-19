@@ -14,7 +14,7 @@ export const signup = async (req, res, next) => {
 
         const { accessToken, refreshToken } = await signupService(name, email, password)
 
-        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: false, sameSite: "lax" })
+        res.cookie("refreshToken", refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: process.env.NODE_ENV === "production" ? "none" : "lax" })
 
         return res.status(200).json({ message: "User registered successfully.", token: accessToken })
     }
