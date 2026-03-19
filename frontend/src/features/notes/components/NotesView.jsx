@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { getSortedNotes } from "../../../utils/sortNotes";
 import { deleteNoteRequest, fetchNoteRequest } from "../services/notesApi";
 import { useNavSearch } from "../../../context/NavSearchContext";
-import Spinner from "../../../components/ui/Spinner";
 import NoteCardSkeleton from "@/components/skeletons/NoteCardSkeleton";
 
 function NotesView({ onNoteClick, newNoteCreated, sortId }) {

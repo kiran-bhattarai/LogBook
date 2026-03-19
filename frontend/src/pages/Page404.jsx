@@ -1,7 +1,11 @@
 import PageContainer from "../components/layout/PageContainer"
 import { Link } from "react-router-dom"
+import { useEffect } from "react"
+
 
 function Page404() {
+
+    useEffect(() => { document.title = "404 | LogBook" }, [])
 
     return (
         <>

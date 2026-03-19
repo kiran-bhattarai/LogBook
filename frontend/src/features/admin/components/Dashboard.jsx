@@ -1,5 +1,4 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell, Legend, ResponsiveContainer } from "recharts";
-import { useEffect, useState } from "react";
 import { useTheme } from "../../../context/ThemeContext";
 import PiechartSkeleton from "@/components/skeletons/Dashboard skeletons/PiechartSkeleton";
 import LinechartSkeleton from "@/components/skeletons/Dashboard skeletons/LinechartSkeleton";
@@ -37,7 +36,7 @@ function prepareChartData(rawData, valueKey, daysBack = 30) {
 
 function Dashboard() {
 
-    const { data, isLoading, error } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['dashboard'],
         queryFn: dashboardDataRequest
     })
@@ -46,14 +45,6 @@ function Dashboard() {
 
 
     const { darkMode } = useTheme()
-
-    // if (loading) {
-    //     return (
-    //         <div className="flex-1 flex items-center justify-center">
-    //             <Spinner></Spinner>
-    //         </div>
-    //     )
-    // }
 
 
     return (

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../../context/AuthContext"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import useClickOutside from "../../../hooks/useClickOutside"
 import { Link } from "react-router-dom"
 import ChangePicture from "../../../features/profile/components/ChangePicture"

@@ -7,8 +7,12 @@ import { useState } from "react"
 import SearchUsers from "../features/profile/components/SearchUsers"
 import { useAuth } from "../context/AuthContext"
 import UnauthenticatedPage from "./UnauthenticatedPage"
+import { useEffect } from "react"
 
 function HomePage() {
+
+    useEffect(() => { document.title = "Home | LogBook" }, [])
+
 
     const { user } = useAuth()
 

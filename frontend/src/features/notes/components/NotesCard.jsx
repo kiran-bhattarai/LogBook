@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { timeAgo } from "../../../utils/formatDate";
-import { useTheme } from "../../../context/ThemeContext";
 import PublicIcon from "@/assets/icons/public.svg"
 import PrivateIcon from "@/assets/icons/private.svg"
 import DeleteIcon from "@/assets/icons/delete.svg"
@@ -30,7 +29,7 @@ function NotesCard({ note, onRealClick, deleteNoteLogicMain }) {
 
 
     return (
-        <motion.div animate={visible ? { y: 0, opacity: 1 } : { y: -300, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 25, duration: 0.8 }} className="flex justify-center flex-wrap relative group rounded-2xl" >
+        <motion.div animate={visible ? { y: 0, opacity: 1 } : { y: -10, opacity: 0 }} transition={{ type: "spring", stiffness: 300, damping: 25, duration: 0.8 }} className="flex justify-center flex-wrap relative group rounded-2xl" >
             <div onClick={() => onRealClick(note)} className="font-inter flex flex-col min-w-56 max-w-140 w-full dark:bg-white/5 justify-self-center p-1 border bg-neutral-100/30 hover:border-black border-neutral-700 dark:shadow-neutral-700 dark:hover:border-neutral-100 hover:scale-101 dark:border-neutral-500 rounded-2xl relative hover:shadow-[0_0px_10px_rgba(255,255,255,0.35)] transition duration-300 justify-between backdrop-blur-sm">
 
                 {deleteNoteLogicMain && <div className="absolute right-0 top-0 transition duration-150">

@@ -9,6 +9,8 @@ function VerifyEmail() {
 
     const navigate = useNavigate()
 
+    useEffect(() => { document.title = "Verify Email | LogBook" }, [])
+
     const [message, setMessage] = useState("")
     const [code, setCode] = useState("")
 
@@ -33,7 +35,7 @@ function VerifyEmail() {
         }
 
         asyncWrapper()
-    }, [])
+    }, [accessToken, navigate])
 
     const verifyEmailCode = async () => {
 

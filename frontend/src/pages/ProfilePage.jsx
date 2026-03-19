@@ -16,6 +16,9 @@ import api from "@/lib/axios"
 
 function ProfilePage() {
 
+    useEffect(() => { document.title = "Profile | LogBook" }, [])
+
+
     const [searchParams] = useSearchParams()
     const id = searchParams.get("id")
 

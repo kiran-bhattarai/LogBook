@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import LoginPage from "../features/auth/components/LoginPage"
 import SignupPage from "../features/auth/components/SignupPage"
 import { TypeAnimation } from "react-type-animation"
@@ -6,6 +6,9 @@ import PageContainer from "../components/layout/PageContainer"
 
 function UnauthenticatedPage() {
 
+    useEffect(() => { document.title = "Home | LogBook" }, [])
+
+    
     const [loginWindow, setLoginWindow] = useState(false)
     const [signupWindow, setSignupWindow] = useState(false)
 

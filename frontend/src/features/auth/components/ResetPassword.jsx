@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { isStrongPassword } from "validator"
 import { changePasswordMainRequest, checkEmailRequest, checkResetCodeRequest } from "../services/authApi"
@@ -12,6 +12,9 @@ import NotVisibleIcon from "@/assets/icons/not_visible.svg"
 function ResetPassword() {
 
     const navigate = useNavigate()
+
+    useEffect(() => { document.title = "Reset Password | LogBook" }, [])
+
 
     const [emailValue, setEmailValue] = useState("")
     const [code, setCode] = useState("")

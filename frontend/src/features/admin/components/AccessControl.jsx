@@ -1,6 +1,5 @@
 import AccessControlUserItem from "./AccessControlUserItem"
 import { useEffect, useState } from "react"
-import { useAuth } from "../../../context/AuthContext"
 import { getUsersRequest } from "../services/adminApi"
 import AccessControlSkeleton from "@/components/skeletons/AccessControlSkeleton"
 import { useInfiniteQuery } from "@tanstack/react-query"
