@@ -2,6 +2,8 @@
 
 LogBook is a MERN-stack platform featuring private and public notes, user discovery, and a modern UI with adaptive themes. It includes infinite scrolling, full OAuth/email authentication, and a data-driven admin dashboard for user management.
 
+> Deployment link: https://logbook-mauve.vercel.app/
+
 ## Features
 
 ### Authentication & Security
@@ -55,11 +57,11 @@ Open your browser at http://localhost:5173
   <!-- Row 1: Access Control -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/AccessControl.png" alt="Dark Mode - Access Control" width="300"/>
+      <img src="assets/Dark/AccessControl.png" alt="Dark Mode - Access Control" width="100%"/>
       <p>Dark Mode - Access Control</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/AccessControl.png" alt="Light Mode - Access Control" width="300"/>
+      <img src="assets/Light/AccessControl.png" alt="Light Mode - Access Control" width="100%"/>
       <p>Light Mode - Access Control</p>
     </div>
   </div>
@@ -67,11 +69,11 @@ Open your browser at http://localhost:5173
   <!-- Row 2: Avatar Change -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/AvatarChange.png" alt="Dark Mode - Avatar Change" width="300"/>
+      <img src="assets/Dark/AvatarChange.png" alt="Dark Mode - Avatar Change" width="100%"/>
       <p>Dark Mode - Avatar Change</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/AvatarChange.png" alt="Light Mode - Avatar Change" width="300"/>
+      <img src="assets/Light/AvatarChange.png" alt="Light Mode - Avatar Change" width="100%"/>
       <p>Light Mode - Avatar Change</p>
     </div>
   </div>
@@ -79,11 +81,11 @@ Open your browser at http://localhost:5173
   <!-- Row 3: Dashboard -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/Dashboard.png" alt="Dark Mode - Dashboard" width="300"/>
+      <img src="assets/Dark/Dashboard.png" alt="Dark Mode - Dashboard" width="100%"/>
       <p>Dark Mode - Dashboard</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/Dashboard.png" alt="Light Mode - Dashboard" width="300"/>
+      <img src="assets/Light/Dashboard.png" alt="Light Mode - Dashboard" width="100%"/>
       <p>Light Mode - Dashboard</p>
     </div>
   </div>
@@ -91,11 +93,11 @@ Open your browser at http://localhost:5173
   <!-- Row 4: Edit Note -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/Edit.png" alt="Dark Mode - Edit Note" width="300"/>
+      <img src="assets/Dark/Edit.png" alt="Dark Mode - Edit Note" width="100%"/>
       <p>Dark Mode - Edit Note</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/Edit.png" alt="Light Mode - Edit Note" width="300"/>
+      <img src="assets/Light/Edit.png" alt="Light Mode - Edit Note" width="100%"/>
       <p>Light Mode - Edit Note</p>
     </div>
   </div>
@@ -103,11 +105,11 @@ Open your browser at http://localhost:5173
   <!-- Row 5: Homepage -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/Homepage.png" alt="Dark Mode - Homepage" width="300"/>
+      <img src="assets/Dark/Homepage.png" alt="Dark Mode - Homepage" width="100%"/>
       <p>Dark Mode - Homepage</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/Homepage.png" alt="Light Mode - Homepage" width="300"/>
+      <img src="assets/Light/Homepage.png" alt="Light Mode - Homepage" width="100%"/>
       <p>Light Mode - Homepage</p>
     </div>
   </div>
@@ -115,11 +117,11 @@ Open your browser at http://localhost:5173
   <!-- Row 6: Profile -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/Profile.png" alt="Dark Mode - Profile" width="300"/>
+      <img src="assets/Dark/Profile.png" alt="Dark Mode - Profile" width="100%"/>
       <p>Dark Mode - Profile</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/Profile.png" alt="Light Mode - Profile" width="300"/>
+      <img src="assets/Light/Profile.png" alt="Light Mode - Profile" width="100%"/>
       <p>Light Mode - Profile</p>
     </div>
   </div>
@@ -127,11 +129,11 @@ Open your browser at http://localhost:5173
   <!-- Row 7: Reset Password -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/ResetPassword.png" alt="Dark Mode - Reset Password" width="300"/>
+      <img src="assets/Dark/ResetPassword.png" alt="Dark Mode - Reset Password" width="100%"/>
       <p>Dark Mode - Reset Password</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/ResetPassword.png" alt="Light Mode - Reset Password" width="300"/>
+      <img src="assets/Light/ResetPassword.png" alt="Light Mode - Reset Password" width="100%"/>
       <p>Light Mode - Reset Password</p>
     </div>
   </div>
@@ -139,11 +141,11 @@ Open your browser at http://localhost:5173
   <!-- Row 8: Search -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/Search.png" alt="Dark Mode - Search" width="300"/>
+      <img src="assets/Dark/Search.png" alt="Dark Mode - Search" width="100%"/>
       <p>Dark Mode - Search</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/Search.png" alt="Light Mode - Search" width="300"/>
+      <img src="assets/Light/Search.png" alt="Light Mode - Search" width="100%"/>
       <p>Light Mode - Search</p>
     </div>
   </div>
@@ -151,11 +153,11 @@ Open your browser at http://localhost:5173
   <!-- Row 9: Unauthenticated -->
   <div style="display: flex; gap: 20px; justify-content: center;">
     <div style="text-align: center;">
-      <img src="assets/Dark/Unauthenticated.png" alt="Dark Mode - Unauthenticated" width="300"/>
+      <img src="assets/Dark/Unauthenticated.png" alt="Dark Mode - Unauthenticated" width="100%"/>
       <p>Dark Mode - Unauthenticated</p>
     </div>
     <div style="text-align: center;">
-      <img src="assets/Light/Unauthenticated.png" alt="Light Mode - Unauthenticated" width="300"/>
+      <img src="assets/Light/Unauthenticated.png" alt="Light Mode - Unauthenticated" width="100%"/>
       <p>Light Mode - Unauthenticated</p>
     </div>
   </div>
